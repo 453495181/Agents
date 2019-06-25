@@ -22,6 +22,7 @@ bld/
 [Oo]bj/
 [Ll]og/
 /src/**/Typings/app/**/**/html
+/src/**/wwwroot/dist
 
 # Visual Studio 2015 cache/options directory
 .vs/
@@ -260,3 +261,4 @@ paket-files/
 # Python Tools for Visual Studio (PTVS)
 __pycache__/
 *.pyc
+/src/Agents.Admin/wwwroot/dist
