@@ -1,5 +1,6 @@
 ﻿
 using System;
+using System.Threading.Tasks;
 using Agents.Agents.Domain.Models;
 
 namespace Agents.Agents.Domain.Services.Abstractions {
@@ -7,10 +8,11 @@ namespace Agents.Agents.Domain.Services.Abstractions {
     /// 代理管理器
     /// </summary>
     public interface IAgentManager {
+
         /// <summary>
-        /// 创建代理
+        /// 添加代理
         /// </summary>
-        void AddAgent(Agent model);
+        Task AddAgent(Agent model, string pwd, string pwdAgain);
         /// <summary>
         /// 审批代理
         /// </summary>
@@ -22,6 +24,6 @@ namespace Agents.Agents.Domain.Services.Abstractions {
         /// <summary>
         /// 申请代理
         /// </summary>
-        void ApplyAgent(Agent model);
+        Task ApplyAgent(Agent model, string pwd, string pwdAgain);
     }
 }

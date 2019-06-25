@@ -1,5 +1,6 @@
 ﻿
 using System;
+using System.Threading.Tasks;
 
 namespace Agents.Finances.Domain.Services.Abstractions {
     /// <summary>
@@ -10,6 +11,6 @@ namespace Agents.Finances.Domain.Services.Abstractions {
         /// <summary>
         /// 创建账户
         /// </summary>
-        void CreateAccount(Guid accountId);
+        Task CreateAccount(Guid accountId);
     }
 }

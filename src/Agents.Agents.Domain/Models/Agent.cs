@@ -8,6 +8,15 @@ namespace Agents.Agents.Domain.Models {
     public partial class Agent {
 
         /// <summary>
+        /// 初始化实体
+        /// </summary>
+        public override void Init() {
+            base.Init();
+            Enabled = true;
+            State = Enums.AgentState.WatiApproval;
+        }
+
+        /// <summary>
         /// 通过审核
         /// </summary>
         public void Approval() {
@@ -24,6 +33,13 @@ namespace Agents.Agents.Domain.Models {
                 throw new Warning("该状态不支持此操作");
             }
             State = Enums.AgentState.UnApproved;
+        }
+
+        /// <summary>
+        /// 设置代理路径
+        /// </summary>
+        public void SetAgentPath(string agentPath) {
+            throw new NotImplementedException();
         }
     }
 }

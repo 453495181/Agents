@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Threading.Tasks;
 using Agents.Finances.Domain.Models;
 using Agents.Finances.Domain.Repositories;
 using Agents.Finances.Domain.Services.Abstractions;
@@ -25,12 +26,12 @@ namespace Agents.Finances.Domain.Services.Implements {
         /// <summary>
         /// 创建账户
         /// </summary>
-        public void CreateAccount(Guid accountId) {
+        public async Task CreateAccount(Guid accountId) {
             var account = new Account(accountId);
             account.Init();
             account.Enabled = true;
             account.Validate();
-            AccountRepository.Add(account);
+            await AccountRepository.AddAsync(account);
         }
 
     }

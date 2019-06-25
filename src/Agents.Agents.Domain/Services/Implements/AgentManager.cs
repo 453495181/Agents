@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Threading.Tasks;
 using Agents.Agents.Domain.Models;
 using Agents.Agents.Domain.Repositories;
 using Agents.Agents.Domain.Services.Abstractions;
@@ -21,36 +22,36 @@ namespace Agents.Agents.Domain.Services.Implements {
         private IAccountManager AccountManager;
 
         /// <summary>
+        /// 用户管理器
+        /// </summary>
+        private IUserManager UserManager;
+
+        /// <summary>
         /// 初始化代理管理器
         /// </summary>
-        /// <param name="agentRepository">代理仓储</param>
-        public AgentManager(IAgentRepository agentRepository, IAccountManager accountManager) {
+        public AgentManager(IAgentRepository agentRepository, IAccountManager accountManager, IUserManager userManager) {
             AgentRepository = agentRepository;
             AccountManager = accountManager;
+            UserManager = userManager;
         }
 
         /// <summary>
-        /// 创建代理
+        /// 添加代理
         /// </summary>
-        public void AddAgent(Agent model) {
-            var agent = CreateAgent(model);
+        public async Task AddAgent(Agent model, string pwd, string pwdAgain) {
+            var agent = await CreateAgent(model, pwd, pwdAgain);
             agent.Approval();
         }
 
         /// <summary>
         /// 创建代理
         /// </summary>
-        private Agent CreateAgent(Agent agent) {
+        private async Task<Agent> CreateAgent(Agent agent, string pwd, string pwdAgain) {
+            await UserManager.CraeteUser(agent.Email, pwd, pwdAgain);
             agent.Init();
-            //获取当前代理 设置代理路径
-            //ToDo
-            agent.Enabled = true;
-            agent.State = Enums.AgentState.WatiApproval;
-            agent.Validate();
-            AccountManager.CreateAccount(agent.Id);
-            //创建用户
-            //ToDo
-            AgentRepository.Add(agent);
+            agent.SetAgentPath("");
+            await AccountManager.CreateAccount(agent.Id);
+            await AgentRepository.AddAsync(agent);
             return agent;
         }
 
@@ -71,8 +72,8 @@ namespace Agents.Agents.Domain.Services.Implements {
         /// <summary>
         /// 申请代理
         /// </summary>
-        public void ApplyAgent(Agent model) {
-            CreateAgent(model);
+        public async Task ApplyAgent(Agent model, string pwd, string pwdAgain) {
+            await CreateAgent(model, pwd, pwdAgain);
         }
     }
 }
