@@ -4,9 +4,9 @@ import { AgentRoutingModule } from './agent-routing.module';
 import { AgentListComponent } from './agent/agent-list.component';
 import { AgentEditComponent } from './agent/agent-edit.component';
 import { AgentDetailComponent } from './agent/agent-detail.component';
-import { OutCashListComponent } from './outCash/outCash-list.component';
-import { OutCashEditComponent } from './outCash/outCash-edit.component';
-import { OutCashDetailComponent } from './outCash/outCash-detail.component';
+import { OutCashListComponent } from './out-cash/outCash-list.component';
+import { OutCashEditComponent } from './out-cash/outCash-edit.component';
+import { OutCashDetailComponent } from './out-cash/outCash-detail.component';
 
 /**
  * agents模块

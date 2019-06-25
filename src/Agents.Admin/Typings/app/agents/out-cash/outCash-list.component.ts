@@ -9,7 +9,7 @@ import { OutCashViewModel } from './model/outCash-view-model';
  */
 @Component({
     selector: 'outCash-list',
-    templateUrl: !env.dev() ? './html/outCash-index.component.html' : '/view/agents/outCash'
+    templateUrl: !env.dev() ? './html/index.component.html' : '/view/agents/outCash'
 })
 export class OutCashListComponent extends TableQueryComponentBase<OutCashViewModel, OutCashQuery>  {
     /**

@@ -8,7 +8,7 @@ import { AgentViewModel } from './model/agent-view-model';
  */
 @Component({
     selector: 'agent-edit',
-    templateUrl: !env.dev() ? './html/agent-edit.component.html' : '/view/agents/agent/edit'
+    templateUrl: !env.dev() ? './html/edit.component.html' : '/view/agents/agent/edit'
 })
 export class AgentEditComponent extends EditComponentBase<AgentViewModel> {
     /**

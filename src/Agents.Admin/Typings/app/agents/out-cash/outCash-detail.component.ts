@@ -8,7 +8,7 @@ import { OutCashViewModel } from './model/outCash-view-model';
  */
 @Component({
     selector: 'outCash-detail',
-    templateUrl: !env.dev() ? './html/outCash-detail.component.html' : '/view/agents/outCash/detail'
+    templateUrl: !env.dev() ? './html/detail.component.html' : '/view/agents/outCash/detail'
 })
 export class OutCashDetailComponent extends EditComponentBase<OutCashViewModel> {
     /**

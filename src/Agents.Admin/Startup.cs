@@ -67,7 +67,7 @@ namespace Agents {
             app.UseWebpackDevMiddleware( new WebpackDevMiddlewareOptions {
                 HotModuleReplacement = true
             } );
-            app.UseSwaggerX();
+            //app.UseSwaggerX();
             CommonConfig( app );
         }
 
@@ -86,6 +86,7 @@ namespace Agents {
             app.UseErrorLog();
             app.UseStaticFiles();
             app.UseAuthentication();
+            app.UseSwaggerX();
             ConfigRoute( app );
         }
 

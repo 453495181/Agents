@@ -3,9 +3,9 @@ import { RouterModule, Routes } from '@angular/router';
 import { AgentListComponent } from './agent/agent-list.component';
 import { AgentEditComponent } from './agent/agent-edit.component';
 import { AgentDetailComponent } from './agent/agent-detail.component';
-import { OutCashListComponent } from './outCash/outCash-list.component';
-import { OutCashEditComponent } from './outCash/outCash-edit.component';
-import { OutCashDetailComponent } from './outCash/outCash-detail.component';
+import { OutCashListComponent } from './out-cash/outCash-list.component';
+import { OutCashEditComponent } from './out-cash/outCash-edit.component';
+import { OutCashDetailComponent } from './out-cash/outCash-detail.component';
 
 //路由配置
 const routes: Routes = [
@@ -18,7 +18,7 @@ const routes: Routes = [
                 { path: 'edit/:id', component: AgentEditComponent },
                 { path: 'detail/:id', component: AgentDetailComponent }
             ]},
-            {path: 'outCash', children: [
+            {path: 'out-cash', children: [
                 { path: '', component: OutCashListComponent },
                 { path: 'create', component: OutCashEditComponent },
                 { path: 'edit/:id', component: OutCashEditComponent },
