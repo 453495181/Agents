@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
+using Agents.Agents.Domain.Enums;
 using Util;
 using Util.Domains;
 using Util.Domains.Auditing;
@@ -120,7 +121,7 @@ namespace Agents.Agents.Domain.Models {
         /// </summary>
         [DisplayName( "状态" )]
         [Required(ErrorMessage = "状态不能为空")]
-        public int State { get; set; }
+        public AgentState State { get; set; }
         /// <summary>
         /// 创建时间
         /// </summary>

@@ -9,6 +9,8 @@ using Agents.Agents.Domain.Repositories;
 using Agents.Service.Dtos.Agents;
 using Agents.Service.Queries.Agents;
 using Agents.Service.Abstractions.Agents;
+using System.Threading.Tasks;
+using Agents.Agents.Domain.Services.Abstractions;
 
 namespace Agents.Service.Implements.Agents {
     /// <summary>
@@ -20,22 +22,28 @@ namespace Agents.Service.Implements.Agents {
         /// </summary>
         /// <param name="unitOfWork">工作单元</param>
         /// <param name="agentRepository">代理仓储</param>
-        public AgentService( IAgentsUnitOfWork unitOfWork, IAgentRepository agentRepository )
-            : base( unitOfWork, agentRepository ) {
+        public AgentService(IAgentsUnitOfWork unitOfWork, IAgentRepository agentRepository, IAgentManager agentManager)
+            : base(unitOfWork, agentRepository) {
             AgentRepository = agentRepository;
+            AgentManager = agentManager;
         }
-        
+
         /// <summary>
         /// 代理仓储
         /// </summary>
         public IAgentRepository AgentRepository { get; set; }
-        
+
+        /// <summary>
+        /// 代理管理器
+        /// </summary>
+        public IAgentManager AgentManager { get; set; }
+
         /// <summary>
         /// 创建查询对象
         /// </summary>
         /// <param name="param">查询参数</param>
-        protected override IQueryBase<Agent> CreateQuery( AgentQuery param ) {
-            return new Query<Agent>( param );
+        protected override IQueryBase<Agent> CreateQuery(AgentQuery param) {
+            return new Query<Agent>(param);
         }
     }
 }

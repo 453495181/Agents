@@ -7,12 +7,12 @@ EXEC msdb.dbo.sp_delete_database_backuphistory @database_name = N'Agents'
 GO
 IF  EXISTS (SELECT name FROM sys.databases WHERE name = N'Agents')
 Begin
-DROP DATABASE [GreatWall]
+DROP DATABASE [Agents]
 End
 GO
 
 --创建数据库
-CREATE DATABASE [GreatWall]
+CREATE DATABASE [Agents]
 GO
 
 /*========================================================== 2. 创建架构 ===========================================================*/
