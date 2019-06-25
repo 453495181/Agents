@@ -1,8 +1,8 @@
-/*========================================================== 1. ´´½¨Êı¾İ¿â ===========================================================*/
+/*========================================================== 1. åˆ›å»ºæ•°æ®åº“ ===========================================================*/
 USE [master]
 GO
 
---É¾³ıÊı¾İ¿â
+--åˆ é™¤æ•°æ®åº“
 EXEC msdb.dbo.sp_delete_database_backuphistory @database_name = N'Agents'
 GO
 IF  EXISTS (SELECT name FROM sys.databases WHERE name = N'Agents')
@@ -11,11 +11,11 @@ DROP DATABASE [GreatWall]
 End
 GO
 
---´´½¨Êı¾İ¿â
+--åˆ›å»ºæ•°æ®åº“
 CREATE DATABASE [GreatWall]
 GO
 
-/*========================================================== 2. ´´½¨¼Ü¹¹ ===========================================================*/
+/*========================================================== 2. åˆ›å»ºæ¶æ„ ===========================================================*/
 USE [Agents]
 GO
 
@@ -54,7 +54,7 @@ CREATE SCHEMA [Sales] AUTHORIZATION [dbo]
 GO
 
 
-/*==========================================================3. ´´½¨±í======================================================================*/
+/*==========================================================3. åˆ›å»ºè¡¨======================================================================*/
 if exists (select 1
             from  sysobjects
            where  id = object_id('Finances.Account')
@@ -91,7 +91,7 @@ end
 
 
 execute sp_addextendedproperty 'MS_Description',  
-   'ÕË»§', 
+   'è´¦æˆ·', 
    'schema', 'Finances', 'table', 'Account'
 go
 
@@ -107,7 +107,7 @@ end
 
 
 execute sp_addextendedproperty 'MS_Description', 
-   'ÕË»§±êÊ¶',
+   'è´¦æˆ·æ ‡è¯†',
    'schema', 'Finances', 'table', 'Account', 'column', 'AccountId'
 go
 
@@ -123,7 +123,7 @@ end
 
 
 execute sp_addextendedproperty 'MS_Description', 
-   'Óà¶î',
+   'ä½™é¢',
    'schema', 'Finances', 'table', 'Account', 'column', 'Balance'
 go
 
@@ -139,7 +139,7 @@ end
 
 
 execute sp_addextendedproperty 'MS_Description', 
-   '¶³½áÓà¶î',
+   'å†»ç»“ä½™é¢',
    'schema', 'Finances', 'table', 'Account', 'column', 'FreezeBalance'
 go
 
@@ -155,7 +155,7 @@ end
 
 
 execute sp_addextendedproperty 'MS_Description', 
-   'ÆôÓÃ',
+   'å¯ç”¨',
    'schema', 'Finances', 'table', 'Account', 'column', 'Enabled'
 go
 
@@ -171,7 +171,7 @@ end
 
 
 execute sp_addextendedproperty 'MS_Description', 
-   '±¸×¢',
+   'å¤‡æ³¨',
    'schema', 'Finances', 'table', 'Account', 'column', 'Note'
 go
 
@@ -187,7 +187,7 @@ end
 
 
 execute sp_addextendedproperty 'MS_Description', 
-   '´´½¨Ê±¼ä',
+   'åˆ›å»ºæ—¶é—´',
    'schema', 'Finances', 'table', 'Account', 'column', 'CreationTime'
 go
 
@@ -203,7 +203,7 @@ end
 
 
 execute sp_addextendedproperty 'MS_Description', 
-   '´´½¨ÈË',
+   'åˆ›å»ºäºº',
    'schema', 'Finances', 'table', 'Account', 'column', 'CreatorId'
 go
 
@@ -219,7 +219,7 @@ end
 
 
 execute sp_addextendedproperty 'MS_Description', 
-   '×îºóĞŞ¸ÄÊ±¼ä',
+   'æœ€åä¿®æ”¹æ—¶é—´',
    'schema', 'Finances', 'table', 'Account', 'column', 'LastModificationTime'
 go
 
@@ -235,7 +235,7 @@ end
 
 
 execute sp_addextendedproperty 'MS_Description', 
-   '×îºóĞŞ¸ÄÈË',
+   'æœ€åä¿®æ”¹äºº',
    'schema', 'Finances', 'table', 'Account', 'column', 'LastModifierId'
 go
 
@@ -251,7 +251,7 @@ end
 
 
 execute sp_addextendedproperty 'MS_Description', 
-   'ÊÇ·ñÉ¾³ı',
+   'æ˜¯å¦åˆ é™¤',
    'schema', 'Finances', 'table', 'Account', 'column', 'IsDeleted'
 go
 
@@ -267,7 +267,7 @@ end
 
 
 execute sp_addextendedproperty 'MS_Description', 
-   '°æ±¾ºÅ',
+   'ç‰ˆæœ¬å·',
    'schema', 'Finances', 'table', 'Account', 'column', 'Version'
 go
 
@@ -320,7 +320,7 @@ end
 
 
 execute sp_addextendedproperty 'MS_Description',  
-   'ÕË»§Ã÷Ï¸', 
+   'è´¦æˆ·æ˜ç»†', 
    'schema', 'Finances', 'table', 'AccountDetail'
 go
 
@@ -336,7 +336,7 @@ end
 
 
 execute sp_addextendedproperty 'MS_Description', 
-   'ÕË»§Ã÷Ï¸±êÊ¶',
+   'è´¦æˆ·æ˜ç»†æ ‡è¯†',
    'schema', 'Finances', 'table', 'AccountDetail', 'column', 'AccountDetailId'
 go
 
@@ -352,7 +352,7 @@ end
 
 
 execute sp_addextendedproperty 'MS_Description', 
-   'ÕË»§±êÊ¶',
+   'è´¦æˆ·æ ‡è¯†',
    'schema', 'Finances', 'table', 'AccountDetail', 'column', 'AccountId'
 go
 
@@ -368,7 +368,7 @@ end
 
 
 execute sp_addextendedproperty 'MS_Description', 
-   '½»Ò×ÀàĞÍ',
+   'äº¤æ˜“ç±»å‹',
    'schema', 'Finances', 'table', 'AccountDetail', 'column', 'TradeType'
 go
 
@@ -384,7 +384,7 @@ end
 
 
 execute sp_addextendedproperty 'MS_Description', 
-   '½»Ò×Ç°Óà¶î',
+   'äº¤æ˜“å‰ä½™é¢',
    'schema', 'Finances', 'table', 'AccountDetail', 'column', 'BeforeBalance'
 go
 
@@ -400,7 +400,7 @@ end
 
 
 execute sp_addextendedproperty 'MS_Description', 
-   '½»Ò×½ğ¶î',
+   'äº¤æ˜“é‡‘é¢',
    'schema', 'Finances', 'table', 'AccountDetail', 'column', 'TradeMoney'
 go
 
@@ -416,7 +416,7 @@ end
 
 
 execute sp_addextendedproperty 'MS_Description', 
-   '½»Ò×ºóÓà¶î',
+   'äº¤æ˜“åä½™é¢',
    'schema', 'Finances', 'table', 'AccountDetail', 'column', 'AfterBalance'
 go
 
@@ -432,7 +432,7 @@ end
 
 
 execute sp_addextendedproperty 'MS_Description', 
-   '½»Ò×Ê±¼ä',
+   'äº¤æ˜“æ—¶é—´',
    'schema', 'Finances', 'table', 'AccountDetail', 'column', 'TradeTime'
 go
 
@@ -448,7 +448,7 @@ end
 
 
 execute sp_addextendedproperty 'MS_Description', 
-   'ÒµÎñ±àºÅ',
+   'ä¸šåŠ¡ç¼–å·',
    'schema', 'Finances', 'table', 'AccountDetail', 'column', 'BusinessId'
 go
 
@@ -464,7 +464,7 @@ end
 
 
 execute sp_addextendedproperty 'MS_Description', 
-   '±¸×¢',
+   'å¤‡æ³¨',
    'schema', 'Finances', 'table', 'AccountDetail', 'column', 'Note'
 go
 
@@ -480,7 +480,7 @@ end
 
 
 execute sp_addextendedproperty 'MS_Description', 
-   '´´½¨Ê±¼ä',
+   'åˆ›å»ºæ—¶é—´',
    'schema', 'Finances', 'table', 'AccountDetail', 'column', 'CreationTime'
 go
 
@@ -496,7 +496,7 @@ end
 
 
 execute sp_addextendedproperty 'MS_Description', 
-   '´´½¨ÈË',
+   'åˆ›å»ºäºº',
    'schema', 'Finances', 'table', 'AccountDetail', 'column', 'CreatorId'
 go
 
@@ -512,7 +512,7 @@ end
 
 
 execute sp_addextendedproperty 'MS_Description', 
-   '×îºóĞŞ¸ÄÊ±¼ä',
+   'æœ€åä¿®æ”¹æ—¶é—´',
    'schema', 'Finances', 'table', 'AccountDetail', 'column', 'LastModificationTime'
 go
 
@@ -528,7 +528,7 @@ end
 
 
 execute sp_addextendedproperty 'MS_Description', 
-   '×îºóĞŞ¸ÄÈË',
+   'æœ€åä¿®æ”¹äºº',
    'schema', 'Finances', 'table', 'AccountDetail', 'column', 'LastModifierId'
 go
 
@@ -544,7 +544,7 @@ end
 
 
 execute sp_addextendedproperty 'MS_Description', 
-   'ÊÇ·ñÉ¾³ı',
+   'æ˜¯å¦åˆ é™¤',
    'schema', 'Finances', 'table', 'AccountDetail', 'column', 'IsDeleted'
 go
 
@@ -560,7 +560,7 @@ end
 
 
 execute sp_addextendedproperty 'MS_Description', 
-   '°æ±¾ºÅ',
+   'ç‰ˆæœ¬å·',
    'schema', 'Finances', 'table', 'AccountDetail', 'column', 'Version'
 go
 
@@ -618,7 +618,7 @@ end
 
 
 execute sp_addextendedproperty 'MS_Description',  
-   '´úÀí', 
+   'ä»£ç†', 
    'schema', 'Agents', 'table', 'Agent'
 go
 
@@ -634,7 +634,7 @@ end
 
 
 execute sp_addextendedproperty 'MS_Description', 
-   '´úÀí±êÊ¶',
+   'ä»£ç†æ ‡è¯†',
    'schema', 'Agents', 'table', 'Agent', 'column', 'AgentId'
 go
 
@@ -650,7 +650,7 @@ end
 
 
 execute sp_addextendedproperty 'MS_Description', 
-   '±àÂë',
+   'ç¼–ç ',
    'schema', 'Agents', 'table', 'Agent', 'column', 'Code'
 go
 
@@ -666,7 +666,7 @@ end
 
 
 execute sp_addextendedproperty 'MS_Description', 
-   'ĞÕÃû',
+   'å§“å',
    'schema', 'Agents', 'table', 'Agent', 'column', 'Name'
 go
 
@@ -682,7 +682,7 @@ end
 
 
 execute sp_addextendedproperty 'MS_Description', 
-   'ÉÏ¼¶´úÀí±êÊ¶',
+   'ä¸Šçº§ä»£ç†æ ‡è¯†',
    'schema', 'Agents', 'table', 'Agent', 'column', 'ParentId'
 go
 
@@ -698,7 +698,7 @@ end
 
 
 execute sp_addextendedproperty 'MS_Description', 
-   '´úÀíÂ·¾¶',
+   'ä»£ç†è·¯å¾„',
    'schema', 'Agents', 'table', 'Agent', 'column', 'AgentPath'
 go
 
@@ -714,7 +714,7 @@ end
 
 
 execute sp_addextendedproperty 'MS_Description', 
-   'Ö§¸¶±¦ÕÊºÅ',
+   'æ”¯ä»˜å®å¸å·',
    'schema', 'Agents', 'table', 'Agent', 'column', 'AlipayAccount'
 go
 
@@ -730,7 +730,7 @@ end
 
 
 execute sp_addextendedproperty 'MS_Description', 
-   '¸öÈËÎ¢ĞÅºÅ',
+   'ä¸ªäººå¾®ä¿¡å·',
    'schema', 'Agents', 'table', 'Agent', 'column', 'WeChatAccount'
 go
 
@@ -746,7 +746,7 @@ end
 
 
 execute sp_addextendedproperty 'MS_Description', 
-   'ÓÊÏä',
+   'é‚®ç®±',
    'schema', 'Agents', 'table', 'Agent', 'column', 'Email'
 go
 
@@ -762,7 +762,7 @@ end
 
 
 execute sp_addextendedproperty 'MS_Description', 
-   'ÊÖ»ú',
+   'æ‰‹æœº',
    'schema', 'Agents', 'table', 'Agent', 'column', 'Mobile'
 go
 
@@ -778,7 +778,7 @@ end
 
 
 execute sp_addextendedproperty 'MS_Description', 
-   '¿ª»§ÒøĞĞ',
+   'å¼€æˆ·é“¶è¡Œ',
    'schema', 'Agents', 'table', 'Agent', 'column', 'Bank'
 go
 
@@ -794,7 +794,7 @@ end
 
 
 execute sp_addextendedproperty 'MS_Description', 
-   '¿ª»§Ãû',
+   'å¼€æˆ·å',
    'schema', 'Agents', 'table', 'Agent', 'column', 'BankUser'
 go
 
@@ -810,7 +810,7 @@ end
 
 
 execute sp_addextendedproperty 'MS_Description', 
-   'ÒøĞĞ¿¨ºÅ',
+   'é“¶è¡Œå¡å·',
    'schema', 'Agents', 'table', 'Agent', 'column', 'BandNumber'
 go
 
@@ -826,7 +826,7 @@ end
 
 
 execute sp_addextendedproperty 'MS_Description', 
-   'ÁªÏµQQ',
+   'è”ç³»QQ',
    'schema', 'Agents', 'table', 'Agent', 'column', 'QQ'
 go
 
@@ -842,7 +842,7 @@ end
 
 
 execute sp_addextendedproperty 'MS_Description', 
-   'ÆôÓÃ',
+   'å¯ç”¨',
    'schema', 'Agents', 'table', 'Agent', 'column', 'Enabled'
 go
 
@@ -858,7 +858,7 @@ end
 
 
 execute sp_addextendedproperty 'MS_Description', 
-   'ÌáÏÖ×Ü¶î',
+   'æç°æ€»é¢',
    'schema', 'Agents', 'table', 'Agent', 'column', 'CashOutTotal'
 go
 
@@ -874,7 +874,7 @@ end
 
 
 execute sp_addextendedproperty 'MS_Description', 
-   '±¸×¢',
+   'å¤‡æ³¨',
    'schema', 'Agents', 'table', 'Agent', 'column', 'Note'
 go
 
@@ -890,7 +890,7 @@ end
 
 
 execute sp_addextendedproperty 'MS_Description', 
-   '×´Ì¬',
+   'çŠ¶æ€',
    'schema', 'Agents', 'table', 'Agent', 'column', 'State'
 go
 
@@ -906,7 +906,7 @@ end
 
 
 execute sp_addextendedproperty 'MS_Description', 
-   '´´½¨Ê±¼ä',
+   'åˆ›å»ºæ—¶é—´',
    'schema', 'Agents', 'table', 'Agent', 'column', 'CreationTime'
 go
 
@@ -922,7 +922,7 @@ end
 
 
 execute sp_addextendedproperty 'MS_Description', 
-   '´´½¨ÈË',
+   'åˆ›å»ºäºº',
    'schema', 'Agents', 'table', 'Agent', 'column', 'CreatorId'
 go
 
@@ -938,7 +938,7 @@ end
 
 
 execute sp_addextendedproperty 'MS_Description', 
-   '×îºóĞŞ¸ÄÊ±¼ä',
+   'æœ€åä¿®æ”¹æ—¶é—´',
    'schema', 'Agents', 'table', 'Agent', 'column', 'LastModificationTime'
 go
 
@@ -954,7 +954,7 @@ end
 
 
 execute sp_addextendedproperty 'MS_Description', 
-   '×îºóĞŞ¸ÄÈË',
+   'æœ€åä¿®æ”¹äºº',
    'schema', 'Agents', 'table', 'Agent', 'column', 'LastModifierId'
 go
 
@@ -970,7 +970,7 @@ end
 
 
 execute sp_addextendedproperty 'MS_Description', 
-   'ÊÇ·ñÉ¾³ı',
+   'æ˜¯å¦åˆ é™¤',
    'schema', 'Agents', 'table', 'Agent', 'column', 'IsDeleted'
 go
 
@@ -986,7 +986,7 @@ end
 
 
 execute sp_addextendedproperty 'MS_Description', 
-   '°æ±¾ºÅ',
+   'ç‰ˆæœ¬å·',
    'schema', 'Agents', 'table', 'Agent', 'column', 'Version'
 go
 
@@ -1036,7 +1036,7 @@ end
 
 
 execute sp_addextendedproperty 'MS_Description',  
-   'ÌáÏÖ', 
+   'æç°', 
    'schema', 'Agents', 'table', 'OutCash'
 go
 
@@ -1052,7 +1052,7 @@ end
 
 
 execute sp_addextendedproperty 'MS_Description', 
-   'ÕË»§±êÊ¶',
+   'è´¦æˆ·æ ‡è¯†',
    'schema', 'Agents', 'table', 'OutCash', 'column', 'OutCashId'
 go
 
@@ -1068,7 +1068,7 @@ end
 
 
 execute sp_addextendedproperty 'MS_Description', 
-   '´úÀí±êÊ¶',
+   'ä»£ç†æ ‡è¯†',
    'schema', 'Agents', 'table', 'OutCash', 'column', 'AgentId'
 go
 
@@ -1084,7 +1084,7 @@ end
 
 
 execute sp_addextendedproperty 'MS_Description', 
-   'ÌáÏÖ½ğ¶î',
+   'æç°é‡‘é¢',
    'schema', 'Agents', 'table', 'OutCash', 'column', 'Money'
 go
 
@@ -1100,7 +1100,7 @@ end
 
 
 execute sp_addextendedproperty 'MS_Description', 
-   '±¸×¢',
+   'å¤‡æ³¨',
    'schema', 'Agents', 'table', 'OutCash', 'column', 'Note'
 go
 
@@ -1116,7 +1116,7 @@ end
 
 
 execute sp_addextendedproperty 'MS_Description', 
-   'Ö§¸¶ÀàĞÍ',
+   'æ”¯ä»˜ç±»å‹',
    'schema', 'Agents', 'table', 'OutCash', 'column', 'PayType'
 go
 
@@ -1132,7 +1132,7 @@ end
 
 
 execute sp_addextendedproperty 'MS_Description', 
-   'ÓÃ»§¿¨ºÅ',
+   'ç”¨æˆ·å¡å·',
    'schema', 'Agents', 'table', 'OutCash', 'column', 'CardId'
 go
 
@@ -1148,7 +1148,7 @@ end
 
 
 execute sp_addextendedproperty 'MS_Description', 
-   '×´Ì¬',
+   'çŠ¶æ€',
    'schema', 'Agents', 'table', 'OutCash', 'column', 'State'
 go
 
@@ -1164,7 +1164,7 @@ end
 
 
 execute sp_addextendedproperty 'MS_Description', 
-   '´´½¨Ê±¼ä',
+   'åˆ›å»ºæ—¶é—´',
    'schema', 'Agents', 'table', 'OutCash', 'column', 'CreationTime'
 go
 
@@ -1180,7 +1180,7 @@ end
 
 
 execute sp_addextendedproperty 'MS_Description', 
-   '´´½¨ÈË',
+   'åˆ›å»ºäºº',
    'schema', 'Agents', 'table', 'OutCash', 'column', 'CreatorId'
 go
 
@@ -1196,7 +1196,7 @@ end
 
 
 execute sp_addextendedproperty 'MS_Description', 
-   '×îºóĞŞ¸ÄÊ±¼ä',
+   'æœ€åä¿®æ”¹æ—¶é—´',
    'schema', 'Agents', 'table', 'OutCash', 'column', 'LastModificationTime'
 go
 
@@ -1212,7 +1212,7 @@ end
 
 
 execute sp_addextendedproperty 'MS_Description', 
-   '×îºóĞŞ¸ÄÈË',
+   'æœ€åä¿®æ”¹äºº',
    'schema', 'Agents', 'table', 'OutCash', 'column', 'LastModifierId'
 go
 
@@ -1228,7 +1228,7 @@ end
 
 
 execute sp_addextendedproperty 'MS_Description', 
-   'ÊÇ·ñÉ¾³ı',
+   'æ˜¯å¦åˆ é™¤',
    'schema', 'Agents', 'table', 'OutCash', 'column', 'IsDeleted'
 go
 
@@ -1244,7 +1244,7 @@ end
 
 
 execute sp_addextendedproperty 'MS_Description', 
-   '°æ±¾ºÅ',
+   'ç‰ˆæœ¬å·',
    'schema', 'Agents', 'table', 'OutCash', 'column', 'Version'
 go
 
@@ -1307,7 +1307,7 @@ end
 
 
 execute sp_addextendedproperty 'MS_Description',  
-   '»áÔ±', 
+   'ä¼šå‘˜', 
    'schema', 'Members', 'table', 'Member'
 go
 
@@ -1323,7 +1323,7 @@ end
 
 
 execute sp_addextendedproperty 'MS_Description', 
-   '»áÔ±±êÊ¶',
+   'ä¼šå‘˜æ ‡è¯†',
    'schema', 'Members', 'table', 'Member', 'column', 'MemberId'
 go
 
@@ -1339,7 +1339,7 @@ end
 
 
 execute sp_addextendedproperty 'MS_Description', 
-   '»áÔ±Íâ²¿±êÊ¶',
+   'ä¼šå‘˜å¤–éƒ¨æ ‡è¯†',
    'schema', 'Members', 'table', 'Member', 'column', 'MemberOutId'
 go
 
@@ -1355,7 +1355,7 @@ end
 
 
 execute sp_addextendedproperty 'MS_Description', 
-   '´úÀí±êÊ¶',
+   'ä»£ç†æ ‡è¯†',
    'schema', 'Members', 'table', 'Member', 'column', 'AgentId'
 go
 
@@ -1371,7 +1371,7 @@ end
 
 
 execute sp_addextendedproperty 'MS_Description', 
-   '´úÀíÂ·¾¶',
+   'ä»£ç†è·¯å¾„',
    'schema', 'Members', 'table', 'Member', 'column', 'AgentPath'
 go
 
@@ -1387,7 +1387,7 @@ end
 
 
 execute sp_addextendedproperty 'MS_Description', 
-   'ĞÕÃû',
+   'å§“å',
    'schema', 'Members', 'table', 'Member', 'column', 'Name'
 go
 
@@ -1403,7 +1403,7 @@ end
 
 
 execute sp_addextendedproperty 'MS_Description', 
-   'ÊÖ»ú',
+   'æ‰‹æœº',
    'schema', 'Members', 'table', 'Member', 'column', 'Mobile'
 go
 
@@ -1435,7 +1435,7 @@ end
 
 
 execute sp_addextendedproperty 'MS_Description', 
-   'ÀàĞÍ',
+   'ç±»å‹',
    'schema', 'Members', 'table', 'Member', 'column', 'Type'
 go
 
@@ -1451,7 +1451,7 @@ end
 
 
 execute sp_addextendedproperty 'MS_Description', 
-   '»áÔ±µ½ÆÚÊ±¼ä',
+   'ä¼šå‘˜åˆ°æœŸæ—¶é—´',
    'schema', 'Members', 'table', 'Member', 'column', 'VipEndTime'
 go
 
@@ -1467,7 +1467,7 @@ end
 
 
 execute sp_addextendedproperty 'MS_Description', 
-   'Éè±¸ÏµÍ³',
+   'è®¾å¤‡ç³»ç»Ÿ',
    'schema', 'Members', 'table', 'Member', 'column', 'ClientOS'
 go
 
@@ -1483,7 +1483,7 @@ end
 
 
 execute sp_addextendedproperty 'MS_Description', 
-   'Éè±¸Ó²¼şºÅ',
+   'è®¾å¤‡ç¡¬ä»¶å·',
    'schema', 'Members', 'table', 'Member', 'column', 'ClientCode'
 go
 
@@ -1499,7 +1499,7 @@ end
 
 
 execute sp_addextendedproperty 'MS_Description', 
-   'Ïû·Ñ×Ü¶î',
+   'æ¶ˆè´¹æ€»é¢',
    'schema', 'Members', 'table', 'Member', 'column', 'ConsumptionTotal'
 go
 
@@ -1515,7 +1515,7 @@ end
 
 
 execute sp_addextendedproperty 'MS_Description', 
-   'Ê×´Î·ÃÎÊÊ±¼ä',
+   'é¦–æ¬¡è®¿é—®æ—¶é—´',
    'schema', 'Members', 'table', 'Member', 'column', 'FirstTime'
 go
 
@@ -1531,7 +1531,7 @@ end
 
 
 execute sp_addextendedproperty 'MS_Description', 
-   '×¢²áÊ±¼ä',
+   'æ³¨å†Œæ—¶é—´',
    'schema', 'Members', 'table', 'Member', 'column', 'RegisterTime'
 go
 
@@ -1547,7 +1547,7 @@ end
 
 
 execute sp_addextendedproperty 'MS_Description', 
-   '±¸×¢',
+   'å¤‡æ³¨',
    'schema', 'Members', 'table', 'Member', 'column', 'Note'
 go
 
@@ -1563,7 +1563,7 @@ end
 
 
 execute sp_addextendedproperty 'MS_Description', 
-   '´´½¨Ê±¼ä',
+   'åˆ›å»ºæ—¶é—´',
    'schema', 'Members', 'table', 'Member', 'column', 'CreationTime'
 go
 
@@ -1579,7 +1579,7 @@ end
 
 
 execute sp_addextendedproperty 'MS_Description', 
-   '´´½¨ÈË',
+   'åˆ›å»ºäºº',
    'schema', 'Members', 'table', 'Member', 'column', 'CreatorId'
 go
 
@@ -1595,7 +1595,7 @@ end
 
 
 execute sp_addextendedproperty 'MS_Description', 
-   '×îºóĞŞ¸ÄÊ±¼ä',
+   'æœ€åä¿®æ”¹æ—¶é—´',
    'schema', 'Members', 'table', 'Member', 'column', 'LastModificationTime'
 go
 
@@ -1611,7 +1611,7 @@ end
 
 
 execute sp_addextendedproperty 'MS_Description', 
-   '×îºóĞŞ¸ÄÈË',
+   'æœ€åä¿®æ”¹äºº',
    'schema', 'Members', 'table', 'Member', 'column', 'LastModifierId'
 go
 
@@ -1627,7 +1627,7 @@ end
 
 
 execute sp_addextendedproperty 'MS_Description', 
-   'ÊÇ·ñÉ¾³ı',
+   'æ˜¯å¦åˆ é™¤',
    'schema', 'Members', 'table', 'Member', 'column', 'IsDeleted'
 go
 
@@ -1643,7 +1643,7 @@ end
 
 
 execute sp_addextendedproperty 'MS_Description', 
-   '°æ±¾ºÅ',
+   'ç‰ˆæœ¬å·',
    'schema', 'Members', 'table', 'Member', 'column', 'Version'
 go
 
@@ -1696,7 +1696,7 @@ end
 
 
 execute sp_addextendedproperty 'MS_Description',  
-   'ÏÂÔØ¼ÇÂ¼', 
+   'ä¸‹è½½è®°å½•', 
    'schema', 'Members', 'table', 'DownloadLog'
 go
 
@@ -1712,7 +1712,7 @@ end
 
 
 execute sp_addextendedproperty 'MS_Description', 
-   'ÏÂÔØ¼ÇÂ¼±êÊ¶',
+   'ä¸‹è½½è®°å½•æ ‡è¯†',
    'schema', 'Members', 'table', 'DownloadLog', 'column', 'DownloadLogId'
 go
 
@@ -1728,7 +1728,7 @@ end
 
 
 execute sp_addextendedproperty 'MS_Description', 
-   '´úÀí±êÊ¶',
+   'ä»£ç†æ ‡è¯†',
    'schema', 'Members', 'table', 'DownloadLog', 'column', 'AgentId'
 go
 
@@ -1760,7 +1760,7 @@ end
 
 
 execute sp_addextendedproperty 'MS_Description', 
-   'Éè±¸ÏµÍ³',
+   'è®¾å¤‡ç³»ç»Ÿ',
    'schema', 'Members', 'table', 'DownloadLog', 'column', 'ClientOS'
 go
 
@@ -1776,7 +1776,7 @@ end
 
 
 execute sp_addextendedproperty 'MS_Description', 
-   'Éè±¸Ó²¼şºÅ',
+   'è®¾å¤‡ç¡¬ä»¶å·',
    'schema', 'Members', 'table', 'DownloadLog', 'column', 'ClientCode'
 go
 
@@ -1792,7 +1792,7 @@ end
 
 
 execute sp_addextendedproperty 'MS_Description', 
-   '´´½¨Ê±¼ä',
+   'åˆ›å»ºæ—¶é—´',
    'schema', 'Members', 'table', 'DownloadLog', 'column', 'CreationTime'
 go
 
@@ -1808,7 +1808,7 @@ end
 
 
 execute sp_addextendedproperty 'MS_Description', 
-   '´´½¨ÈË',
+   'åˆ›å»ºäºº',
    'schema', 'Members', 'table', 'DownloadLog', 'column', 'CreatorId'
 go
 
@@ -1824,7 +1824,7 @@ end
 
 
 execute sp_addextendedproperty 'MS_Description', 
-   '×îºóĞŞ¸ÄÊ±¼ä',
+   'æœ€åä¿®æ”¹æ—¶é—´',
    'schema', 'Members', 'table', 'DownloadLog', 'column', 'LastModificationTime'
 go
 
@@ -1840,7 +1840,7 @@ end
 
 
 execute sp_addextendedproperty 'MS_Description', 
-   '×îºóĞŞ¸ÄÈË',
+   'æœ€åä¿®æ”¹äºº',
    'schema', 'Members', 'table', 'DownloadLog', 'column', 'LastModifierId'
 go
 
@@ -1856,7 +1856,7 @@ end
 
 
 execute sp_addextendedproperty 'MS_Description', 
-   'ÊÇ·ñÉ¾³ı',
+   'æ˜¯å¦åˆ é™¤',
    'schema', 'Members', 'table', 'DownloadLog', 'column', 'IsDeleted'
 go
 
@@ -1872,7 +1872,7 @@ end
 
 
 execute sp_addextendedproperty 'MS_Description', 
-   '°æ±¾ºÅ',
+   'ç‰ˆæœ¬å·',
    'schema', 'Members', 'table', 'DownloadLog', 'column', 'Version'
 go
 
@@ -1930,7 +1930,7 @@ end
 
 
 execute sp_addextendedproperty 'MS_Description',  
-   '¶©µ¥', 
+   'è®¢å•', 
    'schema', 'Sales', 'table', 'Order'
 go
 
@@ -1946,7 +1946,7 @@ end
 
 
 execute sp_addextendedproperty 'MS_Description', 
-   '¶©µ¥±êÊ¶',
+   'è®¢å•æ ‡è¯†',
    'schema', 'Sales', 'table', 'Order', 'column', 'OrderId'
 go
 
@@ -1962,7 +1962,7 @@ end
 
 
 execute sp_addextendedproperty 'MS_Description', 
-   '»áÔ±±êÊ¶',
+   'ä¼šå‘˜æ ‡è¯†',
    'schema', 'Sales', 'table', 'Order', 'column', 'MemberId'
 go
 
@@ -1978,7 +1978,7 @@ end
 
 
 execute sp_addextendedproperty 'MS_Description', 
-   '½ğ¶î',
+   'é‡‘é¢',
    'schema', 'Sales', 'table', 'Order', 'column', 'Money'
 go
 
@@ -1994,7 +1994,7 @@ end
 
 
 execute sp_addextendedproperty 'MS_Description', 
-   'ÀàĞÍ(app,web)',
+   'ç±»å‹(app,web)',
    'schema', 'Sales', 'table', 'Order', 'column', 'Type'
 go
 
@@ -2010,7 +2010,7 @@ end
 
 
 execute sp_addextendedproperty 'MS_Description', 
-   'Ö§¸¶·½Ê½',
+   'æ”¯ä»˜æ–¹å¼',
    'schema', 'Sales', 'table', 'Order', 'column', 'PayType'
 go
 
@@ -2026,7 +2026,7 @@ end
 
 
 execute sp_addextendedproperty 'MS_Description', 
-   '×´Ì¬',
+   'çŠ¶æ€',
    'schema', 'Sales', 'table', 'Order', 'column', 'State'
 go
 
@@ -2042,7 +2042,7 @@ end
 
 
 execute sp_addextendedproperty 'MS_Description', 
-   'ÏÂµ¥Ê±¼ä',
+   'ä¸‹å•æ—¶é—´',
    'schema', 'Sales', 'table', 'Order', 'column', 'OrderTime'
 go
 
@@ -2058,7 +2058,7 @@ end
 
 
 execute sp_addextendedproperty 'MS_Description', 
-   '¸¶¿îÊ±¼ä',
+   'ä»˜æ¬¾æ—¶é—´',
    'schema', 'Sales', 'table', 'Order', 'column', 'PayTime'
 go
 
@@ -2074,7 +2074,7 @@ end
 
 
 execute sp_addextendedproperty 'MS_Description', 
-   'À©Õ¹×Ö¶Î',
+   'æ‰©å±•å­—æ®µ',
    'schema', 'Sales', 'table', 'Order', 'column', 'Extend'
 go
 
@@ -2090,7 +2090,7 @@ end
 
 
 execute sp_addextendedproperty 'MS_Description', 
-   '±¸×¢',
+   'å¤‡æ³¨',
    'schema', 'Sales', 'table', 'Order', 'column', 'Note'
 go
 
@@ -2106,7 +2106,7 @@ end
 
 
 execute sp_addextendedproperty 'MS_Description', 
-   '´´½¨Ê±¼ä',
+   'åˆ›å»ºæ—¶é—´',
    'schema', 'Sales', 'table', 'Order', 'column', 'CreationTime'
 go
 
@@ -2122,7 +2122,7 @@ end
 
 
 execute sp_addextendedproperty 'MS_Description', 
-   '´´½¨ÈË',
+   'åˆ›å»ºäºº',
    'schema', 'Sales', 'table', 'Order', 'column', 'CreatorId'
 go
 
@@ -2138,7 +2138,7 @@ end
 
 
 execute sp_addextendedproperty 'MS_Description', 
-   '×îºóĞŞ¸ÄÊ±¼ä',
+   'æœ€åä¿®æ”¹æ—¶é—´',
    'schema', 'Sales', 'table', 'Order', 'column', 'LastModificationTime'
 go
 
@@ -2154,7 +2154,7 @@ end
 
 
 execute sp_addextendedproperty 'MS_Description', 
-   '×îºóĞŞ¸ÄÈË',
+   'æœ€åä¿®æ”¹äºº',
    'schema', 'Sales', 'table', 'Order', 'column', 'LastModifierId'
 go
 
@@ -2170,7 +2170,7 @@ end
 
 
 execute sp_addextendedproperty 'MS_Description', 
-   'ÊÇ·ñÉ¾³ı',
+   'æ˜¯å¦åˆ é™¤',
    'schema', 'Sales', 'table', 'Order', 'column', 'IsDeleted'
 go
 
@@ -2186,7 +2186,7 @@ end
 
 
 execute sp_addextendedproperty 'MS_Description', 
-   '°æ±¾ºÅ',
+   'ç‰ˆæœ¬å·',
    'schema', 'Sales', 'table', 'Order', 'column', 'Version'
 go
 
@@ -2248,7 +2248,7 @@ end
 
 
 execute sp_addextendedproperty 'MS_Description',  
-   'Ó¶½ğ', 
+   'ä½£é‡‘', 
    'schema', 'Distributions', 'table', 'Commission'
 go
 
@@ -2264,7 +2264,7 @@ end
 
 
 execute sp_addextendedproperty 'MS_Description', 
-   'Ó¶½ğ±êÊ¶',
+   'ä½£é‡‘æ ‡è¯†',
    'schema', 'Distributions', 'table', 'Commission', 'column', 'CommissionId'
 go
 
@@ -2280,7 +2280,7 @@ end
 
 
 execute sp_addextendedproperty 'MS_Description', 
-   '´úÀí±êÊ¶',
+   'ä»£ç†æ ‡è¯†',
    'schema', 'Distributions', 'table', 'Commission', 'column', 'AgentId'
 go
 
@@ -2296,7 +2296,7 @@ end
 
 
 execute sp_addextendedproperty 'MS_Description', 
-   '¶©µ¥±êÊ¶',
+   'è®¢å•æ ‡è¯†',
    'schema', 'Distributions', 'table', 'Commission', 'column', 'OrderId'
 go
 
@@ -2312,7 +2312,7 @@ end
 
 
 execute sp_addextendedproperty 'MS_Description', 
-   'ÀàĞÍ',
+   'ç±»å‹',
    'schema', 'Distributions', 'table', 'Commission', 'column', 'Type'
 go
 
@@ -2328,7 +2328,7 @@ end
 
 
 execute sp_addextendedproperty 'MS_Description', 
-   '½ğ¶î',
+   'é‡‘é¢',
    'schema', 'Distributions', 'table', 'Commission', 'column', 'Money'
 go
 
@@ -2344,7 +2344,7 @@ end
 
 
 execute sp_addextendedproperty 'MS_Description', 
-   '×´Ì¬',
+   'çŠ¶æ€',
    'schema', 'Distributions', 'table', 'Commission', 'column', 'State'
 go
 
@@ -2360,7 +2360,7 @@ end
 
 
 execute sp_addextendedproperty 'MS_Description', 
-   '±¸×¢',
+   'å¤‡æ³¨',
    'schema', 'Distributions', 'table', 'Commission', 'column', 'Note'
 go
 
@@ -2376,7 +2376,7 @@ end
 
 
 execute sp_addextendedproperty 'MS_Description', 
-   '´´½¨Ê±¼ä',
+   'åˆ›å»ºæ—¶é—´',
    'schema', 'Distributions', 'table', 'Commission', 'column', 'CreationTime'
 go
 
@@ -2392,7 +2392,7 @@ end
 
 
 execute sp_addextendedproperty 'MS_Description', 
-   '´´½¨ÈË',
+   'åˆ›å»ºäºº',
    'schema', 'Distributions', 'table', 'Commission', 'column', 'CreatorId'
 go
 
@@ -2408,7 +2408,7 @@ end
 
 
 execute sp_addextendedproperty 'MS_Description', 
-   '×îºóĞŞ¸ÄÊ±¼ä',
+   'æœ€åä¿®æ”¹æ—¶é—´',
    'schema', 'Distributions', 'table', 'Commission', 'column', 'LastModificationTime'
 go
 
@@ -2424,7 +2424,7 @@ end
 
 
 execute sp_addextendedproperty 'MS_Description', 
-   '×îºóĞŞ¸ÄÈË',
+   'æœ€åä¿®æ”¹äºº',
    'schema', 'Distributions', 'table', 'Commission', 'column', 'LastModifierId'
 go
 
@@ -2440,7 +2440,7 @@ end
 
 
 execute sp_addextendedproperty 'MS_Description', 
-   'ÊÇ·ñÉ¾³ı',
+   'æ˜¯å¦åˆ é™¤',
    'schema', 'Distributions', 'table', 'Commission', 'column', 'IsDeleted'
 go
 
@@ -2456,7 +2456,7 @@ end
 
 
 execute sp_addextendedproperty 'MS_Description', 
-   '°æ±¾ºÅ',
+   'ç‰ˆæœ¬å·',
    'schema', 'Distributions', 'table', 'Commission', 'column', 'Version'
 go
 
@@ -2504,7 +2504,7 @@ end
 
 
 execute sp_addextendedproperty 'MS_Description',  
-   'ÓòÃû·ÖÀà', 
+   'åŸŸååˆ†ç±»', 
    'schema', 'Distributions', 'table', 'DomainType'
 go
 
@@ -2520,7 +2520,7 @@ end
 
 
 execute sp_addextendedproperty 'MS_Description', 
-   'ÓòÃû·ÖÀà±êÊ¶',
+   'åŸŸååˆ†ç±»æ ‡è¯†',
    'schema', 'Distributions', 'table', 'DomainType', 'column', 'DomainTypeId'
 go
 
@@ -2536,7 +2536,7 @@ end
 
 
 execute sp_addextendedproperty 'MS_Description', 
-   'Ãû³Æ',
+   'åç§°',
    'schema', 'Distributions', 'table', 'DomainType', 'column', 'Name'
 go
 
@@ -2552,7 +2552,7 @@ end
 
 
 execute sp_addextendedproperty 'MS_Description', 
-   '´´½¨Ê±¼ä',
+   'åˆ›å»ºæ—¶é—´',
    'schema', 'Distributions', 'table', 'DomainType', 'column', 'CreationTime'
 go
 
@@ -2568,7 +2568,7 @@ end
 
 
 execute sp_addextendedproperty 'MS_Description', 
-   '´´½¨ÈË',
+   'åˆ›å»ºäºº',
    'schema', 'Distributions', 'table', 'DomainType', 'column', 'CreatorId'
 go
 
@@ -2584,7 +2584,7 @@ end
 
 
 execute sp_addextendedproperty 'MS_Description', 
-   '×îºóĞŞ¸ÄÊ±¼ä',
+   'æœ€åä¿®æ”¹æ—¶é—´',
    'schema', 'Distributions', 'table', 'DomainType', 'column', 'LastModificationTime'
 go
 
@@ -2600,7 +2600,7 @@ end
 
 
 execute sp_addextendedproperty 'MS_Description', 
-   '×îºóĞŞ¸ÄÈË',
+   'æœ€åä¿®æ”¹äºº',
    'schema', 'Distributions', 'table', 'DomainType', 'column', 'LastModifierId'
 go
 
@@ -2616,7 +2616,7 @@ end
 
 
 execute sp_addextendedproperty 'MS_Description', 
-   'ÊÇ·ñÉ¾³ı',
+   'æ˜¯å¦åˆ é™¤',
    'schema', 'Distributions', 'table', 'DomainType', 'column', 'IsDeleted'
 go
 
@@ -2632,7 +2632,7 @@ end
 
 
 execute sp_addextendedproperty 'MS_Description', 
-   '°æ±¾ºÅ',
+   'ç‰ˆæœ¬å·',
    'schema', 'Distributions', 'table', 'DomainType', 'column', 'Version'
 go
 
@@ -2678,7 +2678,7 @@ end
 
 
 execute sp_addextendedproperty 'MS_Description',  
-   'ÓòÃû', 
+   'åŸŸå', 
    'schema', 'Distributions', 'table', 'Domain'
 go
 
@@ -2694,7 +2694,7 @@ end
 
 
 execute sp_addextendedproperty 'MS_Description', 
-   'ÓòÃû±êÊ¶',
+   'åŸŸåæ ‡è¯†',
    'schema', 'Distributions', 'table', 'Domain', 'column', 'DomainId'
 go
 
@@ -2710,7 +2710,7 @@ end
 
 
 execute sp_addextendedproperty 'MS_Description', 
-   'ÓòÃû·ÖÀà±êÊ¶',
+   'åŸŸååˆ†ç±»æ ‡è¯†',
    'schema', 'Distributions', 'table', 'Domain', 'column', 'DomainTypeId'
 go
 
@@ -2726,7 +2726,7 @@ end
 
 
 execute sp_addextendedproperty 'MS_Description', 
-   'ÓòÃû',
+   'åŸŸå',
    'schema', 'Distributions', 'table', 'Domain', 'column', 'Domain'
 go
 
@@ -2742,7 +2742,7 @@ end
 
 
 execute sp_addextendedproperty 'MS_Description', 
-   '´´½¨Ê±¼ä',
+   'åˆ›å»ºæ—¶é—´',
    'schema', 'Distributions', 'table', 'Domain', 'column', 'CreationTime'
 go
 
@@ -2758,7 +2758,7 @@ end
 
 
 execute sp_addextendedproperty 'MS_Description', 
-   '´´½¨ÈË',
+   'åˆ›å»ºäºº',
    'schema', 'Distributions', 'table', 'Domain', 'column', 'CreatorId'
 go
 
@@ -2774,7 +2774,7 @@ end
 
 
 execute sp_addextendedproperty 'MS_Description', 
-   '×îºóĞŞ¸ÄÊ±¼ä',
+   'æœ€åä¿®æ”¹æ—¶é—´',
    'schema', 'Distributions', 'table', 'Domain', 'column', 'LastModificationTime'
 go
 
@@ -2790,7 +2790,7 @@ end
 
 
 execute sp_addextendedproperty 'MS_Description', 
-   '×îºóĞŞ¸ÄÈË',
+   'æœ€åä¿®æ”¹äºº',
    'schema', 'Distributions', 'table', 'Domain', 'column', 'LastModifierId'
 go
 
@@ -2806,7 +2806,7 @@ end
 
 
 execute sp_addextendedproperty 'MS_Description', 
-   'ÊÇ·ñÉ¾³ı',
+   'æ˜¯å¦åˆ é™¤',
    'schema', 'Distributions', 'table', 'Domain', 'column', 'IsDeleted'
 go
 
@@ -2822,7 +2822,7 @@ end
 
 
 execute sp_addextendedproperty 'MS_Description', 
-   '°æ±¾ºÅ',
+   'ç‰ˆæœ¬å·',
    'schema', 'Distributions', 'table', 'Domain', 'column', 'Version'
 go
 
