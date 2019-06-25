@@ -1,0 +1,26 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netstandard2.0</TargetFramework>
+    <AssemblyName>Agents.Sales.Domain</AssemblyName>
+    <RootNamespace>Agents.Sales.Domain</RootNamespace>
+  </PropertyGroup>
+
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
+    <OutputPath>..\..\output\release</OutputPath>
+    <DocumentationFile>..\..\output\release\Agents.Sales.Domain.xml</DocumentationFile>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Util.Core" Version="1.8.9" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\Agents.Members.Domain\03-Agents.Members.Domain.csproj" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Update="Models/Order.*.cs">
+      <DependentUpon>Order.cs</DependentUpon>
+    </Compile>
+  </ItemGroup>
+</Project>

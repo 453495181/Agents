@@ -1,0 +1,44 @@
+﻿<Project Sdk="Microsoft.NET.Sdk.Web">
+
+  <PropertyGroup>
+    <TargetFramework>netcoreapp2.2</TargetFramework>
+    <AspNetCoreHostingModel>InProcess</AspNetCoreHostingModel>
+    <RootNamespace>Agents</RootNamespace>
+    <TypeScriptToolsVersion>3.1</TypeScriptToolsVersion>
+    <TypeScriptCompileBlocked>true</TypeScriptCompileBlocked>
+  </PropertyGroup>
+
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
+    <GenerateSerializationAssemblies>Off</GenerateSerializationAssemblies>
+    <OutputPath>..\..\output\release</OutputPath>
+    <DocumentationFile>..\..\output\release\Agents.Admin.xml</DocumentationFile>
+  </PropertyGroup>
+
+
+  <ItemGroup>
+    <PackageReference Include="Microsoft.AspNetCore.App" />
+    <PackageReference Include="Microsoft.AspNetCore.Razor.Design" Version="2.2.0" PrivateAssets="All" />
+    <PackageReference Include="Util.Ui.Angular.AntDesign" Version="1.8.9" />
+    <PackageReference Include="Util.Webs" Version="1.8.9" />
+  </ItemGroup>
+
+
+  <ItemGroup>
+    <ProjectReference Include="..\Agents.Infrastructure\Agents.Infrastructure.csproj" />
+    <ProjectReference Include="..\Agents.Service\Agents.Service.csproj" />
+  </ItemGroup>
+
+
+  <ItemGroup>
+    <Content Update="nlog.config">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+  </ItemGroup>
+
+  <!-- 发布阶段打包 -->
+  <Target Name="Publish_RunWebpack" AfterTargets="ComputeFilesToPublish">
+    <Message Importance="high" Text="Webpack开始打包..." />
+    <Exec Command="npm run prod" />
+  </Target>
+
+</Project>

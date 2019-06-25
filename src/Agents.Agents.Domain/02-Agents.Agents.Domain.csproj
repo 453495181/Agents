@@ -1,0 +1,25 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netstandard2.0</TargetFramework>
+    <AssemblyName>Agents.Agents.Domain</AssemblyName>
+    <RootNamespace>Agents.Agents.Domain</RootNamespace>
+  </PropertyGroup>
+
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
+    <OutputPath>..\..\output\release</OutputPath>
+    <DocumentationFile>..\..\output\release\Agents.Agents.Domain.xml</DocumentationFile>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Util.Core" Version="1.8.9" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Update="Models/Agent.*.cs">
+      <DependentUpon>Agent.cs</DependentUpon>
+    </Compile>
+    <Compile Update="Models/OutCash.*.cs">
+      <DependentUpon>OutCash.cs</DependentUpon>
+    </Compile>
+  </ItemGroup>
+</Project>

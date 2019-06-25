@@ -1,0 +1,25 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netstandard2.0</TargetFramework>
+    <AssemblyName>Agents.Finances.Domain</AssemblyName>
+    <RootNamespace>Agents.Finances.Domain</RootNamespace>
+  </PropertyGroup>
+
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
+    <DocumentationFile>..\..\output\release\Agents.Finances.Domain.xml</DocumentationFile>
+    <OutputPath>..\..\output\release</OutputPath>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Util.Core" Version="1.8.9" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Update="Models/Account.*.cs">
+      <DependentUpon>Account.cs</DependentUpon>
+    </Compile>
+    <Compile Update="Models/AccountDetail.*.cs">
+      <DependentUpon>AccountDetail.cs</DependentUpon>
+    </Compile>
+  </ItemGroup>
+</Project>

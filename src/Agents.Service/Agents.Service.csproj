@@ -1,0 +1,25 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netstandard2.0</TargetFramework>
+  </PropertyGroup>
+
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
+    <OutputPath>..\..\output\release</OutputPath>
+    <DocumentationFile>..\..\output\release\netstandard2.0\Agents.Service.xml</DocumentationFile>
+  </PropertyGroup>
+
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|AnyCPU'">
+    <OutputPath>..\..\output\release</OutputPath>
+    <DocumentationFile>..\..\output\release\netstandard2.0\Agents.Service.xml</DocumentationFile>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Util.Applications" Version="1.8.9" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\Agents.Data\Agents.Data.csproj" />
+  </ItemGroup>
+
+</Project>

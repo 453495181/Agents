@@ -1,0 +1,16 @@
+
+<page-header title="提现详情"></page-header>
+<nz-card [nzActions]="[actionBack]" [nzBordered]="false">
+    <nz-descriptions nzTitle="详细信息" [nzBordered]="true" [nzColumn]="3">
+        <nz-descriptions-item nzTitle="代理标识">{{model.agentId}}</nz-descriptions-item>
+        <nz-descriptions-item nzTitle="提现金额">{{model.money}}</nz-descriptions-item>
+        <nz-descriptions-item nzTitle="备注">{{model.note}}</nz-descriptions-item>
+        <nz-descriptions-item nzTitle="支付类型">{{model.payType}}</nz-descriptions-item>
+        <nz-descriptions-item nzTitle="用户卡号">{{model.cardId}}</nz-descriptions-item>
+        <nz-descriptions-item nzTitle="状态">{{model.state}}</nz-descriptions-item>
+        <nz-descriptions-item nzTitle="创建时间">{{ model.creationTime | date:"yyyy-MM-dd" }}</nz-descriptions-item>
+    </nz-descriptions>
+    <ng-template #actionBack="">
+        <x-button (onClick)="back()" text="返回"></x-button>
+    </ng-template>
+</nz-card>

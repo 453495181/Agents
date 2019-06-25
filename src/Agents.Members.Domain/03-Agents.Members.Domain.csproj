@@ -1,0 +1,29 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netstandard2.0</TargetFramework>
+    <AssemblyName>Agents.Members.Domain</AssemblyName>
+    <RootNamespace>Agents.Members.Domain</RootNamespace>
+  </PropertyGroup>
+
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
+    <OutputPath>..\..\output\release</OutputPath>
+    <DocumentationFile>..\..\output\release\Agents.Members.Domain.xml</DocumentationFile>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Util.Core" Version="1.8.9" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\Agents.Agents.Domain\02-Agents.Agents.Domain.csproj" />
+  </ItemGroup>
+<ItemGroup>
+    <Compile Update="Models/DownloadLog.*.cs">
+      <DependentUpon>DownloadLog.cs</DependentUpon>
+    </Compile>
+    <Compile Update="Models/Member.*.cs">
+      <DependentUpon>Member.cs</DependentUpon>
+    </Compile>
+</ItemGroup>
+</Project>

@@ -1,0 +1,29 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netstandard2.0</TargetFramework>
+  </PropertyGroup>
+
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
+    <OutputPath>..\..\output\release</OutputPath>
+    <DocumentationFile>..\..\output\release\netstandard2.0\Agents.Data.xml</DocumentationFile>
+  </PropertyGroup>
+
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|AnyCPU'">
+    <OutputPath>..\..\output\release</OutputPath>
+    <DocumentationFile>..\..\output\release\netstandard2.0\Agents.Data.xml</DocumentationFile>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Util.Datas" Version="1.8.9" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\Agents.Agents.Domain\02-Agents.Agents.Domain.csproj" />
+    <ProjectReference Include="..\Agents.Distributions.Domain\05-Agents.Distributions.Domain.csproj" />
+    <ProjectReference Include="..\Agents.Finances.Domain\01-Agents.Finances.Domain.csproj" />
+    <ProjectReference Include="..\Agents.Members.Domain\03-Agents.Members.Domain.csproj" />
+    <ProjectReference Include="..\Agents.Sales.Domain\04-Agents.Sales.Domain.csproj" />
+  </ItemGroup>
+
+</Project>
