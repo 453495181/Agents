@@ -11,6 +11,6 @@ namespace Agents.Agents.Domain.Services.Abstractions {
         /// <summary>
         /// 创建用户
         /// </summary>
-        Task<Guid> CraeteUser(string userName, string pwd, string pwdAgain);
+        Task<Guid> CraeteUser(string userName, string passWord);
     }
 }

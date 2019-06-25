@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
 
-namespace Agents.menus {
+namespace Agents.Menus {
     /// <summary>
     /// 应用程序数据
     /// </summary>

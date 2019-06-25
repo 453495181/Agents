@@ -12,11 +12,11 @@ namespace Agents.Agents.Domain.Services.Abstractions {
         /// <summary>
         /// 添加代理
         /// </summary>
-        Task AddAgent(Agent model, string pwd, string pwdAgain);
+        Task CreateAgentAsync(Agent model);
         /// <summary>
         /// 审批代理
         /// </summary>
-        void ApprovalAgent(Agent agent);
+        Task ApprovalAgentAsync(Agent agent);
         /// <summary>
         /// 拒绝审批代理
         /// </summary>
@@ -24,6 +24,6 @@ namespace Agents.Agents.Domain.Services.Abstractions {
         /// <summary>
         /// 申请代理
         /// </summary>
-        Task ApplyAgent(Agent model, string pwd, string pwdAgain);
+        Task ApplyAgentAsync(Agent model);
     }
 }

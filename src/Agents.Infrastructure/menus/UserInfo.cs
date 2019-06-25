@@ -1,4 +1,4 @@
-﻿namespace Agents.menus {
+﻿namespace Agents.Menus {
     /// <summary>
     /// 用户信息
     /// </summary>

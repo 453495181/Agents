@@ -75,7 +75,8 @@ namespace Agents.Agents.Domain.Models {
         /// </summary>
         [DisplayName( "手机" )]
         [Required(ErrorMessage = "手机不能为空")]
-        [StringLength( 20, ErrorMessage = "手机输入过长，不能超过20位" )]
+        [MinLength(11, ErrorMessage = "请输入11位的手机号码")]
+        [MaxLength(11, ErrorMessage = "请输入11位的手机号码")]
         public string Mobile { get; set; }
         /// <summary>
         /// 开户银行

@@ -38,19 +38,17 @@ namespace Agents.Agents.Domain.Services.Implements {
         /// <summary>
         /// 添加代理
         /// </summary>
-        public async Task AddAgent(Agent model, string pwd, string pwdAgain) {
-            var agent = await CreateAgent(model, pwd, pwdAgain);
+        public async Task CreateAgentAsync(Agent model) {
+            var agent = await AddAgent(model);
             agent.Approval();
         }
 
         /// <summary>
         /// 创建代理
         /// </summary>
-        private async Task<Agent> CreateAgent(Agent agent, string pwd, string pwdAgain) {
-            await UserManager.CraeteUser(agent.Email, pwd, pwdAgain);
+        private async Task<Agent> AddAgent(Agent agent) {
             agent.Init();
             agent.SetAgentPath("");
-            await AccountManager.CreateAccount(agent.Id);
             await AgentRepository.AddAsync(agent);
             return agent;
         }
@@ -58,8 +56,10 @@ namespace Agents.Agents.Domain.Services.Implements {
         /// <summary>
         /// 审批代理
         /// </summary>
-        public void ApprovalAgent(Agent agent) {
+        public async Task ApprovalAgentAsync(Agent agent) {
             agent.Approval();
+            await UserManager.CraeteUser(agent.Mobile, agent.Mobile.Substring(5, 6));
+            await AccountManager.CreateAccount(agent.Id);
         }
 
         /// <summary>
@@ -72,8 +72,8 @@ namespace Agents.Agents.Domain.Services.Implements {
         /// <summary>
         /// 申请代理
         /// </summary>
-        public async Task ApplyAgent(Agent model, string pwd, string pwdAgain) {
-            await CreateAgent(model, pwd, pwdAgain);
+        public async Task ApplyAgentAsync(Agent model) {
+            await AddAgent(model);
         }
     }
 }

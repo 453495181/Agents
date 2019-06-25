@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
 using Newtonsoft.Json;
 
-namespace Agents.menus {
+namespace Agents.Menus {
     /// <summary>
     /// 菜单信息
     /// </summary>

@@ -20,7 +20,7 @@ namespace Agents.Agents.Domain.Services.Implements {
         /// <summary>
         /// 创建用户
         /// </summary>
-        public async Task<Guid> CraeteUser(string userName, string pwd, string pwdAgain) {
+        public async Task<Guid> CraeteUser(string userName, string passWord) {
             return Guid.NewGuid();
         }
     }

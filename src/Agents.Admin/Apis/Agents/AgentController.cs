@@ -11,14 +11,14 @@ namespace Agents.Apis.Agents {
     /// 代理控制器
     /// </summary>
     public class AgentController : CrudControllerBase<AgentDto, AgentQuery> {
+        /// <summary>
+        /// 初始化代理控制器
+        /// </summary>
         /// <param name="service">代理服务</param>
         public AgentController( IAgentService service ) : base( service ) {
             AgentService = service;
         }
 
-        /// <summary>
-        /// 初始化代理控制器
-        /// </summary>
         /// <summary>
         /// 代理服务
         /// </summary>

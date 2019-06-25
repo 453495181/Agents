@@ -1,4 +1,4 @@
-﻿namespace Agents.menus {
+﻿namespace Agents.Menus {
     /// <summary>
     /// App信息
     /// </summary>
