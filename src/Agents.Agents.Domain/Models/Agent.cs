@@ -17,13 +17,24 @@ namespace Agents.Agents.Domain.Models {
         }
 
         /// <summary>
+        /// 设置编号
+        /// </summary>
+        public void SetCode(int maxCode) {
+            if (maxCode < 100000) {
+                maxCode = 100000;
+            }
+            Code = maxCode + 1;
+        }
+
+        /// <summary>
         /// 通过审核
         /// </summary>
-        public void Approval() {
+        public void Approval(Guid userId) {
             if (State != Enums.AgentState.WatiApproval) {
                 throw new Warning("该状态不支持此操作");
             }
             State = Enums.AgentState.Approved;
+            UserId = userId;
         }
         /// <summary>
         /// 拒绝审核

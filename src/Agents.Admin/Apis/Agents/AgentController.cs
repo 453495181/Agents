@@ -26,6 +26,19 @@ namespace Agents.Apis.Agents {
         /// </summary>
         public IAgentService AgentService { get; }
 
+        /// <summary>获取单个实例</summary>
+        /// <remarks>
+        /// 调用范例:
+        /// GET
+        /// /api/customer/1
+        /// </remarks>
+        /// <param name="id">标识</param>
+        [HttpGet("{id}")]
+        public override async Task<IActionResult> GetAsync(string id) {
+            var byIdAsync = await AgentService.GetAgentByIdAsync(id.ToGuid());
+            return Success((object)byIdAsync, (string)null);
+        }
+
         /// <summary>
         /// 创建用户
         /// </summary>
@@ -69,8 +82,8 @@ namespace Agents.Apis.Agents {
         /// <param name="id">标识</param>
         [HttpDelete("{id}")]
         public async Task<IActionResult> DeleteAsync(string id) {
-            await AgentService.DeleteAsync(id);
-            return Success((object)null, (string)null);
+            await AgentService.DeleteAgents(id);
+            return Success();
         }
 
         /// <summary>批量删除，注意：body参数需要添加引号，"'1,2,3'"而不是"1,2,3"</summary>
@@ -83,8 +96,8 @@ namespace Agents.Apis.Agents {
         /// <param name="ids">标识列表，多个Id用逗号分隔，范例：1,2,3</param>
         [HttpPost("delete")]
         public async Task<IActionResult> BatchDeleteAsync([FromBody] string ids) {
-            await AgentService.DeleteAsync(ids);
-            return Success((object)null, (string)null);
+            await AgentService.DeleteAgents(ids);
+            return Success();
         }
 
     }

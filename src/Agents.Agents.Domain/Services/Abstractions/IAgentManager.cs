@@ -25,5 +25,10 @@ namespace Agents.Agents.Domain.Services.Abstractions {
         /// 申请代理
         /// </summary>
         Task ApplyAgentAsync(Agent model);
+
+        /// <summary>
+        /// 删除用户
+        /// </summary>
+        Task DeleteAgents(string ids);
     }
 }

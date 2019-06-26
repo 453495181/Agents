@@ -11,13 +11,7 @@ namespace Agents.Service.Dtos.Agents.Requests {
     /// 代理数据传输对象
     /// </summary>
     public class CreateAgentRequest : RequestBase {
-        /// <summary>
-        /// 编码
-        /// </summary>
-        [Required(ErrorMessage = "编码不能为空")]
-        [StringLength(20, ErrorMessage = "编码输入过长，不能超过20位")]
-        [Display(Name = "编码")]
-        public string Code { get; set; }
+ 
         /// <summary>
         /// 姓名
         /// </summary>
@@ -29,7 +23,8 @@ namespace Agents.Service.Dtos.Agents.Requests {
         /// 手机
         /// </summary>
         [Required(ErrorMessage = "手机不能为空")]
-        [StringLength(20, ErrorMessage = "手机输入过长，不能超过20位")]
+        [MinLength(11, ErrorMessage = "请输入11位的手机号码")]
+        [MaxLength(11, ErrorMessage = "请输入11位的手机号码")]
         [Display(Name = "手机")]
         public string Mobile { get; set; }
         /// <summary>
@@ -47,14 +42,16 @@ namespace Agents.Service.Dtos.Agents.Requests {
         /// <summary>
         /// 邮箱
         /// </summary>
+        [Required(ErrorMessage = "邮箱不能为空")]
         [StringLength(200, ErrorMessage = "邮箱输入过长，不能超过200位")]
+        [EmailAddress]
         [Display(Name = "邮箱")]
         public string Email { get; set; }
         /// <summary>
         /// 开户银行
         /// </summary>
         [Display(Name = "开户银行")]
-        public int? Bank { get; set; }
+        public BankEnum? Bank { get; set; }
         /// <summary>
         /// 开户名
         /// </summary>
@@ -66,7 +63,7 @@ namespace Agents.Service.Dtos.Agents.Requests {
         /// </summary>
         [StringLength(50, ErrorMessage = "银行卡号输入过长，不能超过50位")]
         [Display(Name = "银行卡号")]
-        public string BandNumber { get; set; }
+        public string BankNumber { get; set; }
         /// <summary>
         /// 联系QQ
         /// </summary>

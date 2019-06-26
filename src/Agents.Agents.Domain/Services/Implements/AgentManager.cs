@@ -1,9 +1,13 @@
 ﻿using System;
+using System.Linq;
 using System.Threading.Tasks;
 using Agents.Agents.Domain.Models;
 using Agents.Agents.Domain.Repositories;
 using Agents.Agents.Domain.Services.Abstractions;
+using Agents.Agents.Domain.Services.Requests;
 using Agents.Finances.Domain.Services.Abstractions;
+using Microsoft.EntityFrameworkCore;
+using Util;
 using Util.Domains.Services;
 
 namespace Agents.Agents.Domain.Services.Implements {
@@ -40,7 +44,7 @@ namespace Agents.Agents.Domain.Services.Implements {
         /// </summary>
         public async Task<Agent> CreateAgentAsync(Agent model) {
             var agent = await AddAgent(model);
-            agent.Approval();
+            await ApprovalAgentAsync(agent);
             return agent;
         }
 
@@ -48,7 +52,11 @@ namespace Agents.Agents.Domain.Services.Implements {
         /// 创建代理
         /// </summary>
         private async Task<Agent> AddAgent(Agent agent) {
+            //var maxCode = await AgentRepository.Find(t => true).MaxAsync(t => t.Code);
+            var maxCode = await AgentRepository.GetMaxCode();
+
             agent.Init();
+            agent.SetCode(maxCode);
             agent.SetAgentPath("");
             await AgentRepository.AddAsync(agent);
             return agent;
@@ -58,8 +66,8 @@ namespace Agents.Agents.Domain.Services.Implements {
         /// 审批代理
         /// </summary>
         public async Task ApprovalAgentAsync(Agent agent) {
-            agent.Approval();
-            await UserManager.CraeteUser(agent.Mobile, agent.Mobile.Substring(5, 6));
+            var userId = await UserManager.CraeteUser(new CreateUserRequest(agent.Mobile, agent.Email, agent.Mobile, agent.Mobile.Substring(5, 6)));
+            agent.Approval(userId);
             await AccountManager.CreateAccount(agent.Id);
         }
 
@@ -75,6 +83,15 @@ namespace Agents.Agents.Domain.Services.Implements {
         /// </summary>
         public async Task ApplyAgentAsync(Agent model) {
             await AddAgent(model);
+        }
+
+        /// <summary>
+        /// 删除用户
+        /// </summary>
+        public async Task DeleteAgents(string ids) {
+            var agents = await AgentRepository.FindByIdsAsync(ids);
+            await UserManager.DeleteUser(agents.Where(t => t.UserId.HasValue).Select(t => t.UserId.Value).Join(","));
+            await AgentRepository.RemoveAsync(agents);
         }
     }
 }

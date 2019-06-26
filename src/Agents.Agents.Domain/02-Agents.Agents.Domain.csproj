@@ -17,6 +17,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\Agents.Finances.Domain\01-Agents.Finances.Domain.csproj" />
+    <ProjectReference Include="..\Agents.Infrastructure\Agents.Infrastructure.csproj" />
   </ItemGroup>
   <ItemGroup>
     <Compile Update="Models/Agent.*.cs">

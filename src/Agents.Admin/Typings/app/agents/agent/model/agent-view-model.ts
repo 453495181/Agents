@@ -47,7 +47,7 @@ export class AgentViewModel extends ViewModel {
     /**
      * 银行卡号
      */
-    bandNumber;
+    bankNumber;
     /**
      * 联系QQ
      */

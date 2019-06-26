@@ -33,12 +33,18 @@ namespace Agents.Service.Queries.Agents {
             get => _name == null ? string.Empty : _name.Trim();
             set => _name = value;
         }
+
+        private string _parentCode = string.Empty;
+
         /// <summary>
-        /// 上级代理标识
+        /// 上级代理编号
         /// </summary>
-        [Display(Name="上级代理标识")]
-        public Guid? ParentId { get; set; }
-        
+        [Display(Name="上级代理编号")]
+        public string ParentCode {
+            get => _parentCode == null ? string.Empty : _parentCode.Trim();
+            set => _parentCode = value;
+        }
+
         private string _agentPath = string.Empty;
         /// <summary>
         /// 代理路径
@@ -104,14 +110,14 @@ namespace Agents.Service.Queries.Agents {
             set => _bankUser = value;
         }
         
-        private string _bandNumber = string.Empty;
+        private string _bankNumber = string.Empty;
         /// <summary>
         /// 银行卡号
         /// </summary>
         [Display(Name="银行卡号")]
-        public string BandNumber {
-            get => _bandNumber == null ? string.Empty : _bandNumber.Trim();
-            set => _bandNumber = value;
+        public string BankNumber {
+            get => _bankNumber == null ? string.Empty : _bankNumber.Trim();
+            set => _bankNumber = value;
         }
         
         private string _qq = string.Empty;

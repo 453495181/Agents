@@ -1,4 +1,6 @@
 ﻿using System;
+using System.Collections.Generic;
+using System.Threading;
 using Util;
 using Util.Maps;
 using Util.Domains.Repositories;
@@ -12,7 +14,11 @@ using Agents.Service.Queries.Agents;
 using Agents.Service.Abstractions.Agents;
 using System.Threading.Tasks;
 using Agents.Agents.Domain.Services.Abstractions;
+using Agents.Service.Dtos.Agents.Extensions;
 using Agents.Service.Dtos.Agents.Requests;
+using AspectCore.DynamicProxy.Parameters;
+using Microsoft.EntityFrameworkCore;
+using Util.Helpers;
 
 namespace Agents.Service.Implements.Agents {
     /// <summary>
@@ -56,6 +62,27 @@ namespace Agents.Service.Implements.Agents {
             agent = await AgentManager.CreateAgentAsync(agent);
             await UnitOfWork.CommitAsync();
             return agent.Id;
+        }
+
+        /// <summary>
+        /// 异步获取代理
+        /// </summary>
+        public async Task<AgentDto> GetAgentByIdAsync(Guid agentId) {
+            var agent = await AgentRepository.FindAsync(agentId);
+            var result = agent.ToDto();
+            if (agent.ParentId != null) {
+                var parentAgent = await AgentRepository.FindAsync(agent.ParentId);
+                result.ParentName = parentAgent.Name;
+            }
+            return result;
+        }
+
+        /// <summary>
+        /// 删除用户
+        /// </summary>
+        public async Task DeleteAgents(string ids) {
+            await AgentManager.DeleteAgents(ids);
+            await UnitOfWork.CommitAsync();
         }
     }
 }

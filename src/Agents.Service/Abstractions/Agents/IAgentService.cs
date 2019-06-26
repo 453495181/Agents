@@ -15,5 +15,15 @@ namespace Agents.Service.Abstractions.Agents {
         /// 添加代理
         /// </summary>
         Task<Guid> CreateAsync(CreateAgentRequest request);
+
+        /// <summary>
+        /// 异步获取代理
+        /// </summary>
+        Task<AgentDto> GetAgentByIdAsync(Guid guid);
+
+        /// <summary>
+        /// 删除用户
+        /// </summary>
+        Task DeleteAgents(string ids);
     }
 }

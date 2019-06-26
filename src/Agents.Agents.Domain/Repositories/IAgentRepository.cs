@@ -1,4 +1,5 @@
-﻿using Util.Domains.Repositories;
+﻿using System.Threading.Tasks;
+using Util.Domains.Repositories;
 using Agents.Agents.Domain.Models;
 
 namespace Agents.Agents.Domain.Repositories {
@@ -6,5 +7,9 @@ namespace Agents.Agents.Domain.Repositories {
     /// 代理仓储
     /// </summary>
     public interface IAgentRepository : IRepository<Agent> {
+        /// <summary>
+        /// 获取最大Code
+        /// </summary>
+        Task<int> GetMaxCode();
     }
 }

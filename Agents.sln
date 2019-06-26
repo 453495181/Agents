@@ -21,15 +21,15 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Agents.Admin", "src\Agents.
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Agents.Api", "src\Agents.Api\Agents.Api.csproj", "{0F84763C-FE95-466D-9F6B-5EB2565B2129}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "01-Agents.Finances.Domain", "src\Agents.Finances.Domain\01-Agents.Finances.Domain.csproj", "{0D932437-15E6-4D13-8D80-64FBAB2537C7}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "01-Agents.Finances.Domain", "src\Agents.Finances.Domain\01-Agents.Finances.Domain.csproj", "{0D932437-15E6-4D13-8D80-64FBAB2537C7}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "02-Agents.Agents.Domain", "src\Agents.Agents.Domain\02-Agents.Agents.Domain.csproj", "{A9F7A68B-0D45-44F5-9165-60DFA9A51493}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "02-Agents.Agents.Domain", "src\Agents.Agents.Domain\02-Agents.Agents.Domain.csproj", "{A9F7A68B-0D45-44F5-9165-60DFA9A51493}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "03-Agents.Members.Domain", "src\Agents.Members.Domain\03-Agents.Members.Domain.csproj", "{40322961-B53B-4D7A-A37D-8192B412D161}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "03-Agents.Members.Domain", "src\Agents.Members.Domain\03-Agents.Members.Domain.csproj", "{40322961-B53B-4D7A-A37D-8192B412D161}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "05-Agents.Distributions.Domain", "src\Agents.Distributions.Domain\05-Agents.Distributions.Domain.csproj", "{50D030F0-0205-42AF-958E-1112A62C8A20}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "05-Agents.Distributions.Domain", "src\Agents.Distributions.Domain\05-Agents.Distributions.Domain.csproj", "{50D030F0-0205-42AF-958E-1112A62C8A20}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "04-Agents.Sales.Domain", "src\Agents.Sales.Domain\04-Agents.Sales.Domain.csproj", "{A18A273E-8F3F-4FF6-88DA-10D3192FEBF7}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "04-Agents.Sales.Domain", "src\Agents.Sales.Domain\04-Agents.Sales.Domain.csproj", "{A18A273E-8F3F-4FF6-88DA-10D3192FEBF7}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
