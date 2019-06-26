@@ -568,6 +568,14 @@ alter table Finances.AccountDetail
    add constraint FK_ACCOUNTD_REFERENCE_ACCOUNT foreign key (AccountId)
       references Finances.Account (AccountId)
 go
+if exists (select 1
+            from  sysindexes
+           where  id    = object_id('Agents.Agent')
+            and   name  = 'Index_1'
+            and   indid > 0
+            and   indid < 255)
+   drop index Agents.Agent.Index_1
+go
 
 if exists (select 1
             from  sysobjects
@@ -581,7 +589,7 @@ go
 /*==============================================================*/
 create table Agents.Agent (
    AgentId              uniqueidentifier     not null,
-   Code                 nvarchar(20)         not null,
+   Code                 int                  not null,
    Name                 nvarchar(200)        not null,
    UserId               uniqueidentifier     null,
    ParentId             uniqueidentifier     null,
@@ -1006,6 +1014,13 @@ execute sp_addextendedproperty 'MS_Description',
    'schema', 'Agents', 'table', 'Agent', 'column', 'Version'
 go
 
+/*==============================================================*/
+/* Index: Index_1                                               */
+/*==============================================================*/
+create unique index Index_1 on Agents.Agent (
+Code ASC
+)
+go
 
 
 if exists (select 1
