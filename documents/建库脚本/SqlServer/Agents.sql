@@ -592,7 +592,7 @@ create table Agents.Agent (
    Mobile               nvarchar(20)         not null,
    Bank                 int                  null,
    BankUser             nvarchar(20)         null,
-   BandNumber           nvarchar(50)         null,
+   BankNumber           nvarchar(50)         null,
    QQ                   nvarchar(12)         null,
    Enabled              bit                  not null,
    CashOutTotal         decimal(18,2)        null,
@@ -800,18 +800,18 @@ go
 
 if exists(select 1 from sys.extended_properties p where
       p.major_id = object_id('Agents.Agent')
-  and p.minor_id = (select c.column_id from sys.columns c where c.object_id = p.major_id and c.name = 'BandNumber')
+  and p.minor_id = (select c.column_id from sys.columns c where c.object_id = p.major_id and c.name = 'BankNumber')
 )
 begin
    execute sp_dropextendedproperty 'MS_Description', 
-   'schema', 'Agents', 'table', 'Agent', 'column', 'BandNumber'
+   'schema', 'Agents', 'table', 'Agent', 'column', 'BankNumber'
 
 end
 
 
 execute sp_addextendedproperty 'MS_Description', 
    '银行卡号',
-   'schema', 'Agents', 'table', 'Agent', 'column', 'BandNumber'
+   'schema', 'Agents', 'table', 'Agent', 'column', 'BankNumber'
 go
 
 if exists(select 1 from sys.extended_properties p where
