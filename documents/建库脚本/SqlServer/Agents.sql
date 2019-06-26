@@ -569,7 +569,6 @@ alter table Finances.AccountDetail
       references Finances.Account (AccountId)
 go
 
-
 if exists (select 1
             from  sysobjects
            where  id = object_id('Agents.Agent')
@@ -584,6 +583,7 @@ create table Agents.Agent (
    AgentId              uniqueidentifier     not null,
    Code                 nvarchar(20)         not null,
    Name                 nvarchar(200)        not null,
+   UserId               uniqueidentifier     null,
    ParentId             uniqueidentifier     null,
    AgentPath            nvarchar(200)        null,
    AlipayAccount        nvarchar(200)        null,
@@ -668,6 +668,22 @@ end
 execute sp_addextendedproperty 'MS_Description', 
    '姓名',
    'schema', 'Agents', 'table', 'Agent', 'column', 'Name'
+go
+
+if exists(select 1 from sys.extended_properties p where
+      p.major_id = object_id('Agents.Agent')
+  and p.minor_id = (select c.column_id from sys.columns c where c.object_id = p.major_id and c.name = 'UserId')
+)
+begin
+   execute sp_dropextendedproperty 'MS_Description', 
+   'schema', 'Agents', 'table', 'Agent', 'column', 'UserId'
+
+end
+
+
+execute sp_addextendedproperty 'MS_Description', 
+   '用户标识',
+   'schema', 'Agents', 'table', 'Agent', 'column', 'UserId'
 go
 
 if exists(select 1 from sys.extended_properties p where
@@ -989,6 +1005,7 @@ execute sp_addextendedproperty 'MS_Description',
    '版本号',
    'schema', 'Agents', 'table', 'Agent', 'column', 'Version'
 go
+
 
 
 if exists (select 1
