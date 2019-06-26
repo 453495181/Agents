@@ -28,7 +28,7 @@ namespace Agents.Service.Implements.Distributions {
         /// <summary>
         /// 佣金仓储
         /// </summary>
-        public ICommissionRepository CommissionRepository { get; set; }
+        public ICommissionRepository CommissionRepository { get; set; } 
         
         /// <summary>
         /// 创建查询对象
