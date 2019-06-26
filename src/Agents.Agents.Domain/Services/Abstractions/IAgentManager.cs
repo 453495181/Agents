@@ -12,7 +12,7 @@ namespace Agents.Agents.Domain.Services.Abstractions {
         /// <summary>
         /// 添加代理
         /// </summary>
-        Task CreateAgentAsync(Agent model);
+        Task<Agent> CreateAgentAsync(Agent model);
         /// <summary>
         /// 审批代理
         /// </summary>

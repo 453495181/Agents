@@ -39,7 +39,7 @@ namespace Agents.Agents.Domain.Models {
         /// 设置代理路径
         /// </summary>
         public void SetAgentPath(string agentPath) {
-            throw new NotImplementedException();
+
         }
     }
 }

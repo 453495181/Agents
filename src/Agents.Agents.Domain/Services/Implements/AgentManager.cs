@@ -38,9 +38,10 @@ namespace Agents.Agents.Domain.Services.Implements {
         /// <summary>
         /// 添加代理
         /// </summary>
-        public async Task CreateAgentAsync(Agent model) {
+        public async Task<Agent> CreateAgentAsync(Agent model) {
             var agent = await AddAgent(model);
             agent.Approval();
+            return agent;
         }
 
         /// <summary>

@@ -1,4 +1,5 @@
-﻿using Util;
+﻿using System;
+using Util;
 using Util.Maps;
 using Util.Domains.Repositories;
 using Util.Datas.Queries;
@@ -11,6 +12,7 @@ using Agents.Service.Queries.Agents;
 using Agents.Service.Abstractions.Agents;
 using System.Threading.Tasks;
 using Agents.Agents.Domain.Services.Abstractions;
+using Agents.Service.Dtos.Agents.Requests;
 
 namespace Agents.Service.Implements.Agents {
     /// <summary>
@@ -20,23 +22,23 @@ namespace Agents.Service.Implements.Agents {
         /// <summary>
         /// 初始化代理服务
         /// </summary>
-        /// <param name="unitOfWork">工作单元</param>
-        /// <param name="agentRepository">代理仓储</param>
         public AgentService(IAgentsUnitOfWork unitOfWork, IAgentRepository agentRepository, IAgentManager agentManager)
             : base(unitOfWork, agentRepository) {
             AgentRepository = agentRepository;
             AgentManager = agentManager;
+            UnitOfWork = unitOfWork;
         }
 
         /// <summary>
         /// 代理仓储
         /// </summary>
         public IAgentRepository AgentRepository { get; set; }
-
         /// <summary>
         /// 代理管理器
         /// </summary>
         public IAgentManager AgentManager { get; set; }
+
+        public IAgentsUnitOfWork UnitOfWork { get; }
 
         /// <summary>
         /// 创建查询对象
@@ -44,6 +46,16 @@ namespace Agents.Service.Implements.Agents {
         /// <param name="param">查询参数</param>
         protected override IQueryBase<Agent> CreateQuery(AgentQuery param) {
             return new Query<Agent>(param);
+        }
+
+        /// <summary>
+        /// 添加代理
+        /// </summary>
+        public async Task<Guid> CreateAsync(CreateAgentRequest request) {
+            var agent = request.MapTo<Agent>();
+            agent = await AgentManager.CreateAgentAsync(agent);
+            await UnitOfWork.CommitAsync();
+            return agent.Id;
         }
     }
 }
