@@ -43,6 +43,11 @@
     </Content>
   </ItemGroup>
 
+
+  <ItemGroup>
+    <Folder Include="Typings\app\agents\sub-agent\html\" />
+  </ItemGroup>
+
   <!-- 发布阶段打包 -->
   <Target Name="Publish_RunWebpack" AfterTargets="ComputeFilesToPublish">
     <Message Importance="high" Text="Webpack开始打包..." />

@@ -16,7 +16,7 @@ namespace Agents.WebClients {
         /// <summary>
         /// Post
         /// </summary>
-        public static async Task<decimal> PostAsync(string url, object request) {
+        public static async Task<dynamic> PostAsync(string url, object request) {
             var result = await Web.Client().Post(url).JsonData(request).ResultFromJsonAsync<Result>();
             result.ErrorValidate();
             return result.Data;

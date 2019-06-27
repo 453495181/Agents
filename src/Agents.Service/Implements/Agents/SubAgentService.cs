@@ -1,35 +1,32 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Threading;
-using Util;
-using Util.Maps;
-using Util.Domains.Repositories;
-using Util.Datas.Queries;
-using Util.Applications;
-using Agents.Data;
-using Agents.Agents.Domain.Models;
+﻿using Agents.Agents.Domain.Models;
 using Agents.Agents.Domain.Repositories;
-using Agents.Service.Dtos.Agents;
-using Agents.Service.Queries.Agents;
-using Agents.Service.Abstractions.Agents;
-using System.Threading.Tasks;
 using Agents.Agents.Domain.Services.Abstractions;
+using Agents.Data;
+using Agents.Service.Abstractions.Agents;
+using Agents.Service.Dtos.Agents;
 using Agents.Service.Dtos.Agents.Extensions;
 using Agents.Service.Dtos.Agents.Requests;
-using AspectCore.DynamicProxy.Parameters;
-using Microsoft.EntityFrameworkCore;
-using Util.Helpers;
+using Agents.Service.Queries.Agents;
+using System;
+using System.Threading.Tasks;
+using Util.Applications;
+using Util.Datas.Queries;
+using Util.Domains.Repositories;
+using Util.Maps;
 
-namespace Agents.Service.Implements.Agents {
+namespace Agents.Service.Implements.Agents
+{
     /// <summary>
     /// 代理服务
     /// </summary>
-    public class SubAgentService : CrudServiceBase<Agent, AgentDto, SubAgentQuery>, ISubAgentService {
+    public class SubAgentService : CrudServiceBase<Agent, AgentDto, SubAgentQuery>, ISubAgentService
+    {
         /// <summary>
         /// 初始化代理服务
         /// </summary>
         public SubAgentService(IAgentsUnitOfWork unitOfWork, IAgentRepository agentRepository, IAgentManager agentManager)
-            : base(unitOfWork, agentRepository) {
+            : base(unitOfWork, agentRepository)
+        {
             AgentRepository = agentRepository;
             AgentManager = agentManager;
             UnitOfWork = unitOfWork;
@@ -53,28 +50,38 @@ namespace Agents.Service.Implements.Agents {
         protected override IQueryBase<Agent> CreateQuery(SubAgentQuery param)
         {
             return new Query<Agent>(param)
-                .Where(t=>t.ParentId == param.AgentId)
-                .WhereIfNotEmpty(t => t.Code==param.Code)
+                .Where(t => t.ParentId == param.AgentId)
+                .WhereIfNotEmpty(t => t.Code == param.Code)
                 .WhereIfNotEmpty(t => t.Name.Contains(param.Name));
         }
 
         /// <summary>
         /// 添加代理
         /// </summary>
-        public async Task<Guid> CreateAsync(AgentCreateRequest request) {
+        public async Task<Guid> CreateAsync(SubAgentCreateRequest request)
+        {
             var agent = request.MapTo<Agent>();
+            if (request.ParentId.HasValue)
+            {
+                var parentPath = await AgentManager.GetParentPath(request.ParentId.Value);
+                agent.AgentPath = parentPath;
+            }
+            
             agent = await AgentManager.CreateAgentAsync(agent);
             await UnitOfWork.CommitAsync();
             return agent.Id;
         }
 
+
         /// <summary>
         /// 异步获取代理
         /// </summary>
-        public async Task<AgentDto> GetAgentByIdAsync(Guid agentId) {
+        public async Task<AgentDto> GetAgentByIdAsync(Guid agentId)
+        {
             var agent = await AgentRepository.FindAsync(agentId);
             var result = agent.ToDto();
-            if (agent.ParentId != null) {
+            if (agent.ParentId != null)
+            {
                 var parentAgent = await AgentRepository.FindAsync(agent.ParentId);
                 result.ParentName = parentAgent.Name;
             }
@@ -84,7 +91,8 @@ namespace Agents.Service.Implements.Agents {
         /// <summary>
         /// 删除用户
         /// </summary>
-        public async Task DeleteAgents(string ids) {
+        public async Task DeleteAgents(string ids)
+        {
             await AgentManager.DeleteAgents(ids);
             await UnitOfWork.CommitAsync();
         }

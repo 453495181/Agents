@@ -61,7 +61,12 @@ namespace Agents.Apis.Menus {
                         Text = "代理管理",
                         Icon = "cloud",
                         Link = "/agents/agent"
-                    }
+                    },
+                    new MenuInfo {
+                    Text = "子代理管理",
+                    Icon = "cloud",
+                    Link = "/agents/subagent"
+                }
                 }
             };
         }

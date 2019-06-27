@@ -14,7 +14,7 @@ namespace Agents.Service.Abstractions.Agents {
         /// <summary>
         /// 添加代理
         /// </summary>
-        Task<Guid> CreateAsync(AgentCreateRequest request);
+        Task<Guid> CreateAsync(SubAgentCreateRequest request);
 
         /// <summary>
         /// 异步获取代理

@@ -30,5 +30,13 @@ namespace Agents.Agents.Domain.Services.Abstractions {
         /// 删除用户
         /// </summary>
         Task DeleteAgents(string ids);
+
+
+        /// <summary>
+        /// 获取代理路径
+        /// </summary>
+        /// <param name="parentId"></param>
+        /// <returns></returns>
+        Task<string> GetParentPath(Guid parentId);
     }
 }
