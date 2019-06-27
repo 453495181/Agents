@@ -1,4 +1,5 @@
 ﻿using System;
+using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
 using Util;
 using Util.Datas.Queries;
@@ -22,14 +23,16 @@ namespace Agents.Service.Queries.Agents {
         public int? Code { get;set; }
         
         private string _name = string.Empty;
+
         /// <summary>
         /// 姓名
         /// </summary>
-        [Display(Name="姓名")]
-        public string Name {
+        [Display(Name = "姓名")]
+        public string Name
+        {
             get => _name == null ? string.Empty : _name.Trim();
             set => _name = value;
-        }
+        } 
 
         private string _parentCode = string.Empty;
 
@@ -106,7 +109,13 @@ namespace Agents.Service.Queries.Agents {
             get => _bankUser == null ? string.Empty : _bankUser.Trim();
             set => _bankUser = value;
         }
-        
+
+        /// <summary>
+        /// 查询等级
+        /// </summary>
+        [Display(Name = "代理等级")]
+        public AgentLevel? Level { get; set; } = AgentLevel.First;
+
         private string _bankNumber = string.Empty;
         /// <summary>
         /// 银行卡号
@@ -181,5 +190,29 @@ namespace Agents.Service.Queries.Agents {
         /// </summary>
         [Display(Name="最后修改人")]
         public Guid? LastModifierId { get; set; }
+    }
+
+    public enum AgentLevel
+    {
+
+        /// <summary>
+        /// 一级代理
+        /// </summary>
+        [Description("一级代理")]
+        First =1,
+
+        /// <summary>
+        /// 二级代理
+        /// </summary>
+        [Description("二级代理")]
+        Second=2,
+
+
+        /// <summary>
+        /// 三级代理
+        /// </summary>
+        [Description("三级代理")]
+        Third=3,
+
     }
 }

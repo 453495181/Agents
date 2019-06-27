@@ -44,7 +44,7 @@ namespace Agents.Apis.Agents {
         /// </summary>
         /// <param name="request">用户</param>
         [HttpPost]
-        public async Task<IActionResult> CreateAsync([FromBody] AgentCreateRequest request) {
+        public async Task<IActionResult> CreateAsync([FromBody] SubAgentCreateRequest request) {
             if (request == null) {
                 return Fail(WebResource.CreateRequestIsEmpty);
             }

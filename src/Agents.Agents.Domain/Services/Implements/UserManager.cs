@@ -29,8 +29,8 @@ namespace Agents.Agents.Domain.Services.Implements {
         /// 创建用户
         /// </summary>
         public async Task<Guid> CraeteUser(CreateUserRequest request) {
-            var id = await WebClientResultHelper.PostAsync($"{UrlProvider.UserServiceUrl}/api/user", request);
-            return id.ToString(CultureInfo.InvariantCulture).ToGuid();
+            string id = await WebClientResultHelper.PostAsync($"{UrlProvider.UserServiceUrl}/api/user", request);
+            return id.ToGuid();
         }
 
         /// <summary>
