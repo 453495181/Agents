@@ -27,7 +27,7 @@ namespace Agents.Service.Abstractions.Agents {
         Task UpdateAsync(AgentUpdateRequest request);
 
         /// <summary>
-        /// 删除用户
+        /// 删除代理
         /// </summary>
         Task DeleteAgents(string ids);
     }

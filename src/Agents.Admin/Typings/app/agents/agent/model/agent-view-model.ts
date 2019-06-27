@@ -17,6 +17,10 @@ export class AgentViewModel extends ViewModel {
      */
     parentId;
     /**
+     * 上级代理
+     */
+    parentName;
+    /**
      * 代理路径
      */
     agentPath;
@@ -40,6 +44,10 @@ export class AgentViewModel extends ViewModel {
      * 开户银行
      */
     bank;
+    /**
+     * 开户银行
+     */
+    bankName;
     /**
      * 开户名
      */
@@ -68,6 +76,10 @@ export class AgentViewModel extends ViewModel {
      * 状态
      */
     state;
+    /**
+     * 状态
+     */
+    stateName;
     /**
      * 创建时间
      */

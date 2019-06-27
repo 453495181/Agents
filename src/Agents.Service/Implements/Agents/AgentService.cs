@@ -43,7 +43,9 @@ namespace Agents.Service.Implements.Agents {
         /// 代理管理器
         /// </summary>
         public IAgentManager AgentManager { get; set; }
-
+        /// <summary>
+        /// 工作单元
+        /// </summary>
         public IAgentsUnitOfWork UnitOfWork { get; }
 
         /// <summary>
@@ -90,7 +92,7 @@ namespace Agents.Service.Implements.Agents {
         }
 
         /// <summary>
-        /// 删除用户
+        /// 删除代理
         /// </summary>
         public async Task DeleteAgents(string ids) {
             await AgentManager.DeleteAgents(ids);

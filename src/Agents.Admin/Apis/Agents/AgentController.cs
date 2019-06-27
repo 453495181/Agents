@@ -12,7 +12,7 @@ namespace Agents.Apis.Agents {
     /// <summary>
     /// 代理控制器
     /// </summary>
-    public class AgentController : QueryControllerBase<AgentDto, AgentQuery> {
+    public class AgentController : CrudControllerBase<AgentDto, AgentQuery> {
         /// <summary>
         /// 初始化代理控制器
         /// </summary>
@@ -52,7 +52,7 @@ namespace Agents.Apis.Agents {
         /// <summary>
         /// 修改代理
         /// </summary>
-        [HttpPut("{id?}")]
+        [HttpPut("{id}")]
         public async Task<IActionResult> UpdateAsync(string id, [FromBody] AgentUpdateRequest request) {
             if (request == null)
                 return Fail(WebResource.UpdateRequestIsEmpty);
