@@ -1,6 +1,7 @@
 ﻿using System;
 using System.ComponentModel.DataAnnotations;
 using System.Runtime.Serialization;
+using Agents.Agents.Domain.Enums;
 using Util.Ui.Attributes;
 using Util.Applications.Dtos;
 
@@ -34,7 +35,14 @@ namespace Agents.Service.Dtos.Agents
         /// </summary>
         [Required(ErrorMessage = "支付类型不能为空")]
         [Display(Name = "支付类型")]
-        public int PayType { get; set; }
+        public OutCashPayType PayType { get; set; }
+
+        /// <summary>
+        /// 支付类型
+        /// </summary>
+        [Display(Name = "支付类型")]
+        public string PayTypeName { get; set; }
+
         /// <summary>
         /// 用户卡号
         /// </summary>
@@ -47,7 +55,13 @@ namespace Agents.Service.Dtos.Agents
         /// </summary>
         [Required(ErrorMessage = "状态不能为空")]
         [Display(Name = "状态")]
-        public int State { get; set; }
+        public OutCashState State { get; set; }
+
+        /// <summary>
+        /// 状态
+        /// </summary>
+        [Display(Name = "状态")]
+        public string StateName { get; set; }
         /// <summary>
         /// 创建时间
         /// </summary>
