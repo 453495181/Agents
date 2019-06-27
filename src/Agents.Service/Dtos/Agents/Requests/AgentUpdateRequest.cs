@@ -10,8 +10,14 @@ namespace Agents.Service.Dtos.Agents.Requests {
     /// <summary>
     /// 代理数据传输对象
     /// </summary>
-    public class CreateAgentRequest : RequestBase {
- 
+    public class AgentUpdateRequest : RequestBase {
+
+        /// <summary>
+        /// 代理标识
+        /// </summary>
+        [Required(ErrorMessage = "代理标识不能为空")]
+        [Display(Name = "代理标识")]
+        public Guid AgentId { get; set; }
         /// <summary>
         /// 姓名
         /// </summary>
@@ -19,14 +25,6 @@ namespace Agents.Service.Dtos.Agents.Requests {
         [StringLength(200, ErrorMessage = "姓名输入过长，不能超过200位")]
         [Display(Name = "姓名")]
         public string Name { get; set; }
-        /// <summary>
-        /// 手机
-        /// </summary>
-        [Required(ErrorMessage = "手机不能为空")]
-        [MinLength(11, ErrorMessage = "请输入11位的手机号码")]
-        [MaxLength(11, ErrorMessage = "请输入11位的手机号码")]
-        [Display(Name = "手机")]
-        public string Mobile { get; set; }
         /// <summary>
         /// 支付宝帐号
         /// </summary>
@@ -78,3 +76,5 @@ namespace Agents.Service.Dtos.Agents.Requests {
         public string Note { get; set; }
     }
 }
+
+

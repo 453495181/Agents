@@ -1,15 +1,15 @@
 ﻿import { Component, Injector } from '@angular/core';
 import { env } from '../../env';
 import { TableQueryComponentBase } from '../../../util';
-import { OutCashQuery } from './model/outCash-query';
-import { OutCashViewModel } from './model/outCash-view-model';
+import { OutCashQuery } from './model/out-cash-query';
+import { OutCashViewModel } from './model/out-cash-view-model';
 
 /**
  * 提现列表页
  */
 @Component({
-    selector: 'outCash-list',
-    templateUrl: !env.dev() ? './html/index.component.html' : '/view/agents/outCash'
+    selector: 'out-cash-list',
+    templateUrl: !env.dev() ? './html/list.component.html' : '/view/agents/out-cash'
 })
 export class OutCashListComponent extends TableQueryComponentBase<OutCashViewModel, OutCashQuery>  {
     /**

@@ -1,18 +1,18 @@
 ﻿import { Component, Injector } from '@angular/core';
 import { env } from '../../env';
 import { EditComponentBase } from '../../../util';
-import { OutCashViewModel } from './model/outCash-view-model';
+import { OutCashViewModel } from './model/out-cash-view-model';
 
 /**
- * 提现详情页
+ * 提现新增页
  */
 @Component({
-    selector: 'outCash-detail',
-    templateUrl: !env.dev() ? './html/detail.component.html' : '/view/agents/outCash/detail'
+    selector: 'out-cash-edit',
+    templateUrl: !env.dev() ? './html/create.component.html' : '/view/agents/out-cash/create'
 })
-export class OutCashDetailComponent extends EditComponentBase<OutCashViewModel> {
+export class OutCashCreateComponent extends EditComponentBase<OutCashViewModel> {
     /**
-     * 初始化提现详情页
+     * 初始化提现编辑页
      * @param injector 注入器
      */
     constructor(injector: Injector) {
@@ -23,6 +23,6 @@ export class OutCashDetailComponent extends EditComponentBase<OutCashViewModel> 
      * 获取基地址
      */
     protected getBaseUrl() {
-        return "outCash";
+        return "out-cash";
     }
 }

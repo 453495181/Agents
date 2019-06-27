@@ -12,19 +12,19 @@ namespace Agents.Apis.Agents {
     /// <summary>
     /// 代理控制器
     /// </summary>
-    public class AgentController : QueryControllerBase<AgentDto, AgentQuery> {
+    public class SubAgentController : QueryControllerBase<AgentDto, SubAgentQuery> {
         /// <summary>
         /// 初始化代理控制器
         /// </summary>
         /// <param name="service">代理服务</param>
-        public AgentController(IAgentService service) : base(service) {
+        public SubAgentController(ISubAgentService service) : base(service) {
             AgentService = service;
         }
 
         /// <summary>
         /// 代理服务
         /// </summary>
-        public IAgentService AgentService { get; }
+        public ISubAgentService AgentService { get; }
 
         /// <summary>获取单个实例</summary>
         /// <remarks>

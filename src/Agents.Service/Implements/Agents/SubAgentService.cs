@@ -24,11 +24,11 @@ namespace Agents.Service.Implements.Agents {
     /// <summary>
     /// 代理服务
     /// </summary>
-    public class AgentService : CrudServiceBase<Agent, AgentDto, AgentQuery>, IAgentService {
+    public class SubAgentService : CrudServiceBase<Agent, AgentDto, SubAgentQuery>, ISubAgentService {
         /// <summary>
         /// 初始化代理服务
         /// </summary>
-        public AgentService(IAgentsUnitOfWork unitOfWork, IAgentRepository agentRepository, IAgentManager agentManager)
+        public SubAgentService(IAgentsUnitOfWork unitOfWork, IAgentRepository agentRepository, IAgentManager agentManager)
             : base(unitOfWork, agentRepository) {
             AgentRepository = agentRepository;
             AgentManager = agentManager;
@@ -50,9 +50,10 @@ namespace Agents.Service.Implements.Agents {
         /// 创建查询对象
         /// </summary>
         /// <param name="param">查询参数</param>
-        protected override IQueryBase<Agent> CreateQuery(AgentQuery param)
+        protected override IQueryBase<Agent> CreateQuery(SubAgentQuery param)
         {
             return new Query<Agent>(param)
+                .Where(t=>t.ParentId == param.AgentId)
                 .WhereIfNotEmpty(t => t.Code==param.Code)
                 .WhereIfNotEmpty(t => t.Name.Contains(param.Name));
         }

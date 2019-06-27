@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Globalization;
 using System.Threading.Tasks;
 using Agents.Agents.Domain.Models;
 using Agents.Agents.Domain.Repositories;
@@ -28,19 +29,15 @@ namespace Agents.Agents.Domain.Services.Implements {
         /// 创建用户
         /// </summary>
         public async Task<Guid> CraeteUser(CreateUserRequest request) {
-            var result = await WebClientHelper.PostAsync<Result>($"{UrlProvider.UserServiceUrl}/api/user", request);
-            result.ErrorValidate();
-            string id = result.Data;
-            return id.ToGuid();
+            var id = await WebClientResultHelper.PostAsync($"{UrlProvider.UserServiceUrl}/api/user", request);
+            return id.ToString(CultureInfo.InvariantCulture).ToGuid();
         }
 
         /// <summary>
         /// 删除用户
         /// </summary>
         public async Task DeleteUser(string ids) {
-            //var result = await WebClientHelper.PostAsync<Result>($"{UrlProvider.UserServiceUrl}/api/user/delete", $"'{ids}'");
-            var result = await WebClientHelper.PostAsync<Result>($"{UrlProvider.UserServiceUrl}/api/user/delete",  ids );
-            result.ErrorValidate();
+            await WebClientResultHelper.PostAsync($"{UrlProvider.UserServiceUrl}/api/user/delete", ids);
         }
     }
 }

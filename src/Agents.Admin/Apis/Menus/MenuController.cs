@@ -18,9 +18,10 @@ namespace Agents.Apis.Menus {
                 User = { Name = "何镇汐", Avatar = "/assets/img/avatar.jpg", Email = "xiadao521@qq.com" },
                 Menu = new List<MenuInfo> {
                     GetMainMenu(),
-                    GetSystemMenu()
                 }
             };
+
+           data.Menu.Add(GetSystemMenu());
             return Success(data);
         }
 
@@ -58,6 +59,11 @@ namespace Agents.Apis.Menus {
                 Children = {
                     new MenuInfo {
                         Text = "代理管理",
+                        Icon = "cloud",
+                        Link = "/agents/agent"
+                    },
+                    new MenuInfo {
+                        Text = "子代理管理",
                         Icon = "cloud",
                         Link = "/agents/agent"
                     }

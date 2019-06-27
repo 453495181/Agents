@@ -7,12 +7,13 @@ namespace Agents.Service.Queries.Agents {
     /// <summary>
     /// 代理查询参数
     /// </summary>
-    public class AgentQuery : QueryParameter {
+    public class SubAgentQuery : QueryParameter
+    {
         /// <summary>
         /// 代理标识
         /// </summary>
-        [Display(Name="代理标识")]
-        public Guid? AgentId { get; set; }
+        [Display(Name = "代理标识")]
+        public Guid? AgentId { get; set; } = Guid.Parse("97F08B03-50D4-44E4-AD12-36A4D9EF4B36");
         
         /// <summary>
         /// 编码
