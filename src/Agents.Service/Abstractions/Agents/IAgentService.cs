@@ -12,14 +12,19 @@ namespace Agents.Service.Abstractions.Agents {
     public interface IAgentService : ICrudService<AgentDto, AgentQuery> {
 
         /// <summary>
+        /// 异步获取代理
+        /// </summary>
+        Task<AgentDto> GetAgentByIdAsync(Guid guid);
+
+        /// <summary>
         /// 添加代理
         /// </summary>
         Task<Guid> CreateAsync(AgentCreateRequest request);
 
         /// <summary>
-        /// 异步获取代理
+        /// 修改代理
         /// </summary>
-        Task<AgentDto> GetAgentByIdAsync(Guid guid);
+        Task UpdateAsync(AgentUpdateRequest request);
 
         /// <summary>
         /// 删除用户

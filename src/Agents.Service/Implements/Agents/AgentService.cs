@@ -50,21 +50,10 @@ namespace Agents.Service.Implements.Agents {
         /// 创建查询对象
         /// </summary>
         /// <param name="param">查询参数</param>
-        protected override IQueryBase<Agent> CreateQuery(AgentQuery param)
-        {
+        protected override IQueryBase<Agent> CreateQuery(AgentQuery param) {
             return new Query<Agent>(param)
-                .WhereIfNotEmpty(t => t.Code==param.Code)
+                .WhereIfNotEmpty(t => t.Code == param.Code)
                 .WhereIfNotEmpty(t => t.Name.Contains(param.Name));
-        }
-
-        /// <summary>
-        /// 添加代理
-        /// </summary>
-        public async Task<Guid> CreateAsync(AgentCreateRequest request) {
-            var agent = request.MapTo<Agent>();
-            agent = await AgentManager.CreateAgentAsync(agent);
-            await UnitOfWork.CommitAsync();
-            return agent.Id;
         }
 
         /// <summary>
@@ -78,6 +67,26 @@ namespace Agents.Service.Implements.Agents {
                 result.ParentName = parentAgent.Name;
             }
             return result;
+        }
+
+        /// <summary>
+        /// 添加代理
+        /// </summary>
+        public async Task<Guid> CreateAsync(AgentCreateRequest request) {
+            var agent = request.MapTo<Agent>();
+            agent = await AgentManager.CreateAgentAsync(agent);
+            await UnitOfWork.CommitAsync();
+            return agent.Id;
+        }
+
+        /// <summary>
+        /// 修改代理
+        /// </summary>
+        public async Task UpdateAsync(AgentUpdateRequest request) {
+            var entity = await AgentRepository.FindAsync(request.AgentId);
+            request.MapTo(entity);
+            await AgentRepository.UpdateAsync(entity);
+            await UnitOfWork.CommitAsync();
         }
 
         /// <summary>
