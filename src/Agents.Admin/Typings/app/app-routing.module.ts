@@ -15,6 +15,7 @@ const routes: Routes = [
             //{ path: 'demo', loadChildren: "./demo/demo.module#DemoModule" },
             //{ path: 'component', loadChildren: "./components/component.module#ComponentModule" },
             { path: 'agents', loadChildren: "./agents/agent.module#AgentModule" },
+            { path: 'members', loadChildren: "./members/member.module#MemberModule" },
         ]
     }
 ];

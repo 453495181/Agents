@@ -1,12 +1,17 @@
-﻿using Util;
+﻿using System;
+using System.Threading.Tasks;
+using Util;
 using Util.Maps;
 using Util.Domains.Repositories;
 using Util.Datas.Queries;
 using Util.Applications;
 using Agents.Data;
 using Agents.Members.Domain.Models;
+using Agents.Members.Domain.Services.Abstractions;
 using Agents.Members.Domain.Repositories;
 using Agents.Service.Dtos.Members;
+using Agents.Service.Dtos.Members.Requests;
+using Agents.Service.Dtos.Members.Extensions;
 using Agents.Service.Queries.Members;
 using Agents.Service.Abstractions.Members;
 
@@ -20,22 +25,74 @@ namespace Agents.Service.Implements.Members {
         /// </summary>
         /// <param name="unitOfWork">工作单元</param>
         /// <param name="downloadLogRepository">下载记录仓储</param>
-        public DownloadLogService( IAgentsUnitOfWork unitOfWork, IDownloadLogRepository downloadLogRepository )
+        /// <param name="downloadLogManager">下载记录管理器</param>
+        public DownloadLogService( IAgentsUnitOfWork unitOfWork, IDownloadLogRepository downloadLogRepository, IDownloadLogManager downloadLogManager)
             : base( unitOfWork, downloadLogRepository ) {
+			UnitOfWork = unitOfWork;
             DownloadLogRepository = downloadLogRepository;
+			DownloadLogManager = downloadLogManager;
+
         }
         
+        /// <summary>
+        /// 工作单元
+        /// </summary>
+        public IAgentsUnitOfWork UnitOfWork { get; }
+
         /// <summary>
         /// 下载记录仓储
         /// </summary>
         public IDownloadLogRepository DownloadLogRepository { get; set; }
         
         /// <summary>
+        /// 下载记录管理器
+        /// </summary>
+        public IDownloadLogManager DownloadLogManager { get; set; }
+
+
+        /// <summary>
         /// 创建查询对象
         /// </summary>
         /// <param name="param">查询参数</param>
         protected override IQueryBase<DownloadLog> CreateQuery( DownloadLogQuery param ) {
             return new Query<DownloadLog>( param );
+        }
+		
+        /// <summary>
+        /// 异步获取下载记录
+        /// </summary>
+        public async Task<DownloadLogDto> GetDownloadLogByIdAsync(Guid id) {
+            var entity = await DownloadLogRepository.FindAsync(id);
+            var result = entity.ToDto();
+            return result;
+        }
+
+        /// <summary>
+        /// 添加下载记录
+        /// </summary>
+        public async Task<Guid> CreateAsync(DownloadLogCreateRequest request) {
+            var downloadLog = request.MapTo<DownloadLog>();
+            downloadLog = await DownloadLogManager.CreateDownloadLogAsync(downloadLog);
+            await UnitOfWork.CommitAsync();
+            return downloadLog.Id;
+        }
+
+        /// <summary>
+        /// 修改下载记录
+        /// </summary>
+        public async Task UpdateAsync(DownloadLogUpdateRequest request) {
+            var entity = await DownloadLogRepository.FindAsync(request.DownloadLogId);
+            request.MapTo(entity);
+            await DownloadLogRepository.UpdateAsync(entity);
+            await UnitOfWork.CommitAsync();
+        }
+
+        /// <summary>
+        /// 删除下载记录
+        /// </summary>
+        public async Task DeleteDownloadLog(string ids) {
+            await DownloadLogManager.DeleteDownloadLog(ids);
+            await UnitOfWork.CommitAsync();
         }
     }
 }
