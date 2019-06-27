@@ -66,7 +66,12 @@ namespace Agents.Apis.Menus {
                     Text = "子代理管理",
                     Icon = "cloud",
                     Link = "/agents/subagent"
-                }
+                },
+                    new MenuInfo {
+                        Text = "提现列表",
+                        Icon = "cloud",
+                        Link = "/agents/out-cash"
+                    }
                 }
             };
         }

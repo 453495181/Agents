@@ -1679,6 +1679,14 @@ execute sp_addextendedproperty 'MS_Description',
    'schema', 'Members', 'table', 'Member', 'column', 'Version'
 go
 
+/*==============================================================*/
+/* Index: Index_1                                               */
+/*==============================================================*/
+create unique index Index_1 on Members.Member (
+MemberOutId ASC
+)
+go
+
 alter table Members.Member
    add constraint FK_MEMBER_REFERENCE_AGENT foreign key (AgentId)
       references Agents.Agent (AgentId)
