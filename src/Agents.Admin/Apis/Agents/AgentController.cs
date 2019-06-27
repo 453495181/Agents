@@ -12,7 +12,7 @@ namespace Agents.Apis.Agents {
     /// <summary>
     /// 代理控制器
     /// </summary>
-    public class AgentController : CrudControllerBase<AgentDto, AgentQuery> {
+    public class AgentController : QueryControllerBase<AgentDto, AgentQuery> {
         /// <summary>
         /// 初始化代理控制器
         /// </summary>
@@ -69,7 +69,7 @@ namespace Agents.Apis.Agents {
         /// 删除代理
         /// </summary>
         [HttpDelete("{id}")]
-        public async Task<IActionResult> DeleteAsync(string id) {
+        public  async Task<IActionResult> DeleteAsync(string id) {
             await AgentService.DeleteAgents(id);
             return Success();
         }
@@ -78,7 +78,7 @@ namespace Agents.Apis.Agents {
         /// 批量删除代理
         /// </summary>
         [HttpPost("delete")]
-        public async Task<IActionResult> BatchDeleteAsync([FromBody] string ids) {
+        public  async Task<IActionResult> BatchDeleteAsync([FromBody] string ids) {
             await AgentService.DeleteAgents(ids);
             return Success();
         }
