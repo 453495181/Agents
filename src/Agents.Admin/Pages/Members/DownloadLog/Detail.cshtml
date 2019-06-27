@@ -1,0 +1,17 @@
+﻿@page
+@model Agents.Service.Dtos.Members.DownloadLogDto
+@*标题*@
+<page-header title="下载记录详情"></page-header>
+@*表单*@
+<util-card show-border="false" actions="[actionBack]">
+    <util-description title="详细信息" column="3" show-border="true" >
+        <util-description-item for="AgentId"></util-description-item>
+        <util-description-item for="IPAddress"></util-description-item>
+        <util-description-item for="ClientOS"></util-description-item>
+        <util-description-item for="ClientCode"></util-description-item>
+        <util-description-item for="CreationTime"></util-description-item>
+    </util-description>
+    <util-template id="actionBack">
+        <util-button text="返回" on-click="back()"></util-button>
+    </util-template>
+</util-card>

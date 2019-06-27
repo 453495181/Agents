@@ -19,6 +19,19 @@
     <DocumentationFile>bin\Debug\netcoreapp2.2\Agents.Admin.xml</DocumentationFile>
   </PropertyGroup>
 
+  <ItemGroup>
+    <None Include="Pages\Members\DownloadLog\Create.cshtml" />
+    <None Include="Pages\Members\DownloadLog\Detail.cshtml" />
+    <None Include="Pages\Members\DownloadLog\Edit.cshtml" />
+    <None Include="Pages\Members\DownloadLog\Index.cshtml" />
+    <None Include="Pages\Members\DownloadLog\Index.Query.cshtml" />
+    <None Include="Pages\Members\Member\Create.cshtml" />
+    <None Include="Pages\Members\Member\Detail.cshtml" />
+    <None Include="Pages\Members\Member\Edit.cshtml" />
+    <None Include="Pages\Members\Member\Index.cshtml" />
+    <None Include="Pages\Members\Member\Index.Query.cshtml" />
+  </ItemGroup>
+
 
   <ItemGroup>
     <PackageReference Include="Microsoft.AspNetCore.App" />
