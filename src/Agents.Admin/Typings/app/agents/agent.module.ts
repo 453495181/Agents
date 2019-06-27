@@ -15,8 +15,8 @@ import { OutCashDetailComponent } from './out-cash/out-cash-detail.component';
  */
 @NgModule({
     declarations: [
-        AgentListComponent,AgentEditComponent,AgentDetailComponent,
-        OutCashListComponent,OutCashEditComponent,OutCashDetailComponent,
+        AgentListComponent,AgentCreateComponent,AgentEditComponent,AgentDetailComponent,
+        OutCashListComponent,OutCashCreateComponent,OutCashEditComponent,OutCashDetailComponent,
     ],
     imports: [
         FrameworkModule,AgentRoutingModule

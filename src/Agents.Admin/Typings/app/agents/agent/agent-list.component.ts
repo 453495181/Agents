@@ -9,7 +9,7 @@ import { AgentViewModel } from './model/agent-view-model';
  */
 @Component({
     selector: 'agent-list',
-    templateUrl: !env.dev() ? './html/index.component.html' : '/view/agents/agent'
+    templateUrl: !env.dev() ? './html/list.component.html' : '/view/agents/agent'
 })
 export class AgentListComponent extends TableQueryComponentBase<AgentViewModel, AgentQuery>  {
     /**

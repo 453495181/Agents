@@ -8,7 +8,7 @@ import { OutCashViewModel } from './model/out-cash-view-model';
  */
 @Component({
     selector: 'out-cash-edit',
-    templateUrl: !env.dev() ? './html/create.component.html' : '/view/agents/out-cash/create'
+    templateUrl: !env.dev() ? './html/create.component.html' : '/view/agents/outCash/create'
 })
 export class OutCashCreateComponent extends EditComponentBase<OutCashViewModel> {
     /**
