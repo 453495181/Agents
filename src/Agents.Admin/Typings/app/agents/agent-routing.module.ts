@@ -6,11 +6,6 @@ import { AgentCreateComponent } from './agent/agent-create.component';
 import { AgentEditComponent } from './agent/agent-edit.component';
 import { AgentDetailComponent } from './agent/agent-detail.component';
 
-import { OutCashListComponent } from './out-cash/out-cash-list.component';
-import { OutCashCreateComponent } from './out-cash/out-cash-create.component';
-import { OutCashEditComponent } from './out-cash/out-cash-edit.component';
-import { OutCashDetailComponent } from './out-cash/out-cash-detail.component';
-
 //路由配置
 const routes: Routes = [
     {
@@ -21,12 +16,6 @@ const routes: Routes = [
                 { path: 'create', component: AgentCreateComponent },
                 { path: 'edit/:id', component: AgentEditComponent },
                 { path: 'detail/:id', component: AgentDetailComponent }
-            ]},
-            {path: 'outCash', children: [
-                { path: '', component: OutCashListComponent },
-                { path: 'create', component: OutCashCreateComponent },
-                { path: 'edit/:id', component: OutCashEditComponent },
-                { path: 'detail/:id', component: OutCashDetailComponent }
             ]},
         ]
     }
