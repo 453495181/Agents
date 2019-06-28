@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Linq;
 using System.Threading.Tasks;
 using Util;
 using Util.Maps;
@@ -14,6 +15,7 @@ using Agents.Service.Dtos.Members.Requests;
 using Agents.Service.Dtos.Members.Extensions;
 using Agents.Service.Queries.Members;
 using Agents.Service.Abstractions.Members;
+using Microsoft.EntityFrameworkCore;
 
 namespace Agents.Service.Implements.Members {
     /// <summary>
@@ -23,14 +25,14 @@ namespace Agents.Service.Implements.Members {
         /// <summary>
         /// 初始化会员服务
         /// </summary>
-        public MemberService( IAgentsUnitOfWork unitOfWork, IMemberRepository memberRepository, IMemberManager memberManager)
-            : base( unitOfWork, memberRepository ) {
-			UnitOfWork = unitOfWork;
+        public MemberService(IAgentsUnitOfWork unitOfWork, IMemberRepository memberRepository, IMemberManager memberManager)
+            : base(unitOfWork, memberRepository) {
+            UnitOfWork = unitOfWork;
             MemberRepository = memberRepository;
-			MemberManager = memberManager;
+            MemberManager = memberManager;
 
         }
-        
+
         /// <summary>
         /// 工作单元
         /// </summary>
@@ -40,7 +42,7 @@ namespace Agents.Service.Implements.Members {
         /// 会员仓储
         /// </summary>
         public IMemberRepository MemberRepository { get; set; }
-        
+
         /// <summary>
         /// 会员管理器
         /// </summary>
@@ -50,15 +52,25 @@ namespace Agents.Service.Implements.Members {
         /// 创建查询对象
         /// </summary>
         /// <param name="param">查询参数</param>
-        protected override IQueryBase<Member> CreateQuery( MemberQuery param ) {
-            return new Query<Member>( param );
+        protected override IQueryBase<Member> CreateQuery(MemberQuery param) {
+            return new Query<Member>(param)
+                .WhereIfNotEmpty(t => t.Agent.Code == param.AgentIntCode)
+                .WhereIfNotEmpty(t => t.Name.Contains(param.Name))
+                .WhereIfNotEmpty(t => t.MemberOutId == param.MemberOutId);
         }
-		
+
+        /// <summary>
+        /// 设置关联对象
+        /// </summary>
+        protected override IQueryable<Member> Filter(IQueryable<Member> queryable, MemberQuery parameter) {
+            return queryable.Include(t => t.Agent);
+        }
+
         /// <summary>
         /// 异步获取会员
         /// </summary>
         public async Task<MemberDto> GetMemberByIdAsync(Guid id) {
-            var entity = await MemberRepository.FindAsync(id);
+            var entity = await MemberRepository.Find(t => t.Id == id).Include(t => t.Agent).FirstOrDefaultAsync();
             var result = entity.ToDto();
             return result;
         }

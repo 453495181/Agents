@@ -79,7 +79,7 @@ namespace Agents.Members.Domain.Services.Implements {
             if (!model.AgentId.HasValue) {
                 return;
             }
-            var agent = await AgentRepository.FindAsync(model.AgentId.SafeString());
+            var agent = await AgentRepository.FindAsync(model.AgentId.SafeValue());
             model.SetAgent(agent);
         }
 

@@ -13,6 +13,7 @@ namespace Agents.Members.Domain.Models {
         public override void Init() {
             base.Init();
             FirstTime = DateTime.Now;
+            RegisterTime = DateTime.Now;
         }
 
         /// <summary>

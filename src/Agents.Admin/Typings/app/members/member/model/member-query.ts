@@ -17,6 +17,10 @@ export class MemberQuery extends QueryParameter {
      */
     agentId;
     /**
+     * 代理编号
+     */
+    agentCode;
+    /**
      * 代理路径
      */
     agentPath;

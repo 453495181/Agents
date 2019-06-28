@@ -49,38 +49,38 @@ namespace Agents.Apis.Members {
             return Success(id);
         }
 		 
-        /// <summary>
-        /// 修改下载记录
-        /// </summary>
-        [HttpPut("{id}")]
-        public async Task<IActionResult> UpdateAsync(string id, [FromBody] DownloadLogUpdateRequest request) {
-            if (request == null)
-                return Fail(WebResource.UpdateRequestIsEmpty);
-            if (id.IsEmpty() && request.DownloadLogId.IsEmpty())
-                return Fail(WebResource.IdIsEmpty);
-            if (request.DownloadLogId.IsEmpty())
-                request.DownloadLogId = id.ToGuid();
-            await DownloadLogService.UpdateAsync(request);
-            DownloadLogDto byIdAsync = await DownloadLogService.GetByIdAsync(request.DownloadLogId);
-            return Success(byIdAsync);
-        }
+        ///// <summary>
+        ///// 修改下载记录
+        ///// </summary>
+        //[HttpPut("{id}")]
+        //public async Task<IActionResult> UpdateAsync(string id, [FromBody] DownloadLogUpdateRequest request) {
+        //    if (request == null)
+        //        return Fail(WebResource.UpdateRequestIsEmpty);
+        //    if (id.IsEmpty() && request.DownloadLogId.IsEmpty())
+        //        return Fail(WebResource.IdIsEmpty);
+        //    if (request.DownloadLogId.IsEmpty())
+        //        request.DownloadLogId = id.ToGuid();
+        //    await DownloadLogService.UpdateAsync(request);
+        //    DownloadLogDto byIdAsync = await DownloadLogService.GetByIdAsync(request.DownloadLogId);
+        //    return Success(byIdAsync);
+        //}
 
-        /// <summary>
-        /// 删除下载记录
-        /// </summary>
-        [HttpDelete("{id}")]
-        public async Task<IActionResult> DeleteAsync(string id) {
-            await DownloadLogService.DeleteDownloadLog(id);
-            return Success();
-        }
+        ///// <summary>
+        ///// 删除下载记录
+        ///// </summary>
+        //[HttpDelete("{id}")]
+        //public async Task<IActionResult> DeleteAsync(string id) {
+        //    await DownloadLogService.DeleteDownloadLog(id);
+        //    return Success();
+        //}
 		
-        /// <summary>
-        /// 批量删除下载记录
-        /// </summary>
-        [HttpPost("delete")]
-        public async Task<IActionResult> BatchDeleteAsync([FromBody] string ids) {
-            await DownloadLogService.DeleteDownloadLog(ids);
-            return Success();
-        }
+        ///// <summary>
+        ///// 批量删除下载记录
+        ///// </summary>
+        //[HttpPost("delete")]
+        //public async Task<IActionResult> BatchDeleteAsync([FromBody] string ids) {
+        //    await DownloadLogService.DeleteDownloadLog(ids);
+        //    return Success();
+        //}
     }
 }

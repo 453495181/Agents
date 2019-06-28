@@ -9,6 +9,10 @@ export class MemberViewModel extends ViewModel {
      */
     memberOutId;
     /**
+     * 上级代理
+     */
+    agentName;
+    /**
      * 代理标识
      */
     agentId;

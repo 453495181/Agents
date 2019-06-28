@@ -34,5 +34,13 @@ namespace Agents.Finances.Domain.Services.Implements {
             await AccountRepository.AddAsync(account);
         }
 
+        /// <summary>
+        /// 删除账户
+        /// </summary>
+        public async Task DeleteAccount(string ids) {
+            var entitis = await AccountRepository.FindByIdsAsync(ids);
+            await AccountRepository.RemoveAsync(entitis);
+        }
+
     }
 }

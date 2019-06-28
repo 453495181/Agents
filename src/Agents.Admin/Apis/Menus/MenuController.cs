@@ -18,10 +18,10 @@ namespace Agents.Apis.Menus {
                 User = { Name = "何镇汐", Avatar = "/assets/img/avatar.jpg", Email = "xiadao521@qq.com" },
                 Menu = new List<MenuInfo> {
                     GetMainMenu(),
+                    GetSystemMenu(),
+                    GetAgentMenu()
                 }
             };
-
-           data.Menu.Add(GetSystemMenu());
             return Success(data);
         }
 
@@ -66,13 +66,29 @@ namespace Agents.Apis.Menus {
                         Text = "会员管理",
                         Icon = "cloud",
                         Link = "/members/member"
-                    },
+                    }
+                }
+            };
+        }
 
+        /// <summary>
+        /// 获取代理菜单
+        /// </summary>
+        private MenuInfo GetAgentMenu() {
+            return new MenuInfo {
+                Text = "代理菜单",
+                Group = true,
+                Children = {
                     new MenuInfo {
-                    Text = "子代理管理",
-                    Icon = "cloud",
-                    Link = "/agents/subagent"
-                },
+                        Text = "代理管理",
+                        Icon = "cloud",
+                        Link = "/agents/subagent"
+                    },
+                    new MenuInfo {
+                        Text = "会员管理",
+                        Icon = "cloud",
+                        Link = "/members/member"
+                    },
                     new MenuInfo {
                         Text = "提现列表",
                         Icon = "cloud",
