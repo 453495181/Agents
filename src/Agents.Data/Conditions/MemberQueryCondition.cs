@@ -25,8 +25,8 @@ namespace Agents.Data.Conditions {
             Expression<Func<Member, bool>> result = null;
             if (CurrentAgent != null) {
 
-                var agentCode = CurrentAgent.Code.SafeString();
-                result = t => t.AgentPath.Contains(agentCode);
+                var agentId = CurrentAgent.Id.SafeString();
+                result = t => t.AgentPath.Contains(agentId);
             }
             return result;
         }

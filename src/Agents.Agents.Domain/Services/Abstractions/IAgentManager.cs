@@ -34,14 +34,6 @@ namespace Agents.Agents.Domain.Services.Abstractions {
         /// </summary>
         Task DeleteAgents(string ids);
 
-
-        /// <summary>
-        /// 获取代理路径
-        /// </summary>
-        /// <param name="parentId"></param>
-        /// <returns></returns>
-        Task<string> GetParentPath(Guid parentId);
-
         /// <summary>
         /// 获取当前登陆代理 如果当前登陆的不是代理 返回Null
         /// </summary>

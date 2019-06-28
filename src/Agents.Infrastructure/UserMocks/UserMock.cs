@@ -14,7 +14,7 @@ namespace Agents.UserMocks {
         /// 获取当前登陆用户
         /// </summary>
         public static Guid CurrentUserId() {
-            return "9655735F-912F-473C-9EC4-183062EF17BD".ToGuid();
+            return "DDFB385B-ACBC-4212-9F47-0098F3B764B5".ToGuid();
         }
     }
 }

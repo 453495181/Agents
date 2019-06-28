@@ -57,7 +57,7 @@ namespace Agents.Agents.Domain.Services.Implements {
 
             agent.Init();
             agent.SetCode(maxCode);
-            agent.SetAgentPath("");
+            agent.SetAgentPath(GetCurrentAgentAsync());
             await AgentRepository.AddAsync(agent);
             return agent;
         }
@@ -94,27 +94,7 @@ namespace Agents.Agents.Domain.Services.Implements {
             await AccountManager.DeleteAccount(agents.Select(t => t.Id).Join(","));
             await AgentRepository.RemoveAsync(agents);
         }
-
-        /// <summary>
-        /// 获取代理路径
-        /// </summary>
-        public async Task<string> GetParentPath(Guid parentId) {
-            var entity = await AgentRepository.FindAsync(parentId);
-            var path = entity.AgentPath;
-            if (string.IsNullOrEmpty(path)) {
-                return parentId.ToString();
-            }
-
-            //只要3级代理
-            var p = path.Split(',').ToList();
-            var list = p;
-            if (p.Count >= 3) {
-                list = p.GetRange(p.Count - 2, 2);
-            }
-
-            return list.Join(",") + "," + parentId.ToString();
-        }
-
+        
         /// <summary>
         /// 获取当前登陆代理 如果当前登陆的不是代理 返回Null
         /// </summary>

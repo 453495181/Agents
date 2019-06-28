@@ -58,15 +58,9 @@ namespace Agents.Service.Implements.Agents
         /// <summary>
         /// 添加代理
         /// </summary>
-        public async Task<Guid> CreateAsync(SubAgentCreateRequest request)
+        public async Task<Guid> CreateAsync(AgentCreateRequest request)
         {
             var agent = request.MapTo<Agent>();
-            if (request.ParentId.HasValue)
-            {
-                var parentPath = await AgentManager.GetParentPath(request.ParentId.Value);
-                agent.AgentPath = parentPath;
-            }
-            
             agent = await AgentManager.CreateAgentAsync(agent);
             await UnitOfWork.CommitAsync();
             return agent.Id;

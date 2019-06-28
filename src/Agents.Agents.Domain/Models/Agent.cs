@@ -1,4 +1,6 @@
 ﻿using System;
+using System.Linq;
+using Microsoft.EntityFrameworkCore.Internal;
 using Util.Exceptions;
 
 namespace Agents.Agents.Domain.Models {
@@ -49,7 +51,24 @@ namespace Agents.Agents.Domain.Models {
         /// <summary>
         /// 设置代理路径
         /// </summary>
-        public void SetAgentPath(string agentPath) {
+        public void SetAgentPath(Agent parentAgent) {
+            if (parentAgent == null)
+            {
+                AgentPath = Id.ToString();
+            }
+            else
+            {
+                AgentPath = parentAgent.AgentPath + "," + Id;
+
+                //只要3级代理
+                var p = AgentPath.Split(',').ToList();
+                if (p.Count >= 3)
+                {
+                    p = p.GetRange(p.Count - 3, 3);
+                }
+
+                AgentPath = p.Join(",");
+            }
 
         }
     }
