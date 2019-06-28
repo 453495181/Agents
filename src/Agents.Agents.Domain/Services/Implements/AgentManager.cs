@@ -6,6 +6,7 @@ using Agents.Finances.Domain.Services.Abstractions;
 using System;
 using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.EntityFrameworkCore;
 using Util;
 using Util.Domains.Services;
 
@@ -94,6 +95,9 @@ namespace Agents.Agents.Domain.Services.Implements {
             await AgentRepository.RemoveAsync(agents);
         }
 
+        /// <summary>
+        /// 获取代理路径
+        /// </summary>
         public async Task<string> GetParentPath(Guid parentId) {
             var entity = await AgentRepository.FindAsync(parentId);
             var path = entity.AgentPath;
@@ -111,5 +115,13 @@ namespace Agents.Agents.Domain.Services.Implements {
             return list.Join(",") + "," + parentId.ToString();
         }
 
+        /// <summary>
+        /// 获取当前登陆代理 如果当前登陆的不是代理 返回Null
+        /// </summary>
+        public Agent GetCurrentAgentAsync() {
+            var currentUserId = UserMocks.UserMock.CurrentUserId();
+            var agent = AgentRepository.Single(t => t.UserId == currentUserId);
+            return agent;
+        }
     }
 }

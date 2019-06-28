@@ -20,6 +20,10 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Content Remove="Pages\Members\Member\SubIndex.cshtml" />
+  </ItemGroup>
+
+  <ItemGroup>
     <None Include="Pages\Members\DownloadLog\Create.cshtml" />
     <None Include="Pages\Members\DownloadLog\Detail.cshtml" />
     <None Include="Pages\Members\DownloadLog\Edit.cshtml" />

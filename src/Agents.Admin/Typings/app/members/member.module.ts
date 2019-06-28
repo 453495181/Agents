@@ -10,13 +10,15 @@ import { MemberCreateComponent } from './member/member-create.component';
 import { MemberEditComponent } from './member/member-edit.component';
 import { MemberDetailComponent } from './member/member-detail.component';
 
+import { SubMemberListComponent } from './member/sub-member-list.component';
+
 /**
  * members模块
  */
 @NgModule({
     declarations: [
         DownloadLogListComponent,DownloadLogCreateComponent,DownloadLogEditComponent,DownloadLogDetailComponent,
-        MemberListComponent,MemberCreateComponent,MemberEditComponent,MemberDetailComponent,
+        MemberListComponent,MemberCreateComponent,MemberEditComponent,MemberDetailComponent,SubMemberListComponent
     ],
     imports: [
         FrameworkModule,MemberRoutingModule

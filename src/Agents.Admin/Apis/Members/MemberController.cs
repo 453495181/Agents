@@ -17,16 +17,25 @@ namespace Agents.Apis.Members {
         /// 初始化会员控制器
         /// </summary>
         /// <param name="service">会员服务</param>
-        public MemberController( IMemberService service ) : base( service ) {
+        public MemberController(IMemberService service) : base(service) {
             MemberService = service;
         }
-        
+
         /// <summary>
         /// 会员服务
         /// </summary>
         public IMemberService MemberService { get; }
 
-		
+        /// <summary>
+        /// 分页查询
+        /// </summary>
+        [HttpGet("query222")]
+        public IActionResult PagerQuery222(MemberQuery query) {
+            PagerQueryBefore(query);
+            var result = MemberService.PagerQuery222(query);
+            return Success(ToPagerQueryResult(result));
+        }
+
         /// <summary>
         /// 根据Id获取会员
         /// </summary>
@@ -36,7 +45,7 @@ namespace Agents.Apis.Members {
             var byIdAsync = await MemberService.GetMemberByIdAsync(id.ToGuid());
             return Success(byIdAsync);
         }
-				
+
         /// <summary>
         /// 创建会员
         /// </summary>
@@ -48,7 +57,7 @@ namespace Agents.Apis.Members {
             var id = await MemberService.CreateAsync(request);
             return Success(id);
         }
-		 
+
         /// <summary>
         /// 修改会员
         /// </summary>
@@ -73,7 +82,7 @@ namespace Agents.Apis.Members {
             await MemberService.DeleteMember(id);
             return Success();
         }
-		
+
         /// <summary>
         /// 批量删除会员
         /// </summary>

@@ -11,6 +11,8 @@ import { MemberCreateComponent } from './member/member-create.component';
 import { MemberEditComponent } from './member/member-edit.component';
 import { MemberDetailComponent } from './member/member-detail.component';
 
+import { SubMemberListComponent } from './member/sub-member-list.component';
+
 //路由配置
 const routes: Routes = [
     {
@@ -26,7 +28,10 @@ const routes: Routes = [
                 { path: '', component: MemberListComponent },
                 { path: 'create', component: MemberCreateComponent },
                 { path: 'edit/:id', component: MemberEditComponent },
-                { path: 'detail/:id', component: MemberDetailComponent }
+                { path: 'detail/:id', component: MemberDetailComponent },
+
+                { path: 'submember', component: SubMemberListComponent },
+                //{ path: 'submember/detail/:id', component: MemberDetailComponent },
             ]},
         ]
     }

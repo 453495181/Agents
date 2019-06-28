@@ -4,6 +4,7 @@ using Util.Applications;
 using Agents.Service.Dtos.Members;
 using Agents.Service.Dtos.Members.Requests;
 using Agents.Service.Queries.Members;
+using Util.Domains.Repositories;
 
 namespace Agents.Service.Abstractions.Members {
     /// <summary>
@@ -30,6 +31,13 @@ namespace Agents.Service.Abstractions.Members {
         /// 删除会员
         /// </summary>
         Task DeleteMember(string ids);
+
+
+        /// <summary>
+        /// 分页查询
+        /// </summary>
+        /// <param name="parameter">查询参数</param>
+        PagerList<MemberDto> PagerQuery222(MemberQuery parameter);
 
     }
 }

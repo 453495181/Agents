@@ -87,7 +87,7 @@ namespace Agents.Apis.Menus {
                     new MenuInfo {
                         Text = "会员管理",
                         Icon = "cloud",
-                        Link = "/members/member"
+                        Link = "/members/member/submember"
                     },
                     new MenuInfo {
                         Text = "提现列表",

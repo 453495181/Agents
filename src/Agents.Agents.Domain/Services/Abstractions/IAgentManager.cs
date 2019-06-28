@@ -13,14 +13,17 @@ namespace Agents.Agents.Domain.Services.Abstractions {
         /// 添加代理
         /// </summary>
         Task<Agent> CreateAgentAsync(Agent model);
+
         /// <summary>
         /// 审批代理
         /// </summary>
         Task ApprovalAgentAsync(Agent agent);
+
         /// <summary>
         /// 拒绝审批代理
         /// </summary>
         void RefuseAgent(Agent agent);
+
         /// <summary>
         /// 申请代理
         /// </summary>
@@ -38,5 +41,10 @@ namespace Agents.Agents.Domain.Services.Abstractions {
         /// <param name="parentId"></param>
         /// <returns></returns>
         Task<string> GetParentPath(Guid parentId);
+
+        /// <summary>
+        /// 获取当前登陆代理 如果当前登陆的不是代理 返回Null
+        /// </summary>
+        Agent GetCurrentAgentAsync();
     }
 }
