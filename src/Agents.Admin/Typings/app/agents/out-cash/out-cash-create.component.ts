@@ -23,6 +23,19 @@ export class OutCashCreateComponent extends EditComponentBase<OutCashViewModel> 
      * 获取基地址
      */
     protected getBaseUrl() {
-        return "out-cash";
+        return "outcash";
     }
+
+
+    loadById() {
+
+        //代理和账号ID同号
+        const id = "97F08B03-50D4-44E4-AD12-36A4D9EF4B36";
+        this.util.webapi.get<number>(`/api/${this.getBaseUrl()}/getAbleMoney`).param("id",id).handle({
+            ok: result => {
+                this.model.ableOutMoney = result;
+            }
+        });
+    }
+
 }

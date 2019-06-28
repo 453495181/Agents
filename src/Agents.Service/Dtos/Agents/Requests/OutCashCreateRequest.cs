@@ -1,6 +1,7 @@
 ﻿using System;
 using System.ComponentModel.DataAnnotations;
 using System.Runtime.Serialization;
+using Agents.Agents.Domain.Enums;
 using Util.Ui.Attributes;
 using Util.Applications.Dtos;
 
@@ -20,8 +21,17 @@ namespace Agents.Service.Dtos.Agents.Requests {
         /// 提现金额
         /// </summary>
         [Required(ErrorMessage = "提现金额不能为空")]
-        [Display( Name = "提现金额" )]
+        [Display( Name = "提现金额(元)" )]
         public decimal Money { get; set; }
+
+
+        /// <summary>
+        /// 可提现金额
+        /// </summary>
+        [Display(Name = "可提现金额")]
+        public decimal AbleOutMoney { get; set; } = 0;
+
+
         /// <summary>
         /// 备注
         /// </summary>
@@ -33,7 +43,7 @@ namespace Agents.Service.Dtos.Agents.Requests {
         /// </summary>
         [Required(ErrorMessage = "支付类型不能为空")]
         [Display( Name = "支付类型" )]
-        public int PayType { get; set; }
+        public OutCashPayType PayType { get; set; }
         /// <summary>
         /// 用户卡号
         /// </summary>
@@ -41,12 +51,13 @@ namespace Agents.Service.Dtos.Agents.Requests {
         [StringLength( 200, ErrorMessage = "用户卡号输入过长，不能超过200位" )]
         [Display( Name = "用户卡号" )]
         public string CardId { get; set; }
+
         /// <summary>
         /// 状态
         /// </summary>
         [Required(ErrorMessage = "状态不能为空")]
-        [Display( Name = "状态" )]
-        public int State { get; set; }
+        [Display(Name = "状态")]
+        public OutCashState State { get; set; } = OutCashState.Apply;
         /// <summary>
         /// 创建时间
         /// </summary>

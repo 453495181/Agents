@@ -1,11 +1,13 @@
-﻿using System.Threading.Tasks;
-using Util.Webs.Controllers;
-using Microsoft.AspNetCore.Mvc;
+﻿using Agents.Service.Abstractions.Agents;
+using Agents.Service.Abstractions.Finances;
 using Agents.Service.Dtos.Agents;
 using Agents.Service.Dtos.Agents.Requests;
 using Agents.Service.Queries.Agents;
-using Agents.Service.Abstractions.Agents;
+using Microsoft.AspNetCore.Mvc;
+using System;
+using System.Threading.Tasks;
 using Util;
+using Util.Webs.Controllers;
 using Util.Webs.Properties;
 
 namespace Agents.Apis.Agents
@@ -19,15 +21,21 @@ namespace Agents.Apis.Agents
         /// 初始化提现控制器
         /// </summary>
         /// <param name="service">提现服务</param>
-        public OutCashController(IOutCashService service) : base(service)
+        public OutCashController(IOutCashService service, IAccountService accountService) : base(service)
         {
             OutCashService = service;
+            AccountService = accountService;
         }
 
         /// <summary>
         /// 提现服务
         /// </summary>
         public IOutCashService OutCashService { get; }
+
+        /// <summary>
+        /// 账户服务
+        /// </summary>
+        public IAccountService AccountService { get; }
 
 
         /// <summary>
@@ -39,6 +47,17 @@ namespace Agents.Apis.Agents
         {
             var byIdAsync = await OutCashService.GetOutCashByIdAsync(id.ToGuid());
             return Success(byIdAsync);
+        }
+
+        /// <summary>
+        /// 获取账户可提现余额
+        /// </summary>
+        /// <param name="id">标识</param>
+        [HttpGet("GetAbleMoney")]
+        public async Task<IActionResult> GetAbleMoney(Guid id)
+        {
+            var account = await AccountService.GetByIdAsync(id);
+             return Success(account.Balance);
         }
 
         /// <summary>
@@ -62,11 +81,20 @@ namespace Agents.Apis.Agents
         public async Task<IActionResult> UpdateAsync(string id, [FromBody] OutCashUpdateRequest request)
         {
             if (request == null)
+            {
                 return Fail(WebResource.UpdateRequestIsEmpty);
+            }
+
             if (id.IsEmpty() && request.OutCashId.IsEmpty())
+            {
                 return Fail(WebResource.IdIsEmpty);
+            }
+
             if (request.OutCashId.IsEmpty())
+            {
                 request.OutCashId = id.ToGuid();
+            }
+
             await OutCashService.UpdateAsync(request);
             OutCashDto byIdAsync = await OutCashService.GetByIdAsync(request.OutCashId);
             return Success(byIdAsync);

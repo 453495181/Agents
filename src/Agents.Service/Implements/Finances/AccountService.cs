@@ -9,6 +9,8 @@ using Agents.Finances.Domain.Repositories;
 using Agents.Service.Dtos.Finances;
 using Agents.Service.Queries.Finances;
 using Agents.Service.Abstractions.Finances;
+using System;
+using System.Threading.Tasks;
 
 namespace Agents.Service.Implements.Finances {
     /// <summary>
@@ -29,7 +31,9 @@ namespace Agents.Service.Implements.Finances {
         /// 账户仓储
         /// </summary>
         public IAccountRepository AccountRepository { get; set; }
-        
+
+      
+
         /// <summary>
         /// 创建查询对象
         /// </summary>

@@ -12,6 +12,11 @@ export class OutCashViewModel extends ViewModel {
      * 提现金额
      */
     money;
+
+    /**
+    * 可提现金额
+    */
+   ableOutMoney;
     /**
      * 备注
      */
