@@ -1929,6 +1929,14 @@ alter table Sales."Order"
    drop constraint FK_ORDER_REFERENCE_MEMBER
 go
 
+
+if exists (select 1
+   from sys.sysreferences r join sys.sysobjects o on (o.id = r.constid and o.type = 'F')
+   where r.fkeyid = object_id('Sales."Order"') and o.name = 'FK_ORDER_REFERENCE_MEMBER')
+alter table Sales."Order"
+   drop constraint FK_ORDER_REFERENCE_MEMBER
+go
+
 if exists (select 1
             from  sysobjects
            where  id = object_id('Sales."Order"')
@@ -1943,7 +1951,8 @@ create table Sales."Order" (
    OrderId              uniqueidentifier     not null,
    MemberId             uniqueidentifier     not null,
    Money                decimal(18,2)        not null,
-   Type                 nvarchar(100)        not null,
+   GoodsName            nvarchar(100)        null,
+   Type                 int                  not null,
    PayType              int                  null,
    State                int                  not null,
    OrderTime            datetime             not null,
@@ -2020,6 +2029,22 @@ end
 execute sp_addextendedproperty 'MS_Description', 
    '金额',
    'schema', 'Sales', 'table', 'Order', 'column', 'Money'
+go
+
+if exists(select 1 from sys.extended_properties p where
+      p.major_id = object_id('Sales."Order"')
+  and p.minor_id = (select c.column_id from sys.columns c where c.object_id = p.major_id and c.name = 'GoodsName')
+)
+begin
+   execute sp_dropextendedproperty 'MS_Description', 
+   'schema', 'Sales', 'table', 'Order', 'column', 'GoodsName'
+
+end
+
+
+execute sp_addextendedproperty 'MS_Description', 
+   '商品名称',
+   'schema', 'Sales', 'table', 'Order', 'column', 'GoodsName'
 go
 
 if exists(select 1 from sys.extended_properties p where
@@ -2234,6 +2259,7 @@ alter table Sales."Order"
    add constraint FK_ORDER_REFERENCE_MEMBER foreign key (MemberId)
       references Members.Member (MemberId)
 go
+
 
 
 if exists (select 1
