@@ -37,6 +37,6 @@ namespace Agents.Agents.Domain.Services.Abstractions {
         /// <summary>
         /// 获取当前登陆代理 如果当前登陆的不是代理 返回Null
         /// </summary>
-        Agent GetCurrentAgentAsync();
+        Task<Agent> GetCurrentAgentAsync();
     }
 }

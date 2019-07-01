@@ -26,9 +26,9 @@ namespace Agents.Service.Queries.Sales {
         
         private string _type = string.Empty;
         /// <summary>
-        /// 类型(app,web)
+        /// 类型
         /// </summary>
-        [Display(Name="类型(app,web)")]
+        [Display(Name="类型")]
         public string Type {
             get => _type == null ? string.Empty : _type.Trim();
             set => _type = value;

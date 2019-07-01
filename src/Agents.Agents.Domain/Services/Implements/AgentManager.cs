@@ -52,12 +52,10 @@ namespace Agents.Agents.Domain.Services.Implements {
         /// 创建代理
         /// </summary>
         private async Task<Agent> AddAgent(Agent agent) {
-            //var maxCode = await AgentRepository.Find(t => true).MaxAsync(t => t.Code);
             var maxCode = await AgentRepository.GetMaxCode();
-
             agent.Init();
             agent.SetCode(maxCode);
-            agent.SetAgentPath(GetCurrentAgentAsync());
+            agent.SetAgentPath(await GetCurrentAgentAsync());
             await AgentRepository.AddAsync(agent);
             return agent;
         }
@@ -94,11 +92,11 @@ namespace Agents.Agents.Domain.Services.Implements {
             await AccountManager.DeleteAccount(agents.Select(t => t.Id).Join(","));
             await AgentRepository.RemoveAsync(agents);
         }
-        
+
         /// <summary>
         /// 获取当前登陆代理 如果当前登陆的不是代理 返回Null
         /// </summary>
-        public Agent GetCurrentAgentAsync() {
+        public async Task<Agent> GetCurrentAgentAsync() {
             var currentUserId = UserMocks.UserMock.CurrentUserId();
             var agent = AgentRepository.Single(t => t.UserId == currentUserId);
             return agent;

@@ -1,14 +1,15 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Linq.Expressions;
-using System.Text;
 using Agents.Agents.Domain.Models;
 using Agents.Members.Domain.Models;
 using Util;
-using Util.Datas.Queries;
 using Util.Domains.Repositories;
 
-namespace Agents.Data.Conditions {
+namespace Agents.Data.Conditions.Members {
+
+    /// <summary>
+    /// 会员查询规约
+    /// </summary>
     public class MemberQueryCondition : ICriteria<Member> {
 
         /// <summary>

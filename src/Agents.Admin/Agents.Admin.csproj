@@ -20,10 +20,28 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Content Remove="Pages\Members\Member\SubIndex.cshtml" />
-  </ItemGroup>
-
-  <ItemGroup>
+    <None Include="Pages\Agents\Agent\Create.cshtml" />
+    <None Include="Pages\Agents\Agent\Detail.cshtml" />
+    <None Include="Pages\Agents\Agent\Edit.cshtml" />
+    <None Include="Pages\Agents\Agent\Index.cshtml" />
+    <None Include="Pages\Agents\Agent\Index.Query.cshtml" />
+    <None Include="Pages\Agents\OutCash\Create.cshtml" />
+    <None Include="Pages\Agents\OutCash\Detail.cshtml" />
+    <None Include="Pages\Agents\OutCash\Edit.cshtml" />
+    <None Include="Pages\Agents\OutCash\Index.cshtml" />
+    <None Include="Pages\Agents\OutCash\Index.Query.cshtml" />
+    <None Include="Pages\Agents\SubAgent\Create.cshtml" />
+    <None Include="Pages\Agents\SubAgent\Detail.cshtml" />
+    <None Include="Pages\Agents\SubAgent\Edit.cshtml" />
+    <None Include="Pages\Agents\SubAgent\Index.cshtml" />
+    <None Include="Pages\Agents\SubAgent\Index.Query.cshtml" />
+    <None Include="Pages\Home\Dashboard\V1.cshtml" />
+    <None Include="Pages\Home\Dashboard\V1\CardStats.cshtml" />
+    <None Include="Pages\Home\Dashboard\V1\ColumnChart.cshtml" />
+    <None Include="Pages\Home\Dashboard\V1\LineChart.cshtml" />
+    <None Include="Pages\Home\Dashboard\V1\List.cshtml" />
+    <None Include="Pages\Home\NotFound.cshtml" />
+    <None Include="Pages\Index.cshtml" />
     <None Include="Pages\Members\DownloadLog\Create.cshtml" />
     <None Include="Pages\Members\DownloadLog\Detail.cshtml" />
     <None Include="Pages\Members\DownloadLog\Edit.cshtml" />
@@ -34,6 +52,13 @@
     <None Include="Pages\Members\Member\Edit.cshtml" />
     <None Include="Pages\Members\Member\Index.cshtml" />
     <None Include="Pages\Members\Member\Index.Query.cshtml" />
+    <None Include="Pages\Members\Member\SubIndex.cshtml" />
+    <None Include="Pages\Sales\Order\Create.cshtml" />
+    <None Include="Pages\Sales\Order\Detail.cshtml" />
+    <None Include="Pages\Sales\Order\Edit.cshtml" />
+    <None Include="Pages\Sales\Order\Index.cshtml" />
+    <None Include="Pages\Sales\Order\Index.Query.cshtml" />
+    <None Include="Pages\_ViewImports.cshtml" />
   </ItemGroup>
 
 

@@ -1,0 +1,29 @@
+﻿@page
+@model Agents.Service.Dtos.Sales.OrderDto
+<page-header title="订单"></page-header>
+<util-card show-border="false">
+    @*查询表单*@
+    @await Html.PartialAsync("Index.Query")
+    @*工具按钮*@
+    @*提示语*@
+    <util-alert class="my-md" type="Info" show-icon="true">
+        已选择<strong class="text-primary mx-md">{{getCheckedLength()}}</strong>行
+    </util-alert>
+    @*表格*@
+    <util-table id="tableOrder" query-param="queryParam" base-url="order" sort="CreationTime desc">
+        <util-table-column type="Checkbox"></util-table-column>
+        <util-table-column type="LineNumber"></util-table-column>
+        <util-table-column for="GoodsName"></util-table-column>
+        <util-table-column for="MemberId"></util-table-column>
+        <util-table-column for="Money"></util-table-column>
+        <util-table-column for="TypeName"></util-table-column>
+        <util-table-column for="PayTypeName"></util-table-column>
+        <util-table-column for="StateName"></util-table-column>
+        <util-table-column for="OrderTime"></util-table-column>
+        <util-table-column for="PayTime"></util-table-column>
+        <util-table-column for="Note"></util-table-column>
+        <util-table-column title="操作">
+            <util-a shape="Circle" icon="Eye" tooltip="详情" bind-link="['detail',row.id]"></util-a>
+        </util-table-column>
+    </util-table>
+</util-card>

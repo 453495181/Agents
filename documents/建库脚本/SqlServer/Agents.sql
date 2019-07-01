@@ -1921,15 +1921,6 @@ alter table Members.DownloadLog
       references Agents.Agent (AgentId)
 go
 
-
-if exists (select 1
-   from sys.sysreferences r join sys.sysobjects o on (o.id = r.constid and o.type = 'F')
-   where r.fkeyid = object_id('Sales."Order"') and o.name = 'FK_ORDER_REFERENCE_MEMBER')
-alter table Sales."Order"
-   drop constraint FK_ORDER_REFERENCE_MEMBER
-go
-
-
 if exists (select 1
    from sys.sysreferences r join sys.sysobjects o on (o.id = r.constid and o.type = 'F')
    where r.fkeyid = object_id('Sales."Order"') and o.name = 'FK_ORDER_REFERENCE_MEMBER')
@@ -1949,6 +1940,7 @@ go
 /*==============================================================*/
 create table Sales."Order" (
    OrderId              uniqueidentifier     not null,
+   OrderOutId           nvarchar(50)         not null,
    MemberId             uniqueidentifier     not null,
    Money                decimal(18,2)        not null,
    GoodsName            nvarchar(100)        null,
@@ -1997,6 +1989,22 @@ end
 execute sp_addextendedproperty 'MS_Description', 
    '订单标识',
    'schema', 'Sales', 'table', 'Order', 'column', 'OrderId'
+go
+
+if exists(select 1 from sys.extended_properties p where
+      p.major_id = object_id('Sales."Order"')
+  and p.minor_id = (select c.column_id from sys.columns c where c.object_id = p.major_id and c.name = 'OrderOutId')
+)
+begin
+   execute sp_dropextendedproperty 'MS_Description', 
+   'schema', 'Sales', 'table', 'Order', 'column', 'OrderOutId'
+
+end
+
+
+execute sp_addextendedproperty 'MS_Description', 
+   '订单外部标识',
+   'schema', 'Sales', 'table', 'Order', 'column', 'OrderOutId'
 go
 
 if exists(select 1 from sys.extended_properties p where
@@ -2259,6 +2267,7 @@ alter table Sales."Order"
    add constraint FK_ORDER_REFERENCE_MEMBER foreign key (MemberId)
       references Members.Member (MemberId)
 go
+
 
 
 

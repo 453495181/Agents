@@ -29,10 +29,10 @@ namespace Agents.Apis.Members {
         /// <summary>
         /// 分页查询
         /// </summary>
-        [HttpGet("query222")]
-        public IActionResult PagerQuery222(MemberQuery query) {
+        [HttpGet]
+        public override async Task<IActionResult> PagerQueryAsync(MemberQuery query) {
             PagerQueryBefore(query);
-            var result = MemberService.PagerQuery222(query);
+            var result = await MemberService.PagerQueryMemberAsync(query);
             return Success(ToPagerQueryResult(result));
         }
 

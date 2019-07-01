@@ -10,6 +10,7 @@ using Util.Datas.Queries;
 using Util.Applications;
 using Agents.Data;
 using Agents.Data.Conditions;
+using Agents.Data.Conditions.Members;
 using Agents.Members.Domain.Models;
 using Agents.Members.Domain.Services.Abstractions;
 using Agents.Members.Domain.Repositories;
@@ -57,15 +58,14 @@ namespace Agents.Service.Implements.Members {
         /// </summary>
         public IAgentManager AgentManager { get; }
 
-
         /// <summary>
         /// 分页查询
         /// </summary>
         /// <param name="parameter">查询参数</param>
-        public PagerList<MemberDto> PagerQuery222(MemberQuery parameter) {
+        public async Task<PagerList<MemberDto>> PagerQueryMemberAsync(MemberQuery parameter) {
             if (parameter == null)
                 return new PagerList<MemberDto>();
-            var query = CreateQuery(parameter);
+            var query = await CreateQuery(parameter);
             var queryable = Filter(query);
             queryable = Filter(queryable, parameter);
             return (queryable.ToPagerList(query.GetPager())).Convert(ToDto);
@@ -75,8 +75,8 @@ namespace Agents.Service.Implements.Members {
         /// 创建查询对象
         /// </summary>
         /// <param name="param">查询参数</param>
-        protected IQueryBase<Member> CreateQuery(MemberQuery param) {
-            Agent currentAgent = AgentManager.GetCurrentAgentAsync();
+        protected new async Task<IQueryBase<Member>> CreateQuery(MemberQuery param) {
+            Agent currentAgent = await AgentManager.GetCurrentAgentAsync();
             var memberQueryCondition = new MemberQueryCondition(currentAgent);
             return new Query<Member>(param)
                 .Where(memberQueryCondition)
@@ -84,7 +84,6 @@ namespace Agents.Service.Implements.Members {
                 .WhereIfNotEmpty(t => t.Name.Contains(param.Name))
                 .WhereIfNotEmpty(t => t.MemberOutId == param.MemberOutId);
         }
-
 
         /// <summary>
         /// 过滤

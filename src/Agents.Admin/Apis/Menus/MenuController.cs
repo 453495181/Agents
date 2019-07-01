@@ -66,6 +66,11 @@ namespace Agents.Apis.Menus {
                         Text = "会员管理",
                         Icon = "cloud",
                         Link = "/members/member"
+                    },
+                    new MenuInfo {
+                        Text = "订单管理",
+                        Icon = "cloud",
+                        Link = "/sales/order"
                     }
                 }
             };
@@ -88,6 +93,11 @@ namespace Agents.Apis.Menus {
                         Text = "会员管理",
                         Icon = "cloud",
                         Link = "/members/member/submember"
+                    },
+                    new MenuInfo {
+                        Text = "订单管理",
+                        Icon = "cloud",
+                        Link = "/sales/order"
                     },
                     new MenuInfo {
                         Text = "提现列表",

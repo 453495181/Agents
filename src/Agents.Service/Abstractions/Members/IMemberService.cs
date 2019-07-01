@@ -11,7 +11,13 @@ namespace Agents.Service.Abstractions.Members {
     /// 会员服务
     /// </summary>
     public interface IMemberService : ICrudService<MemberDto, MemberQuery> {
-	
+
+        /// <summary>
+        /// 分页查询
+        /// </summary>
+        /// <param name="parameter">查询参数</param>
+        Task<PagerList<MemberDto>> PagerQueryMemberAsync(MemberQuery parameter);
+
         /// <summary>
         /// 异步获取会员
         /// </summary>
@@ -32,12 +38,6 @@ namespace Agents.Service.Abstractions.Members {
         /// </summary>
         Task DeleteMember(string ids);
 
-
-        /// <summary>
-        /// 分页查询
-        /// </summary>
-        /// <param name="parameter">查询参数</param>
-        PagerList<MemberDto> PagerQuery222(MemberQuery parameter);
 
     }
 }
