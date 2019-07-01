@@ -24,7 +24,10 @@ namespace Agents.Service.Dtos.Sales.Extensions {
         public static OrderDto ToDto(this Order entity) {
             if( entity == null )
                 return new OrderDto();
-            return entity.MapTo<OrderDto>();
+            var result =  entity.MapTo<OrderDto>();
+            result.MemberName = entity.Member.Name;
+            result.AgentName = entity.Member.Agent.Name;
+            return result;
         }
 
     }

@@ -13,8 +13,8 @@ namespace Agents.Sales.Domain.Services.Abstractions {
         /// <summary>
         /// 添加订单
         /// </summary>
-        Task<Order> CreateOrderAsync(Order model,Member member);
-				
+        Task<Order> CreateOrderAsync(Order model, Member member);
+
         /// <summary>
         /// 修改订单
         /// </summary>
@@ -24,5 +24,10 @@ namespace Agents.Sales.Domain.Services.Abstractions {
         /// 删除订单
         /// </summary>
         Task DeleteOrder(string ids);
+
+        /// <summary>
+        /// 添加订单
+        /// </summary>
+        void PayOrderAsync(Order model);
     }
 }

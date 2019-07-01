@@ -18,6 +18,23 @@ namespace Agents.Service.Dtos.Sales {
         [Display(Name = "会员标识")]
         public Guid MemberId { get; set; }
         /// <summary>
+        /// 会员
+        /// </summary>
+        [Display(Name = "会员")]
+        public string MemberName { get; set; }
+        /// <summary>
+        /// 代理
+        /// </summary>
+        [Display(Name = "代理")]
+        public string AgentName { get; set; }
+        /// <summary>
+        /// 订单外部标识
+        /// </summary>
+        [Display(Name = "订单外部标识")]
+        [Required(ErrorMessage = "订单外部标识不能为空")]
+        [StringLength(50, ErrorMessage = "订单外部标识输入过长，不能超过50位")]
+        public string OrderOutId { get; set; }
+        /// <summary>
         /// 商品名称
         /// </summary>
         [Display(Name = "商品名称")]
@@ -34,7 +51,6 @@ namespace Agents.Service.Dtos.Sales {
         /// 类型
         /// </summary>
         [Required(ErrorMessage = "类型不能为空")]
-        [StringLength(100, ErrorMessage = "类型输入过长，不能超过100位")]
         [Display(Name = "类型")]
         public OrderType Type { get; set; }
         /// <summary>

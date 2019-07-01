@@ -17,6 +17,7 @@ using Agents.Service.Dtos.Sales.Requests;
 using Agents.Service.Dtos.Sales.Extensions;
 using Agents.Service.Queries.Sales;
 using Agents.Service.Abstractions.Sales;
+using Microsoft.EntityFrameworkCore;
 using Util.Exceptions;
 
 namespace Agents.Service.Implements.Sales {
@@ -87,7 +88,7 @@ namespace Agents.Service.Implements.Sales {
         /// 设置关联对象
         /// </summary>
         protected override IQueryable<Order> Filter(IQueryable<Order> queryable, OrderQuery parameter) {
-            return queryable;
+            return queryable.Include(t => t.Member).Include(t => t.Member.Agent);
         }
 
         /// <summary>
@@ -108,9 +109,21 @@ namespace Agents.Service.Implements.Sales {
                 throw new Warning("找不到会员信息");
             }
             var order = request.MapTo<Order>();
-            order = await OrderManager.CreateOrderAsync(order,member);
+            order = await OrderManager.CreateOrderAsync(order, member);
             await UnitOfWork.CommitAsync();
             return order.Id;
+        }
+
+        /// <summary>
+        /// 修改订单
+        /// </summary>
+        public async Task PayAsync(Guid orderId) {
+            var entity = await OrderRepository.FindAsync(orderId);
+            if (entity == null) {
+                throw new Warning("找不到订单");
+            }
+            OrderManager.PayOrderAsync(entity);
+            await UnitOfWork.CommitAsync();
         }
 
         /// <summary>

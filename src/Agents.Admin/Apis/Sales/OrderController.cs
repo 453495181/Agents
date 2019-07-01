@@ -1,4 +1,5 @@
-﻿using System.Threading.Tasks;
+﻿using System;
+using System.Threading.Tasks;
 using Util.Webs.Controllers;
 using Microsoft.AspNetCore.Mvc;
 using Agents.Service.Dtos.Sales;
@@ -64,9 +65,9 @@ namespace Agents.Apis.Sales {
         /// </summary>
         [HttpPut("Pay{id}")]
         public async Task<IActionResult> PayedAsync(string id) {
-            if (id.IsEmpty())
+            if (id.IsEmpty() || id.ToGuid() == Guid.Empty)
                 return Fail(WebResource.IdIsEmpty);
-            //await OrderService.UpdateAsync(request);
+            await OrderService.PayAsync(id.ToGuid());
             return Success();
         }
     }

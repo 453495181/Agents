@@ -11,7 +11,7 @@ namespace Agents.Service.Abstractions.Sales {
     /// 订单服务
     /// </summary>
     public interface IOrderService : ICrudService<OrderDto, OrderQuery> {
-	
+
         /// <summary>
         /// 分页查询
         /// </summary>
@@ -26,6 +26,11 @@ namespace Agents.Service.Abstractions.Sales {
         /// 添加订单
         /// </summary>
         Task<Guid> CreateAsync(OrderCreateRequest request);
+
+        /// <summary>
+        /// 修改订单
+        /// </summary>
+        Task PayAsync(Guid orderId);
 
         /// <summary>
         /// 修改订单

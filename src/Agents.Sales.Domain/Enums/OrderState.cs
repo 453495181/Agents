@@ -8,7 +8,7 @@ namespace Agents.Sales.Domain.Enums {
         /// <summary>
         /// 待支付
         /// </summary>
-        [Description("WaitPay")]
+        [Description("待支付")]
         WaitPay = 0,
 
         /// <summary>

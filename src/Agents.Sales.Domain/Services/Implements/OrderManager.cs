@@ -31,9 +31,16 @@ namespace Agents.Sales.Domain.Services.Implements {
         /// </summary>
         public async Task<Order> CreateOrderAsync(Order model, Member member) {
             model.Init();
-            model.MemberId = member.Id;
+            model.SetMemberInfo(member);
             await OrderRepository.AddAsync(model);
             return model;
+        }
+
+        /// <summary>
+        /// 添加订单
+        /// </summary>
+        public void PayOrderAsync(Order model) {
+            model.Pay();
         }
 
         /// <summary>

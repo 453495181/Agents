@@ -30,6 +30,14 @@ namespace Agents.Sales.Domain.Models {
         }
 
         /// <summary>
+        /// 订单外部标识
+        /// </summary>
+        [DisplayName("订单外部标识")]
+        [Required(ErrorMessage = "订单外部标识不能为空")]
+        [StringLength(50, ErrorMessage = "订单外部标识输入过长，不能超过50位")]
+        public string OrderOutId { get; set; }
+        
+        /// <summary>
         /// 会员标识
         /// </summary>
         [DisplayName("会员标识")]
@@ -53,7 +61,6 @@ namespace Agents.Sales.Domain.Models {
         /// </summary>
         [DisplayName("类型")]
         [Required(ErrorMessage = "类型不能为空")]
-        [StringLength(100, ErrorMessage = "类型输入过长，不能超过100位")]
         public OrderType Type { get; set; }
         /// <summary>
         /// 支付方式
