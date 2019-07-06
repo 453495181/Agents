@@ -34,7 +34,8 @@ const routes: Routes = [
                     { path: '', component: SubAgentListComponent },
                     { path: 'create', component: SubAgentCreateComponent },
                     { path: 'edit/:id', component: SubAgentEditComponent },
-                    { path: 'detail/:id', component: SubAgentDetailComponent }
+                    { path: 'detail/:id', component: SubAgentDetailComponent },
+                    { path: 'mine', component: SubAgentEditComponent }
                 ]
             },
             {

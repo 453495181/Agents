@@ -10,6 +10,7 @@ import { SubAgentListComponent } from './sub-agent/sub-agent-list.component';
 import { SubAgentCreateComponent } from './sub-agent/sub-agent-create.component';
 import { SubAgentEditComponent } from './sub-agent/sub-agent-edit.component';
 import { SubAgentDetailComponent } from './sub-agent/sub-agent-detail.component';
+import { SubAgentMineComponent } from './sub-agent/sub-agent-mine.component';
 
 import { OutCashListComponent } from './out-cash/out-cash-list.component';
 import { OutCashCreateComponent } from './out-cash/out-cash-create.component';
@@ -22,7 +23,7 @@ import { OutCashDetailComponent } from './out-cash/out-cash-detail.component';
 @NgModule({
     declarations: [
         AgentListComponent, AgentCreateComponent, AgentEditComponent, AgentDetailComponent,
-        SubAgentListComponent, SubAgentCreateComponent, SubAgentEditComponent, SubAgentDetailComponent,
+        SubAgentListComponent, SubAgentCreateComponent, SubAgentEditComponent, SubAgentDetailComponent, SubAgentMineComponent,
         OutCashListComponent, OutCashCreateComponent, OutCashEditComponent, OutCashDetailComponent
     ],
     imports: [

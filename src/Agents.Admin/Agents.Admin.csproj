@@ -20,6 +20,10 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <None Remove="Typings\app\agents\sub-agent\sub-agent-mine.component.ts" />
+  </ItemGroup>
+
+  <ItemGroup>
     <None Include="Pages\Agents\Agent\Create.cshtml" />
     <None Include="Pages\Agents\Agent\Detail.cshtml" />
     <None Include="Pages\Agents\Agent\Edit.cshtml" />
@@ -65,6 +69,7 @@
   <ItemGroup>
     <PackageReference Include="Microsoft.AspNetCore.App" />
     <PackageReference Include="Microsoft.AspNetCore.Razor.Design" Version="2.2.0" PrivateAssets="All" />
+    <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="2.2.0" />
     <PackageReference Include="Util.Ui.Angular.AntDesign" Version="1.8.9" />
     <PackageReference Include="Util.Webs" Version="1.8.9" />
   </ItemGroup>
@@ -88,6 +93,11 @@
 
   <ItemGroup>
     <Folder Include="Typings\app\agents\sub-agent\html\" />
+  </ItemGroup>
+
+
+  <ItemGroup>
+    <TypeScriptCompile Include="Typings\app\agents\sub-agent\sub-agent-mine.component.ts" />
   </ItemGroup>
 
   <!-- 发布阶段打包 -->

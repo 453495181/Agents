@@ -85,6 +85,11 @@ namespace Agents.Apis.Menus {
                 Group = true,
                 Children = {
                     new MenuInfo {
+                        Text = "我的信息",
+                        Icon = "cloud",
+                        Link = "/agents/subagent/mine"
+                    },
+                    new MenuInfo {
                         Text = "代理管理",
                         Icon = "cloud",
                         Link = "/agents/subagent"
