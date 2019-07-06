@@ -23,6 +23,7 @@
         <util-table-column for="Note"></util-table-column>
         <util-table-column title="操作">
             <util-button class="mr-sm" color="Primary" shape="Circle" icon="Audit" tooltip="同意" on-click="audit(null,row.id)" ng-if="row.state==1 "></util-button>
+            <util-button class="mr-sm" color="Danger" shape="Circle" icon="Diff" tooltip="拒绝" on-click="refuse(null,row.id)" ng-if="row.state==1 "></util-button>
             <util-button class="mr-sm" color="Danger" shape="Circle" icon="Delete" tooltip="取消" on-click="delete(null,row.id)"></util-button>
         </util-table-column>
     </util-table>

@@ -24,5 +24,6 @@ namespace Agents.Agents.Domain.Services.Abstractions {
         /// </summary>
         Task DeleteOutCash(string ids);
         void AuditOutCash(string id);
+        void RefuseOutCash(string id);
     }
 }

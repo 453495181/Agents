@@ -22,9 +22,22 @@ export class OutCashListComponent extends TableQueryComponentBase<OutCashViewMod
 
     audit(button?, id?) {
 
-        this.util.webapi.get<number>(`/api/${this.getBaseUrl()}/getAbleMoney`).param("id", id).handle({
+        this.util.webapi.get<string>(`/api/outcash/audit`).param("id", id).handle({
             ok: result => {
-                this.model.ableOutMoney = result;
+                if (result === "ok") {
+                    this.util.message.info("审核成功");
+                }
+            }
+        });
+    }
+
+    refuse(button?, id?) {
+
+        this.util.webapi.get<string>(`/api/outcash/refuse`).param("id", id).handle({
+            ok: result => {
+                if (result === "ok") {
+                    this.util.message.info("拒绝成功");
+                }
             }
         });
     }

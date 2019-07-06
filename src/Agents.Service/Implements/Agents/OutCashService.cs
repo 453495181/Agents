@@ -30,13 +30,13 @@ namespace Agents.Service.Implements.Agents
         /// <param name="unitOfWork">工作单元</param>
         /// <param name="outCashRepository">提现仓储</param>
         /// <param name="outCashManager">提现管理器</param>
-        public OutCashService(IAgentsUnitOfWork unitOfWork, IOutCashRepository outCashRepository, IOutCashManager outCashManager)
+        public OutCashService(IAgentsUnitOfWork unitOfWork, IOutCashRepository outCashRepository, IOutCashManager outCashManager, IAgentManager agentManager)
             : base(unitOfWork, outCashRepository)
         {
             UnitOfWork = unitOfWork;
             OutCashRepository = outCashRepository;
             OutCashManager = outCashManager;
-
+            AgentManager = agentManager;
         }
 
         /// <summary>
@@ -54,14 +54,23 @@ namespace Agents.Service.Implements.Agents
         /// </summary>
         public IOutCashManager OutCashManager { get; set; }
 
+        /// <summary>
+        /// 代理管理器
+        /// </summary>
+        public IAgentManager AgentManager { get; }
+
 
         /// <summary>
         /// 创建查询对象
         /// </summary>
         /// <param name="param">查询参数</param>
-        protected override IQueryBase<OutCash> CreateQuery(OutCashQuery param)
+        protected new async Task<IQueryBase<OutCash>> CreateQuery(OutCashQuery param)
         {
-            return new Query<OutCash>(param);
+            Agent currentAgent = await AgentManager.GetCurrentAgentAsync();
+            return new Query<OutCash>(param)
+                .WhereIfNotEmpty(t => t.AgentId == currentAgent.Id)
+                .WhereIfNotEmpty(t => t.CreationTime >= param.BeginCreationTime)
+                .WhereIfNotEmpty(t => t.CreationTime <= param.BeginCreationTime);
         }
 
         /// <summary>
@@ -124,7 +133,7 @@ namespace Agents.Service.Implements.Agents
                 return new PagerList<OutCashDto>();
             }
 
-            var query = CreateQuery(parameter);
+            var query =await CreateQuery(parameter);
             var queryable = OutCashRepository.Find().Include(x => x.Agent).Where(query);
             queryable = Filter(queryable, parameter);
             return (queryable.ToPagerList(query.GetPager())).Convert(ToDto);
@@ -132,7 +141,12 @@ namespace Agents.Service.Implements.Agents
 
         public async Task AuditOutCash(string id)
         {
-             OutCashManager.AuditOutCash(id);
+            OutCashManager.AuditOutCash(id);
+        }
+
+        public async Task RefuseOutCash(string id)
+        {
+            OutCashManager.RefuseOutCash(id);
         }
 
         /// <summary>转换为数据传输对象</summary>

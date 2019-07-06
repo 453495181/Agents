@@ -35,5 +35,6 @@ namespace Agents.Service.Abstractions.Agents
         Task DeleteOutCash(string ids);
         Task<PagerList<OutCashDto>> PagerQueryOutCashAsync(OutCashQuery query);
         Task AuditOutCash(string id);
+        Task RefuseOutCash(string id);
     }
 }

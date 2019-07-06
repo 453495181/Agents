@@ -115,12 +115,25 @@ namespace Agents.Apis.Agents
         /// <summary>
         /// 审核提现
         /// </summary>
-        [HttpPost]
+        [HttpPost("audit")]
         public async Task<IActionResult> AuditAsync(string id)
         {
             await OutCashService.AuditOutCash(id);
-            return Success();
+            return Success("ok");
         }
+
+
+        /// <summary>
+        /// 拒绝提现
+        /// </summary>
+        [HttpPost("refuse")]
+        public async Task<IActionResult> RefuseAsync(string id)
+        {
+            await OutCashService.RefuseOutCash(id);
+            return Success("ok");
+        }
+
+        
 
         /// <summary>
         /// 取消提现

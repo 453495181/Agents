@@ -68,5 +68,13 @@ namespace Agents.Agents.Domain.Services.Implements
 
             //todo£∫ Ω‚∂≥”‡∂Ó£¨ø€≥˝”‡∂Ó£¨º«¬º’À∫≈√˜œ∏
         }
+
+        public async void RefuseOutCash(string id)
+        {
+            var entitis = await OutCashRepository.FindAsync(id);
+            entitis.State = OutCashState.Refuse;
+
+            //todo£∫ Ω‚∂≥”‡∂Ó£¨ª÷∏¥”‡∂Ó
+        }
     }
 }
