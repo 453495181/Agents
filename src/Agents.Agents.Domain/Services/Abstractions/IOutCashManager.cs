@@ -23,5 +23,6 @@ namespace Agents.Agents.Domain.Services.Abstractions {
         /// 删除提现
         /// </summary>
         Task DeleteOutCash(string ids);
+        void AuditOutCash(string id);
     }
 }

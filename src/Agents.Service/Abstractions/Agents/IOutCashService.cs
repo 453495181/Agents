@@ -4,6 +4,7 @@ using Util.Applications;
 using Agents.Service.Dtos.Agents;
 using Agents.Service.Dtos.Agents.Requests;
 using Agents.Service.Queries.Agents;
+using Util.Domains.Repositories;
 
 namespace Agents.Service.Abstractions.Agents
 {
@@ -32,6 +33,7 @@ namespace Agents.Service.Abstractions.Agents
         /// 删除提现
         /// </summary>
         Task DeleteOutCash(string ids);
-
+        Task<PagerList<OutCashDto>> PagerQueryOutCashAsync(OutCashQuery query);
+        Task AuditOutCash(string id);
     }
 }

@@ -8,6 +8,29 @@ export class OutCashViewModel extends ViewModel {
      * 代理标识
      */
     agentId;
+
+    /**
+     * 支付宝帐号
+     */
+    alipayAccount;
+    /**
+     * 开户银行
+     */
+    bank;
+    /**
+     * 开户银行
+     */
+    bankName;
+    /**
+     * 开户名
+     */
+    bankUser;
+    /**
+     * 银行卡号
+     */
+    bankNumber;
+
+
     /**
      * 提现金额
      */
@@ -20,6 +43,7 @@ export class OutCashViewModel extends ViewModel {
     /**
      * 备注
      */
+
     note;
     /**
      * 支付类型

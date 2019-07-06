@@ -44,6 +44,7 @@ namespace Agents.Apis.Members {
         public override async Task<IActionResult> GetAsync(string id) {
             var byIdAsync = await MemberService.GetMemberByIdAsync(id.ToGuid());
             return Success(byIdAsync);
+            
         }
 
         /// <summary>

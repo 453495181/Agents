@@ -19,4 +19,13 @@ export class OutCashListComponent extends TableQueryComponentBase<OutCashViewMod
     constructor(injector: Injector) {
         super(injector);
     }
+
+    audit(button?, id?) {
+
+        this.util.webapi.get<number>(`/api/${this.getBaseUrl()}/getAbleMoney`).param("id", id).handle({
+            ok: result => {
+                this.model.ableOutMoney = result;
+            }
+        });
+    }
 }

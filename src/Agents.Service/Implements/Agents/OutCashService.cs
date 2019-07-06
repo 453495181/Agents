@@ -1,19 +1,21 @@
-﻿using System;
+﻿using Agents.Agents.Domain.Enums;
+using Agents.Agents.Domain.Models;
+using Agents.Agents.Domain.Repositories;
+using Agents.Agents.Domain.Services.Abstractions;
+using Agents.Data;
+using Agents.Service.Abstractions.Agents;
+using Agents.Service.Dtos.Agents;
+using Agents.Service.Dtos.Agents.Extensions;
+using Agents.Service.Dtos.Agents.Requests;
+using Agents.Service.Queries.Agents;
+using Microsoft.EntityFrameworkCore;
+using System;
 using System.Threading.Tasks;
 using Util;
-using Util.Maps;
-using Util.Domains.Repositories;
-using Util.Datas.Queries;
 using Util.Applications;
-using Agents.Data;
-using Agents.Agents.Domain.Models;
-using Agents.Agents.Domain.Services.Abstractions;
-using Agents.Agents.Domain.Repositories;
-using Agents.Service.Dtos.Agents;
-using Agents.Service.Dtos.Agents.Requests;
-using Agents.Service.Dtos.Agents.Extensions;
-using Agents.Service.Queries.Agents;
-using Agents.Service.Abstractions.Agents;
+using Util.Datas.Queries;
+using Util.Domains.Repositories;
+using Util.Maps;
 
 namespace Agents.Service.Implements.Agents
 {
@@ -78,6 +80,18 @@ namespace Agents.Service.Implements.Agents
         public async Task<Guid> CreateAsync(OutCashCreateRequest request)
         {
             var outCash = request.MapTo<OutCash>();
+
+            switch (request.PayType)
+            {
+                case OutCashPayType.Alipay:
+                    outCash.CardId = request.AlipayAccount;
+                    break;
+                case OutCashPayType.Bank:
+                    outCash.CardId = $"{request.Bank.Description()},{request.BankUser},{request.BankNumber}";
+                    break;
+            }
+
+
             outCash = await OutCashManager.CreateOutCashAsync(outCash);
             await UnitOfWork.CommitAsync();
             return outCash.Id;
@@ -102,5 +116,33 @@ namespace Agents.Service.Implements.Agents
             await OutCashManager.DeleteOutCash(ids);
             await UnitOfWork.CommitAsync();
         }
+
+        public async Task<PagerList<OutCashDto>> PagerQueryOutCashAsync(OutCashQuery parameter)
+        {
+            if (parameter == null)
+            {
+                return new PagerList<OutCashDto>();
+            }
+
+            var query = CreateQuery(parameter);
+            var queryable = OutCashRepository.Find().Include(x => x.Agent).Where(query);
+            queryable = Filter(queryable, parameter);
+            return (queryable.ToPagerList(query.GetPager())).Convert(ToDto);
+        }
+
+        public async Task AuditOutCash(string id)
+        {
+             OutCashManager.AuditOutCash(id);
+        }
+
+        /// <summary>转换为数据传输对象</summary>
+        /// <param name="entity">实体</param>
+        protected override OutCashDto ToDto(OutCash entity)
+        {
+            var dto = entity.MapTo<OutCashDto>();
+            dto.OutCashAgentName = entity.Agent.Name;
+            return dto;
+        }
+
     }
 }

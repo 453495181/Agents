@@ -1,10 +1,10 @@
 
-using System;
-using System.Threading.Tasks;
+using Agents.Agents.Domain.Enums;
 using Agents.Agents.Domain.Models;
 using Agents.Agents.Domain.Repositories;
 using Agents.Agents.Domain.Services.Abstractions;
-using Util;
+using System;
+using System.Threading.Tasks;
 using Util.Domains.Services;
 
 namespace Agents.Agents.Domain.Services.Implements
@@ -34,7 +34,12 @@ namespace Agents.Agents.Domain.Services.Implements
         /// </summary>
         public async Task<OutCash> CreateOutCashAsync(OutCash model)
         {
-            throw new NotImplementedException();
+            model.Init();
+            await OutCashRepository.AddAsync(model);
+
+            //todo£∫ ∂≥Ω·”‡∂Ó
+
+            return model;
         }
 
         /// <summary>
@@ -51,8 +56,17 @@ namespace Agents.Agents.Domain.Services.Implements
         public async Task DeleteOutCash(string ids)
         {
             var entitis = await OutCashRepository.FindByIdsAsync(ids);
-            await OutCashRepository.RemoveAsync(entitis);
+            entitis.ForEach(x => x.State = OutCashState.Cancel);
+
+            //todo£∫ ª÷∏¥”‡∂Ó
         }
 
+        public async void AuditOutCash(string id)
+        {
+            var entitis = await OutCashRepository.FindAsync(id);
+            entitis.State = OutCashState.Agreed;
+
+            //todo£∫ Ω‚∂≥”‡∂Ó£¨ø€≥˝”‡∂Ó£¨º«¬º’À∫≈√˜œ∏
+        }
     }
 }
