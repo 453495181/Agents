@@ -3,10 +3,8 @@ using Agents.Agents.Domain.Repositories;
 using Agents.Agents.Domain.Services.Abstractions;
 using Agents.Agents.Domain.Services.Requests;
 using Agents.Finances.Domain.Services.Abstractions;
-using System;
 using System.Linq;
 using System.Threading.Tasks;
-using Microsoft.EntityFrameworkCore;
 using Util;
 using Util.Domains.Services;
 
@@ -66,7 +64,7 @@ namespace Agents.Agents.Domain.Services.Implements {
         public async Task ApprovalAgentAsync(Agent agent) {
             var userId = await UserManager.CraeteUser(new CreateUserRequest(agent.Mobile, agent.Email, agent.Mobile, agent.Mobile.Substring(5, 6)));
             agent.Approval(userId);
-            await AccountManager.CreateAccount(agent.Id);
+            await AccountManager.CreateAccountAsync(agent.Id);
         }
 
         /// <summary>
@@ -89,7 +87,7 @@ namespace Agents.Agents.Domain.Services.Implements {
         public async Task DeleteAgents(string ids) {
             var agents = await AgentRepository.FindByIdsAsync(ids);
             await UserManager.DeleteUser(agents.Where(t => t.UserId.HasValue).Select(t => t.UserId.Value).Join(","));
-            await AccountManager.DeleteAccount(agents.Select(t => t.Id).Join(","));
+            await AccountManager.DeleteAccountAsync(agents.Select(t => t.Id).Join(","));
             await AgentRepository.RemoveAsync(agents);
         }
 

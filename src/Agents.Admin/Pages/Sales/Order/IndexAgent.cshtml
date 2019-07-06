@@ -27,7 +27,7 @@
         <util-table-column for="Note"></util-table-column>
         <util-table-column title="操作">
             <util-a shape="Circle" icon="Eye" tooltip="详情" bind-link="['/sales/order/detail',row.id]"></util-a>
-            <util-a shape="Circle" icon="MoneyCollect" tooltip="佣金详情" bind-link="['/sales/order/order-commission',row.id]" ng-if="row.commissionState!=0"></util-a>
+            <util-a shape="Circle" icon="MoneyCollect" tooltip="佣金详情" bind-link="['/sales/order/order-commission-agent',row.id]" ng-if="row.commissionState!=0"></util-a>
         </util-table-column>
     </util-table>
 </util-card>

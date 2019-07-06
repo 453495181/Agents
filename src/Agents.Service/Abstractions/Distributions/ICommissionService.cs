@@ -17,25 +17,5 @@ namespace Agents.Service.Abstractions.Distributions {
         /// </summary>
         Task<PagerList<CommissionDto>> PagerQueryCommissionAsync(CommissionQuery parameter);
 
-        /// <summary>
-        /// 异步获取佣金
-        /// </summary>
-        Task<CommissionDto> GetCommissionByIdAsync(Guid guid);
-
-        /// <summary>
-        /// 添加佣金
-        /// </summary>
-        Task<Guid> CreateAsync(CommissionCreateRequest request);
-
-        /// <summary>
-        /// 修改佣金
-        /// </summary>
-        Task UpdateAsync(CommissionUpdateRequest request);
-
-        /// <summary>
-        /// 删除佣金
-        /// </summary>
-        Task DeleteCommission(string ids);
-
     }
 }

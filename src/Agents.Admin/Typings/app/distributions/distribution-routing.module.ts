@@ -16,6 +16,8 @@ import { DomainTypeCreateComponent } from './domain-type/domain-type-create.comp
 import { DomainTypeEditComponent } from './domain-type/domain-type-edit.component';
 import { DomainTypeDetailComponent } from './domain-type/domain-type-detail.component';
 
+
+
 //路由配置
 const routes: Routes = [
     {
@@ -25,7 +27,7 @@ const routes: Routes = [
                 { path: '', component: CommissionListComponent },
                 { path: 'create', component: CommissionCreateComponent },
                 { path: 'edit/:id', component: CommissionEditComponent },
-                { path: 'detail/:id', component: CommissionDetailComponent }
+                { path: 'detail/:id', component: CommissionDetailComponent },
             ]},
             {path: 'domain', children: [
                 { path: '', component: DomainListComponent },

@@ -133,8 +133,7 @@ namespace Agents.Service.Implements.Sales {
         /// <summary>
         /// 支付订单
         /// </summary>
-        public async Task PayAsync(Guid orderId)
-        {
+        public async Task PayAsync(Guid orderId) {
             var entity = await OrderRepository.Find(t => t.Id == orderId).Include(t => t.Member)
                 .Include(t => t.Member.Agent).FirstOrDefaultAsync();
             if (entity == null) {
@@ -146,20 +145,15 @@ namespace Agents.Service.Implements.Sales {
         }
 
         /// <summary>
-        /// 修改订单
+        /// 支付订单佣金
         /// </summary>
-        public async Task UpdateAsync(OrderUpdateRequest request) {
-            var entity = await OrderRepository.FindAsync(request.OrderId);
-            request.MapTo(entity);
-            await OrderRepository.UpdateAsync(entity);
-            await UnitOfWork.CommitAsync();
-        }
-
-        /// <summary>
-        /// 删除订单
-        /// </summary>
-        public async Task DeleteOrder(string ids) {
-            await OrderManager.DeleteOrder(ids);
+        public async Task PayedCommissionAsync(Guid orderId) {
+            var entity = await OrderRepository.Find(t => t.Id == orderId).Include(t => t.Member)
+                .Include(t => t.Member.Agent).FirstOrDefaultAsync();
+            if (entity == null) {
+                throw new Warning("找不到订单");
+            }
+            await CommissionManager.PayedOrderCommissionAsync(entity);
             await UnitOfWork.CommitAsync();
         }
     }

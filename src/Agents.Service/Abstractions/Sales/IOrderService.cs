@@ -33,14 +33,9 @@ namespace Agents.Service.Abstractions.Sales {
         Task PayAsync(Guid orderId);
 
         /// <summary>
-        /// 修改订单
+        /// 支付订单佣金
         /// </summary>
-        Task UpdateAsync(OrderUpdateRequest request);
-
-        /// <summary>
-        /// 删除订单
-        /// </summary>
-        Task DeleteOrder(string ids);
+        Task PayedCommissionAsync(Guid orderId);
 
     }
 }

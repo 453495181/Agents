@@ -1,6 +1,7 @@
 ﻿using System;
 using Agents.Members.Domain.Models;
 using Agents.Sales.Domain.Enums;
+using Util.Exceptions;
 
 namespace Agents.Sales.Domain.Models {
     /// <summary>
@@ -31,6 +32,16 @@ namespace Agents.Sales.Domain.Models {
         public void Pay() {
             State = OrderState.Payed;
             PayTime = DateTime.Now;
+        }
+
+        /// <summary>
+        /// 支付订单佣金
+        /// </summary>
+        public void PayCommission() {
+            if (CommissionState != OrderCommissionState.WaitPay) {
+                throw new Warning("错误的订单状态");
+            }
+            CommissionState = OrderCommissionState.Payed;
         }
     }
 }

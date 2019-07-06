@@ -11,23 +11,13 @@ namespace Agents.Distributions.Domain.Services.Abstractions {
     public interface ICommissionManager {
 
         /// <summary>
-        /// 添加佣金
-        /// </summary>
-        Task<Commission> CreateCommissionAsync(Commission model);
-				
-        /// <summary>
-        /// 修改佣金
-        /// </summary>
-        Task UpdateCommission(Commission model);
-
-        /// <summary>
-        /// 删除佣金
-        /// </summary>
-        Task DeleteCommission(string ids);
-
-        /// <summary>
         /// 计算佣金
         /// </summary>
         Task CalcCommissionAsync(Order order);
+
+        /// <summary>
+        /// 支付订单佣金
+        /// </summary>
+        Task PayedOrderCommissionAsync(Order order);
     }
 }

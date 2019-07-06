@@ -18,11 +18,22 @@ namespace Agents.Service.Dtos.Distributions {
         [Display(Name = "代理标识")]
         public Guid AgentId { get; set; }
         /// <summary>
+        /// 代理
+        /// </summary>
+        [Display(Name = "代理")]
+        public string AgentName { get; set; }
+        /// <summary>
         /// 订单标识
         /// </summary>
         [Required(ErrorMessage = "订单标识不能为空")]
         [Display(Name = "订单标识")]
         public Guid OrderId { get; set; }
+        /// <summary>
+        /// 订单外部标识
+        /// </summary>
+        [Display(Name = "订单外部标识")]
+        public string OrderOutId { get; set; }
+
         /// <summary>
         /// 类型
         /// </summary>

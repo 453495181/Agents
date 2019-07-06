@@ -16,17 +16,7 @@ namespace Agents.Sales.Domain.Services.Abstractions {
         Task<Order> CreateOrderAsync(Order model, Member member);
 
         /// <summary>
-        /// 修改订单
-        /// </summary>
-        Task UpdateOrder(Order model);
-
-        /// <summary>
-        /// 删除订单
-        /// </summary>
-        Task DeleteOrder(string ids);
-
-        /// <summary>
-        /// 添加订单
+        /// 支付订单
         /// </summary>
         void PayOrder(Order model);
     }

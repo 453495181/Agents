@@ -17,6 +17,8 @@ const routes: Routes = [
             { path: 'agents', loadChildren: "./agents/agent.module#AgentModule" },
             { path: 'members', loadChildren: "./members/member.module#MemberModule" },
             { path: 'sales', loadChildren: "./sales/sale.module#SaleModule" },
+            { path: 'sales', loadChildren: "./sales/sale.module#SaleModule" },
+            { path: 'distributions', loadChildren: "./distributions/distribution.module#DistributionModule" },
         ]
     }
 ];

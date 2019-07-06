@@ -19,12 +19,12 @@ import { DomainTypeDetailComponent } from './domain-type/domain-type-detail.comp
  */
 @NgModule({
     declarations: [
-        CommissionListComponent,CommissionCreateComponent,CommissionEditComponent,CommissionDetailComponent,
-        DomainListComponent,DomainCreateComponent,DomainEditComponent,DomainDetailComponent,
-        DomainTypeListComponent,DomainTypeCreateComponent,DomainTypeEditComponent,DomainTypeDetailComponent,
+        CommissionListComponent, CommissionCreateComponent, CommissionEditComponent, CommissionDetailComponent,
+        DomainListComponent, DomainCreateComponent, DomainEditComponent, DomainDetailComponent,
+        DomainTypeListComponent, DomainTypeCreateComponent, DomainTypeEditComponent, DomainTypeDetailComponent,
     ],
     imports: [
-        FrameworkModule,DistributionRoutingModule
+        FrameworkModule, DistributionRoutingModule
     ]
 })
 export class DistributionModule {

@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Linq;
 using System.Threading.Tasks;
+using Agents.Agents.Domain.Models;
+using Agents.Agents.Domain.Services.Abstractions;
 using Util;
 using Util.Maps;
 using Util.Domains.Repositories;
@@ -16,6 +18,7 @@ using Agents.Service.Dtos.Distributions.Requests;
 using Agents.Service.Dtos.Distributions.Extensions;
 using Agents.Service.Queries.Distributions;
 using Agents.Service.Abstractions.Distributions;
+using Microsoft.EntityFrameworkCore;
 
 namespace Agents.Service.Implements.Distributions {
     /// <summary>
@@ -25,14 +28,14 @@ namespace Agents.Service.Implements.Distributions {
         /// <summary>
         /// 初始化佣金服务
         /// </summary>
-        public CommissionService( IAgentsUnitOfWork unitOfWork, ICommissionRepository commissionRepository, ICommissionManager commissionManager)
-            : base( unitOfWork, commissionRepository ) {
-			UnitOfWork = unitOfWork;
+        public CommissionService(IAgentsUnitOfWork unitOfWork, ICommissionRepository commissionRepository, ICommissionManager commissionManager, IAgentManager agentManager)
+            : base(unitOfWork, commissionRepository) {
+            UnitOfWork = unitOfWork;
             CommissionRepository = commissionRepository;
-			CommissionManager = commissionManager;
-
+            CommissionManager = commissionManager;
+            AgentManager = agentManager;
         }
-        
+
         /// <summary>
         /// 工作单元
         /// </summary>
@@ -42,12 +45,16 @@ namespace Agents.Service.Implements.Distributions {
         /// 佣金仓储
         /// </summary>
         public ICommissionRepository CommissionRepository { get; set; }
-        
+
         /// <summary>
         /// 佣金管理器
         /// </summary>
         public ICommissionManager CommissionManager { get; set; }
-		
+
+        /// <summary>
+        /// 代理管理器
+        /// </summary>
+        public IAgentManager AgentManager { get; }
 
         /// <summary>
         /// 分页查询
@@ -57,7 +64,7 @@ namespace Agents.Service.Implements.Distributions {
             if (parameter == null)
                 return new PagerList<CommissionDto>();
             var query = await CreateQuery(parameter);
-            var queryable =  CommissionRepository.FindAsNoTracking().Where(query);
+            var queryable = CommissionRepository.FindAsNoTracking().Where(query);
             queryable = Filter(queryable, parameter);
             return (queryable.ToPagerList(query.GetPager())).Convert(ToDto);
         }
@@ -67,7 +74,8 @@ namespace Agents.Service.Implements.Distributions {
         /// </summary>
         /// <param name="param">查询参数</param>
         protected new async Task<IQueryBase<Commission>> CreateQuery(CommissionQuery param) {
-            var queryCondition = new CommissionQueryCondition();
+            var currentAgent = await AgentManager.GetCurrentAgentAsync();
+            var queryCondition = new CommissionQueryCondition(currentAgent);
             return new Query<Commission>(param)
                 .Where(queryCondition);
         }
@@ -76,44 +84,14 @@ namespace Agents.Service.Implements.Distributions {
         /// 设置关联对象
         /// </summary>
         protected override IQueryable<Commission> Filter(IQueryable<Commission> queryable, CommissionQuery parameter) {
-            return queryable;
+            return queryable.Include(t => t.Order).Include(t=>t.Agent);
         }
 
         /// <summary>
-        /// 异步获取佣金
+        /// 转换为数据传输对象
         /// </summary>
-        public async Task<CommissionDto> GetCommissionByIdAsync(Guid id) {
-            var entity = await CommissionRepository.FindAsync(id);
-            var result = entity.ToDto();
-            return result;
-        }
-
-        /// <summary>
-        /// 添加佣金
-        /// </summary>
-        public async Task<Guid> CreateAsync(CommissionCreateRequest request) {
-            var commission = request.MapTo<Commission>();
-            commission = await CommissionManager.CreateCommissionAsync(commission);
-            await UnitOfWork.CommitAsync();
-            return commission.Id;
-        }
-
-        /// <summary>
-        /// 修改佣金
-        /// </summary>
-        public async Task UpdateAsync(CommissionUpdateRequest request) {
-            var entity = await CommissionRepository.FindAsync(request.CommissionId);
-            request.MapTo(entity);
-            await CommissionRepository.UpdateAsync(entity);
-            await UnitOfWork.CommitAsync();
-        }
-
-        /// <summary>
-        /// 删除佣金
-        /// </summary>
-        public async Task DeleteCommission(string ids) {
-            await CommissionManager.DeleteCommission(ids);
-            await UnitOfWork.CommitAsync();
+        protected override CommissionDto ToDto(Commission entity) {
+            return entity.ToDto();
         }
     }
 }

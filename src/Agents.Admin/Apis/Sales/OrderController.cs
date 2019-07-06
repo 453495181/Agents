@@ -70,5 +70,17 @@ namespace Agents.Apis.Sales {
             await OrderService.PayAsync(id.ToGuid());
             return Success();
         }
+
+
+        /// <summary>
+        /// 支付订单佣金
+        /// </summary>
+        [HttpPut("PayCommission{id}")]
+        public async Task<IActionResult> PayedCommissionAsync(string id) {
+            if (id.IsEmpty() || id.ToGuid() == Guid.Empty)
+                return Fail(WebResource.IdIsEmpty);
+            await OrderService.PayedCommissionAsync(id.ToGuid());
+            return Success();
+        }
     }
 }

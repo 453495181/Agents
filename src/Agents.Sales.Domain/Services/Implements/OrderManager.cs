@@ -41,23 +41,6 @@ namespace Agents.Sales.Domain.Services.Implements {
         /// </summary>
         public void PayOrder(Order model) {
             model.Pay();
-
         }
-
-        /// <summary>
-        /// 修改订单
-        /// </summary>
-        public async Task UpdateOrder(Order model) {
-            throw new NotImplementedException();
-        }
-
-        /// <summary>
-        /// 删除订单
-        /// </summary>
-        public async Task DeleteOrder(string ids) {
-            var entitis = await OrderRepository.FindByIdsAsync(ids);
-            await OrderRepository.RemoveAsync(entitis);
-        }
-
     }
 }

@@ -7,10 +7,14 @@ using Agents.Distributions.Domain.Enums;
 using Agents.Distributions.Domain.Models;
 using Agents.Distributions.Domain.Repositories;
 using Agents.Distributions.Domain.Services.Abstractions;
+using Agents.Finances.Domain.Services.Abstractions;
+using Agents.Sales.Domain.Enums;
 using Agents.Sales.Domain.Models;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Util;
 using Util.Domains.Services;
+using Util.Exceptions;
 
 namespace Agents.Distributions.Domain.Services.Implements {
     /// <summary>
@@ -21,10 +25,11 @@ namespace Agents.Distributions.Domain.Services.Implements {
         /// <summary>
         /// 初始化佣金管理器
         /// </summary>
-        public CommissionManager(ICommissionRepository commissionRepository, IConfiguration configuration, IAgentRepository agentRepository) {
+        public CommissionManager(ICommissionRepository commissionRepository, IConfiguration configuration, IAgentRepository agentRepository, IAccountManager accountManager) {
             CommissionRepository = commissionRepository;
             Configuration = configuration;
             AgentRepository = agentRepository;
+            AccountManager = accountManager;
         }
 
         /// <summary>
@@ -42,29 +47,7 @@ namespace Agents.Distributions.Domain.Services.Implements {
         /// </summary>
         public IAgentRepository AgentRepository { get; }
 
-        /// <summary>
-        /// 添加佣金
-        /// </summary>
-        public async Task<Commission> CreateCommissionAsync(Commission model) {
-            model.Init();
-            await CommissionRepository.AddAsync(model);
-            return model;
-        }
-
-        /// <summary>
-        /// 修改佣金
-        /// </summary>
-        public async Task UpdateCommission(Commission model) {
-            throw new NotImplementedException();
-        }
-
-        /// <summary>
-        /// 删除佣金
-        /// </summary>
-        public async Task DeleteCommission(string ids) {
-            var entitis = await CommissionRepository.FindByIdsAsync(ids);
-            await CommissionRepository.RemoveAsync(entitis);
-        }
+        public IAccountManager AccountManager { get; }
 
         /// <summary>
         /// 计算佣金
@@ -143,12 +126,32 @@ namespace Agents.Distributions.Domain.Services.Implements {
 
             var model = new Commission();
             model.Init();
-            model.Money = order.Money * commission/100;
+            model.Money = order.Money * commission / 100;
             model.Type = type;
             model.State = CommissionState.UnPayed;
             model.AgentId = agent.Id;
             model.OrderId = order.Id;
             await CommissionRepository.AddAsync(model);
+        }
+
+        /// <summary>
+        /// 支付订单佣金
+        /// </summary>
+        public async Task PayedOrderCommissionAsync(Order order) {
+            order.PayCommission();
+            var commissions = await CommissionRepository.Find(t => t.OrderId == order.Id).Include(t => t.Order).ToListAsync();
+            foreach (var commission in commissions) {
+                await ParCommissionAsync(commission);
+            }
+        }
+
+        /// <summary>
+        /// 支付佣金
+        /// </summary>
+        private async Task ParCommissionAsync(Commission commission) {
+            await AccountManager.AddMoneyAsync(commission.AgentId, commission.Money,
+                Finances.Domain.Enums.TradeType.Commission, commission.Order.OrderOutId, commission.Type.Description());
+            commission.Pay();
         }
     }
 }

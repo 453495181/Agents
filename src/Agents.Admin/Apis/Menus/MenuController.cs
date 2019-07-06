@@ -105,6 +105,11 @@ namespace Agents.Apis.Menus {
                         Link = "/sales/order/suborder"
                     },
                     new MenuInfo {
+                        Text = "我的佣金",
+                        Icon = "money",
+                        Link = "/distributions/commission"
+                    },
+                    new MenuInfo {
                         Text = "提现列表",
                         Icon = "cloud",
                         Link = "/agents/out-cash"

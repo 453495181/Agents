@@ -9,7 +9,7 @@ import { OrderViewModel } from './model/order-view-model';
  */
 @Component({
     selector: 'order-list',
-    templateUrl: !env.dev() ? './html/index.component.html' : '/view/sales/order'
+    templateUrl: !env.dev() ? './html/index-agent.component.html' : '/view/sales/order/indexAgent'
 })
 export class SubOrderListComponent extends TableQueryComponentBase<OrderViewModel, OrderQuery>  {
     /**
