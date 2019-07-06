@@ -13,6 +13,18 @@ export class OrderViewModel extends ViewModel {
      */
     memberId;
     /**
+     * 订单外部标识
+     */
+    orderOutId;
+    /**
+    * 会员名称
+    */
+    memberName;
+    /**
+     * 代理名称
+     */
+    memberAgentName;
+    /**
      * 金额
      */
     money;

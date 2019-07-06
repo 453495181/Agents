@@ -10,7 +10,7 @@ namespace Agents.Service.Abstractions.Sales {
     /// <summary>
     /// 订单服务
     /// </summary>
-    public interface IOrderService : ICrudService<OrderDto, OrderQuery> {
+    public interface IOrderService : IDeleteService<OrderDto, OrderQuery> {
 
         /// <summary>
         /// 分页查询

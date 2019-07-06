@@ -61,7 +61,7 @@ namespace Agents.Apis.Sales {
         }
 
         /// <summary>
-        /// 修改订单
+        /// 支付订单
         /// </summary>
         [HttpPut("Pay{id}")]
         public async Task<IActionResult> PayedAsync(string id) {

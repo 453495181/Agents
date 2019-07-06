@@ -98,7 +98,7 @@ namespace Agents.Agents.Domain.Services.Implements {
         /// </summary>
         public async Task<Agent> GetCurrentAgentAsync() {
             var currentUserId = UserMocks.UserMock.CurrentUserId();
-            var agent = AgentRepository.Single(t => t.UserId == currentUserId);
+            var agent = await AgentRepository.SingleAsync(t => t.UserId == currentUserId);
             return agent;
         }
     }
