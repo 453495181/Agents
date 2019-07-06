@@ -126,13 +126,16 @@ namespace Agents.Distributions.Domain.Services.Implements {
             decimal commission = 0;
             switch (type) {
                 case CommissionType.Level1:
-                    commission = ConfigHelper.GetConfigString("CommissionLevel1").ToDecimal();
+                    //commission = ConfigHelper.GetConfigString("CommissionLevel1").ToDecimal();
+                    commission = 15;
                     break;
                 case CommissionType.Level2:
-                    commission = ConfigHelper.GetConfigString("CommissionLevel2").ToDecimal();
+                    //commission = ConfigHelper.GetConfigString("CommissionLevel2").ToDecimal();
+                    commission = 10;
                     break;
                 case CommissionType.Level3:
-                    commission = ConfigHelper.GetConfigString("CommissionLevel3").ToDecimal();
+                    //commission = ConfigHelper.GetConfigString("CommissionLevel3").ToDecimal();
+                    commission = 5;
                     break;
                 default:
                     throw new ArgumentOutOfRangeException(nameof(type), type, null);
@@ -140,7 +143,7 @@ namespace Agents.Distributions.Domain.Services.Implements {
 
             var model = new Commission();
             model.Init();
-            model.Money = order.Money * commission;
+            model.Money = order.Money * commission/100;
             model.Type = type;
             model.State = CommissionState.UnPayed;
             model.AgentId = agent.Id;
