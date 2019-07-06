@@ -41,6 +41,10 @@ export class OrderViewModel extends ViewModel {
      */
     state;
     /**
+     * 订单状态
+     */
+    commissionState;
+    /**
      * 下单时间
      */
     orderTime;

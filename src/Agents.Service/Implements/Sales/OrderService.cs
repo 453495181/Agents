@@ -10,6 +10,7 @@ using Util.Datas.Queries;
 using Util.Applications;
 using Agents.Data;
 using Agents.Data.Conditions.Sales;
+using Agents.Distributions.Domain.Services.Abstractions;
 using Agents.Members.Domain.Repositories;
 using Agents.Sales.Domain.Models;
 using Agents.Sales.Domain.Services.Abstractions;
@@ -30,13 +31,14 @@ namespace Agents.Service.Implements.Sales {
         /// <summary>
         /// 初始化订单服务
         /// </summary>
-        public OrderService(IAgentsUnitOfWork unitOfWork, IOrderRepository orderRepository, IOrderManager orderManager, IMemberRepository memberRepository, IAgentManager agentManager)
+        public OrderService(IAgentsUnitOfWork unitOfWork, IOrderRepository orderRepository, IOrderManager orderManager, IMemberRepository memberRepository, IAgentManager agentManager, ICommissionManager commissionManager)
             : base(unitOfWork, orderRepository) {
             UnitOfWork = unitOfWork;
             OrderRepository = orderRepository;
             OrderManager = orderManager;
             MemberRepository = memberRepository;
             AgentManager = agentManager;
+            CommissionManager = commissionManager;
         }
 
         /// <summary>
@@ -59,6 +61,12 @@ namespace Agents.Service.Implements.Sales {
         /// 代理管理器
         /// </summary>
         public IAgentManager AgentManager { get; }
+
+        /// <summary>
+        /// 佣金管理器
+        /// </summary>
+        public ICommissionManager CommissionManager { get; }
+
 
         /// <summary>
         /// 分页查询
@@ -130,7 +138,8 @@ namespace Agents.Service.Implements.Sales {
             if (entity == null) {
                 throw new Warning("找不到订单");
             }
-            OrderManager.PayOrderAsync(entity);
+            OrderManager.PayOrder(entity);
+            await CommissionManager.CalcCommissionAsync(entity);
             await UnitOfWork.CommitAsync();
         }
 

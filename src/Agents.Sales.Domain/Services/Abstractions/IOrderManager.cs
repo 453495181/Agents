@@ -28,6 +28,6 @@ namespace Agents.Sales.Domain.Services.Abstractions {
         /// <summary>
         /// 添加订单
         /// </summary>
-        void PayOrderAsync(Order model);
+        void PayOrder(Order model);
     }
 }

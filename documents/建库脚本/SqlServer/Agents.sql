@@ -1947,6 +1947,7 @@ create table Sales."Order" (
    Type                 int                  not null,
    PayType              int                  null,
    State                int                  not null,
+   CommissionState      int                  not null,
    OrderTime            datetime             not null,
    PayTime              datetime             null,
    Extend               nvarchar(max)        null,
@@ -2101,6 +2102,22 @@ end
 execute sp_addextendedproperty 'MS_Description', 
    '状态',
    'schema', 'Sales', 'table', 'Order', 'column', 'State'
+go
+
+if exists(select 1 from sys.extended_properties p where
+      p.major_id = object_id('Sales."Order"')
+  and p.minor_id = (select c.column_id from sys.columns c where c.object_id = p.major_id and c.name = 'CommissionState')
+)
+begin
+   execute sp_dropextendedproperty 'MS_Description', 
+   'schema', 'Sales', 'table', 'Order', 'column', 'CommissionState'
+
+end
+
+
+execute sp_addextendedproperty 'MS_Description', 
+   '佣金状态',
+   'schema', 'Sales', 'table', 'Order', 'column', 'CommissionState'
 go
 
 if exists(select 1 from sys.extended_properties p where
@@ -2267,7 +2284,6 @@ alter table Sales."Order"
    add constraint FK_ORDER_REFERENCE_MEMBER foreign key (MemberId)
       references Members.Member (MemberId)
 go
-
 
 
 

@@ -11,5 +11,10 @@ namespace Agents.Agents.Domain.Repositories {
         /// 获取最大Code
         /// </summary>
         Task<int> GetMaxCode();
+
+        /// <summary>
+        /// 获取上级代理
+        /// </summary>
+        Task<Agent> GetParentAgentAsync(Agent agent);
     }
 }
