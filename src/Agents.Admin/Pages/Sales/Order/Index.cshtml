@@ -21,11 +21,13 @@
         <util-table-column for="TypeName"></util-table-column>
         <util-table-column for="PayTypeName"></util-table-column>
         <util-table-column for="StateName"></util-table-column>
+        <util-table-column for="CommissionStateName"></util-table-column>
         <util-table-column for="OrderTime"></util-table-column>
         <util-table-column for="PayTime"></util-table-column>
         <util-table-column for="Note"></util-table-column>
         <util-table-column title="操作">
-            <util-a shape="Circle" icon="Eye" tooltip="详情" bind-link="['detail',row.id]"></util-a>
+            <util-a shape="Circle" icon="Eye" tooltip="详情" bind-link="['/sales/order/detail',row.id]"></util-a>
+            <util-a shape="Circle" icon="Eye" tooltip="计算佣金" bind-link="['/sales/order/detail',row.id]" ng-if="row.state==1"></util-a>
         </util-table-column>
     </util-table>
 </util-card>

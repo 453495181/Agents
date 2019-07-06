@@ -1,5 +1,6 @@
 ﻿using System;
 using Agents.Members.Domain.Models;
+using Agents.Sales.Domain.Enums;
 
 namespace Agents.Sales.Domain.Models {
     /// <summary>
@@ -11,7 +12,8 @@ namespace Agents.Sales.Domain.Models {
         /// 初始化
         /// </summary>
         public override void Init() {
-            State = Enums.OrderState.WaitPay;
+            State = OrderState.WaitPay;
+            CommissionState = OrderCommissionState.WaitCalculation;
             OrderTime = DateTime.Now;
             base.Init();
         }
@@ -27,7 +29,7 @@ namespace Agents.Sales.Domain.Models {
         /// 支付订单
         /// </summary>
         public void Pay() {
-            State = Enums.OrderState.Payed;
+            State = OrderState.Payed;
             PayTime = DateTime.Now;
         }
     }

@@ -1,5 +1,6 @@
 ﻿using System;
 using System.ComponentModel.DataAnnotations;
+using Agents.Distributions.Domain.Enums;
 using Util;
 using Util.Datas.Queries;
 
@@ -27,7 +28,7 @@ namespace Agents.Service.Queries.Distributions {
         /// 类型
         /// </summary>
         [Display(Name="类型")]
-        public int? Type { get; set; }
+        public CommissionType? Type { get; set; }
         /// <summary>
         /// 金额
         /// </summary>
@@ -37,7 +38,7 @@ namespace Agents.Service.Queries.Distributions {
         /// 状态
         /// </summary>
         [Display(Name="状态")]
-        public int? State { get; set; }
+        public CommissionState? State { get; set; }
         
         private string _note = string.Empty;
         /// <summary>

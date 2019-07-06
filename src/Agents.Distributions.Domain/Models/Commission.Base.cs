@@ -4,6 +4,7 @@ using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 using Agents.Agents.Domain.Models;
+using Agents.Distributions.Domain.Enums;
 using Agents.Sales.Domain.Models;
 using Util;
 using Util.Domains;
@@ -46,7 +47,7 @@ namespace Agents.Distributions.Domain.Models {
         /// </summary>
         [DisplayName( "类型" )]
         [Required(ErrorMessage = "类型不能为空")]
-        public int Type { get; set; }
+        public CommissionType Type { get; set; }
         /// <summary>
         /// 金额
         /// </summary>
@@ -58,7 +59,7 @@ namespace Agents.Distributions.Domain.Models {
         /// </summary>
         [DisplayName( "状态" )]
         [Required(ErrorMessage = "状态不能为空")]
-        public int State { get; set; }
+        public CommissionState State { get; set; }
         /// <summary>
         /// 备注
         /// </summary>

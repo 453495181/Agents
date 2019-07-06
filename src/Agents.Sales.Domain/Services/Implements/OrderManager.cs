@@ -39,8 +39,9 @@ namespace Agents.Sales.Domain.Services.Implements {
         /// <summary>
         /// 添加订单
         /// </summary>
-        public void PayOrderAsync(Order model) {
+        public void PayOrder(Order model) {
             model.Pay();
+
         }
 
         /// <summary>

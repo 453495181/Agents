@@ -80,6 +80,17 @@ namespace Agents.Service.Dtos.Sales {
         [Display(Name = "状态")]
         public string StateName => State.Description();
         /// <summary>
+        /// 佣金状态
+        /// </summary>
+        [Required(ErrorMessage = "佣金状态不能为空")]
+        [Display(Name = "佣金状态")]
+        public OrderCommissionState CommissionState { get; set; }
+        /// <summary>
+        /// 佣金状态
+        /// </summary>
+        [Display(Name = "佣金状态")]
+        public string CommissionStateName => CommissionState.Description();
+        /// <summary>
         /// 下单时间
         /// </summary>
         [Required(ErrorMessage = "下单时间不能为空")]

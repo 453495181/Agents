@@ -16,6 +16,7 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <PackageReference Include="System.Configuration.ConfigurationManager" Version="4.5.0" />
     <PackageReference Include="Util.Core" Version="1.8.9" />
     <PackageReference Include="Util.Webs" Version="1.8.9" />
   </ItemGroup>

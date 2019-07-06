@@ -74,6 +74,12 @@ namespace Agents.Sales.Domain.Models {
         [Required(ErrorMessage = "状态不能为空")]
         public OrderState State { get; set; }
         /// <summary>
+        /// 佣金状态
+        /// </summary>
+        [DisplayName("佣金状态")]
+        [Required(ErrorMessage = "佣金状态不能为空")]
+        public OrderCommissionState CommissionState { get; set; }
+        /// <summary>
         /// 下单时间
         /// </summary>
         [DisplayName("下单时间")]

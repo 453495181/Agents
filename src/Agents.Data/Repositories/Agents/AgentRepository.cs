@@ -3,6 +3,7 @@ using System.Threading.Tasks;
 using Agents.Agents.Domain.Models;
 using Agents.Agents.Domain.Repositories;
 using Dapper;
+using Util;
 using Util.Datas.Ef.Core;
 using Util.Datas.Sql;
 
@@ -27,6 +28,17 @@ namespace Agents.Data.Repositories.Agents {
                 return 0;
             }
             return Convert.ToInt32(result);
+        }
+
+
+        /// <summary>
+        /// 获取上级代理
+        /// </summary>
+        public async Task<Agent> GetParentAgentAsync(Agent agent) {
+            if (agent == null || !agent.ParentId.HasValue) {
+                return null;
+            }
+            return await FindAsync(agent.ParentId.SafeValue());
         }
     }
 }
