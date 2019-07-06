@@ -90,5 +90,14 @@ namespace Agents.Service.Implements.Agents
             await AgentManager.DeleteAgents(ids);
             await UnitOfWork.CommitAsync();
         }
+
+        public async Task UpdateAgentAsync(AgentUpdateRequest request)
+        {
+            var entity = await AgentRepository.FindAsync(request.Id);
+            request.MapTo(entity);
+
+            await AgentRepository.UpdateAsync(entity);
+            await UnitOfWork.CommitAsync();
+        }
     }
 }

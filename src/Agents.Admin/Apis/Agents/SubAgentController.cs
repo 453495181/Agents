@@ -5,6 +5,7 @@ using Agents.Service.Queries.Agents;
 using Agents.UserMocks;
 using Microsoft.AspNetCore.Mvc;
 using System.Threading.Tasks;
+using Agents.Agents.Domain.Services.Abstractions;
 using Util;
 using Util.Webs.Controllers;
 using Util.Webs.Properties;
@@ -20,15 +21,23 @@ namespace Agents.Apis.Agents
         /// 初始化代理控制器
         /// </summary>
         /// <param name="service">代理服务</param>
-        public SubAgentController(ISubAgentService service) : base(service)
+        public SubAgentController(ISubAgentService service, IAgentManager agentManager) : base(service)
         {
             AgentService = service;
+            AgentManager = agentManager;
         }
 
         /// <summary>
         /// 代理服务
         /// </summary>
         public ISubAgentService AgentService { get; }
+
+        /// <summary>
+        /// 代理管理器
+        /// </summary>
+        public IAgentManager AgentManager { get; }
+
+        
 
         /// <summary>获取单个实例</summary>
         /// <remarks>
@@ -51,8 +60,7 @@ namespace Agents.Apis.Agents
         [HttpGet("mine")]
         public async Task<IActionResult> MineAsync()
         {
-            var id = UserMock.CurrentUserId();
-            var byIdAsync = await AgentService.GetAgentByIdAsync(id);
+            var byIdAsync = await AgentManager.GetCurrentAgentAsync();
             return Success(byIdAsync);
         }
 
@@ -81,24 +89,15 @@ namespace Agents.Apis.Agents
         /// <param name="id">标识</param>
         /// <param name="request">修改参数</param>
         [HttpPut("{id?}")]
-        public virtual async Task<IActionResult> UpdateAsync(string id, [FromBody] AgentDto request)
+        public virtual async Task<IActionResult> UpdateAsync([FromBody] AgentUpdateRequest request)
         {
             if (request == null)
             {
                 return Fail(WebResource.UpdateRequestIsEmpty);
             }
-
-            if (id.IsEmpty() && request.Id.IsEmpty())
-            {
-                return Fail(WebResource.IdIsEmpty);
-            }
-
-            if (request.Id.IsEmpty())
-            {
-                request.Id = id;
-            }
-
-            await AgentService.UpdateAsync(request);
+            
+          
+            await AgentService.UpdateAgentAsync(request);
             AgentDto byIdAsync = await AgentService.GetByIdAsync(request.Id);
             return Success(byIdAsync, null);
         }

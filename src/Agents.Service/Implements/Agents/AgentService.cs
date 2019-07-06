@@ -85,7 +85,7 @@ namespace Agents.Service.Implements.Agents {
         /// 修改代理
         /// </summary>
         public async Task UpdateAsync(AgentUpdateRequest request) {
-            var entity = await AgentRepository.FindAsync(request.AgentId);
+            var entity = await AgentRepository.FindAsync(request.Id);
             request.MapTo(entity);
             await AgentRepository.UpdateAsync(entity);
             await UnitOfWork.CommitAsync();

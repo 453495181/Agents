@@ -12,12 +12,14 @@ namespace Agents.Service.Dtos.Agents.Requests {
     /// </summary>
     public class AgentUpdateRequest : RequestBase {
 
+
         /// <summary>
         /// 代理标识
         /// </summary>
-        [Required(ErrorMessage = "代理标识不能为空")]
         [Display(Name = "代理标识")]
-        public Guid AgentId { get; set; }
+        public Guid Id { get; set; }
+
+      
         /// <summary>
         /// 姓名
         /// </summary>

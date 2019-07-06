@@ -133,8 +133,10 @@ namespace Agents.Service.Implements.Sales {
         /// <summary>
         /// 支付订单
         /// </summary>
-        public async Task PayAsync(Guid orderId) {
-            var entity = await OrderRepository.FindAsync(orderId);
+        public async Task PayAsync(Guid orderId)
+        {
+            var entity = await OrderRepository.Find(t => t.Id == orderId).Include(t => t.Member)
+                .Include(t => t.Member.Agent).FirstOrDefaultAsync();
             if (entity == null) {
                 throw new Warning("找不到订单");
             }

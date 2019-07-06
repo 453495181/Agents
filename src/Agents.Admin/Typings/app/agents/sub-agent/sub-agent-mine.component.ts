@@ -28,7 +28,6 @@ export class SubAgentMineComponent extends EditComponentBase<SubAgentViewModel> 
 
 
     loadById() {
-
         this.util.webapi.get<SubAgentViewModel>(`/api/${this.getBaseUrl()}/mine`).handle({
             ok: result => {
                 this.model = result;

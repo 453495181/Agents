@@ -13,6 +13,10 @@ export class SubAgentViewModel extends ViewModel {
      */
     name;
     /**
+     * 用户iD
+     */
+    userId;
+    /**
      * 上级代理标识
      */
     parentId;

@@ -56,12 +56,12 @@ namespace Agents.Apis.Agents {
         public async Task<IActionResult> UpdateAsync(string id, [FromBody] AgentUpdateRequest request) {
             if (request == null)
                 return Fail(WebResource.UpdateRequestIsEmpty);
-            if (id.IsEmpty() && request.AgentId.IsEmpty())
+            if (id.IsEmpty() && request.Id.IsEmpty())
                 return Fail(WebResource.IdIsEmpty);
-            if (request.AgentId.IsEmpty())
-                request.AgentId = id.ToGuid();
+            if (request.Id.IsEmpty())
+                request.Id = id.ToGuid();
             await AgentService.UpdateAsync(request);
-            AgentDto byIdAsync = await AgentService.GetByIdAsync(request.AgentId);
+            AgentDto byIdAsync = await AgentService.GetByIdAsync(request.Id);
             return Success(byIdAsync);
         }
 
