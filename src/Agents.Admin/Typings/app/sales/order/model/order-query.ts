@@ -9,6 +9,18 @@ export class OrderQuery extends QueryParameter {
      */
     goodsName;
     /**
+     * 订单外部标识
+     */
+    orderOutId;
+    /**
+    * 会员名称
+    */
+    memberName;
+    /**
+     * 代理名称
+     */
+    agentName;
+    /**
      * 订单标识
      */
     orderId;

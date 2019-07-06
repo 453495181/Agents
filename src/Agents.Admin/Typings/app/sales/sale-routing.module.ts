@@ -6,6 +6,8 @@ import { OrderCreateComponent } from './order/order-create.component';
 import { OrderEditComponent } from './order/order-edit.component';
 import { OrderDetailComponent } from './order/order-detail.component';
 
+import { SubOrderListComponent } from './order/sub-order-list.component';
+
 //路由配置
 const routes: Routes = [
     {
@@ -15,7 +17,8 @@ const routes: Routes = [
                 { path: '', component: OrderListComponent },
                 { path: 'create', component: OrderCreateComponent },
                 { path: 'edit/:id', component: OrderEditComponent },
-                { path: 'detail/:id', component: OrderDetailComponent }
+                { path: 'detail/:id', component: OrderDetailComponent },
+                { path: 'suborder', component: SubOrderListComponent },
             ]},
         ]
     }

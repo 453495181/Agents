@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Linq;
 using System.Threading.Tasks;
+using Agents.Agents.Domain.Models;
+using Agents.Agents.Domain.Services.Abstractions;
 using Util;
 using Util.Maps;
 using Util.Domains.Repositories;
@@ -24,35 +26,39 @@ namespace Agents.Service.Implements.Sales {
     /// <summary>
     /// 订单服务
     /// </summary>
-    public class OrderService : CrudServiceBase<Order, OrderDto, OrderQuery>, IOrderService {
+    public class OrderService : DeleteServiceBase<Order, OrderDto, OrderQuery>, IOrderService {
         /// <summary>
         /// 初始化订单服务
         /// </summary>
-        public OrderService(IAgentsUnitOfWork unitOfWork, IOrderRepository orderRepository, IOrderManager orderManager, IMemberRepository memberRepository)
+        public OrderService(IAgentsUnitOfWork unitOfWork, IOrderRepository orderRepository, IOrderManager orderManager, IMemberRepository memberRepository, IAgentManager agentManager)
             : base(unitOfWork, orderRepository) {
             UnitOfWork = unitOfWork;
             OrderRepository = orderRepository;
             OrderManager = orderManager;
             MemberRepository = memberRepository;
+            AgentManager = agentManager;
         }
 
         /// <summary>
         /// 工作单元
         /// </summary>
         public IAgentsUnitOfWork UnitOfWork { get; }
-
         /// <summary>
         /// 订单仓储
         /// </summary>
         public IOrderRepository OrderRepository { get; set; }
-
         /// <summary>
         /// 订单管理器
         /// </summary>
         public IOrderManager OrderManager { get; set; }
-
+        /// <summary>
+        /// 会员仓储
+        /// </summary>
         public IMemberRepository MemberRepository { get; }
-
+        /// <summary>
+        /// 代理管理器
+        /// </summary>
+        public IAgentManager AgentManager { get; }
 
         /// <summary>
         /// 分页查询
@@ -62,7 +68,7 @@ namespace Agents.Service.Implements.Sales {
             if (parameter == null)
                 return new PagerList<OrderDto>();
             var query = await CreateQuery(parameter);
-            var queryable = Filter(query);
+            var queryable = OrderRepository.FindAsNoTracking().Where(query);
             queryable = Filter(queryable, parameter);
             return (queryable.ToPagerList(query.GetPager())).Convert(ToDto);
         }
@@ -72,16 +78,17 @@ namespace Agents.Service.Implements.Sales {
         /// </summary>
         /// <param name="param">查询参数</param>
         protected new async Task<IQueryBase<Order>> CreateQuery(OrderQuery param) {
-            var queryCondition = new OrderQueryCondition();
+            Agent currentAgent = await AgentManager.GetCurrentAgentAsync();
+            var queryCondition = new OrderQueryCondition(currentAgent);
             return new Query<Order>(param)
-                .Where(queryCondition);
-        }
-
-        /// <summary>
-        /// 过滤
-        /// </summary>
-        private IQueryable<Order> Filter(IQueryBase<Order> query) {
-            return IsTracking ? OrderRepository.Find().Where(query) : OrderRepository.FindAsNoTracking().Where(query);
+                .Where(queryCondition)
+                .WhereIfNotEmpty(t => t.Type == param.Type)
+                .WhereIfNotEmpty(t => t.PayType == param.PayType)
+                .WhereIfNotEmpty(t => t.State == param.State)
+                .WhereIfNotEmpty(t => t.OrderOutId == param.OrderOutId)
+                .WhereIfNotEmpty(t => t.GoodsName.Contains(param.GoodsName))
+                .WhereIfNotEmpty(t => t.Member.Name.Contains(param.MemberName))
+                .WhereIfNotEmpty(t => t.Member.Agent.Name.Contains(param.AgentName));
         }
 
         /// <summary>
@@ -95,7 +102,8 @@ namespace Agents.Service.Implements.Sales {
         /// 异步获取订单
         /// </summary>
         public async Task<OrderDto> GetOrderByIdAsync(Guid id) {
-            var entity = await OrderRepository.FindAsync(id);
+            var entity = await OrderRepository.Find(t => t.Id == id).Include(t => t.Member).Include(t => t.Member.Agent)
+                .FirstOrDefaultAsync();
             var result = entity.ToDto();
             return result;
         }
@@ -115,7 +123,7 @@ namespace Agents.Service.Implements.Sales {
         }
 
         /// <summary>
-        /// 修改订单
+        /// 支付订单
         /// </summary>
         public async Task PayAsync(Guid orderId) {
             var entity = await OrderRepository.FindAsync(orderId);

@@ -26,7 +26,7 @@ namespace Agents.Service.Dtos.Sales.Extensions {
                 return new OrderDto();
             var result =  entity.MapTo<OrderDto>();
             result.MemberName = entity.Member.Name;
-            result.AgentName = entity.Member.Agent.Name;
+            result.MemberAgentName = entity.Member.Agent.Name;
             return result;
         }
 

@@ -97,7 +97,7 @@ namespace Agents.Apis.Menus {
                     new MenuInfo {
                         Text = "订单管理",
                         Icon = "cloud",
-                        Link = "/sales/order"
+                        Link = "/sales/order/suborder"
                     },
                     new MenuInfo {
                         Text = "提现列表",

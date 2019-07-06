@@ -6,12 +6,14 @@ import { OrderCreateComponent } from './order/order-create.component';
 import { OrderEditComponent } from './order/order-edit.component';
 import { OrderDetailComponent } from './order/order-detail.component';
 
+import { SubOrderListComponent } from './order/sub-order-list.component';
+
 /**
  * sales模块
  */
 @NgModule({
     declarations: [
-        OrderListComponent,OrderCreateComponent,OrderEditComponent,OrderDetailComponent,
+        OrderListComponent, OrderCreateComponent, OrderEditComponent, OrderDetailComponent, SubOrderListComponent,
     ],
     imports: [
         FrameworkModule,SaleRoutingModule

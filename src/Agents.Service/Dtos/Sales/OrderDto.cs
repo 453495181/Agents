@@ -26,7 +26,7 @@ namespace Agents.Service.Dtos.Sales {
         /// 代理
         /// </summary>
         [Display(Name = "代理")]
-        public string AgentName { get; set; }
+        public string MemberAgentName { get; set; }
         /// <summary>
         /// 订单外部标识
         /// </summary>
