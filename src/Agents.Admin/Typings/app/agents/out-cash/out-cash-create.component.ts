@@ -2,6 +2,8 @@
 import { env } from '../../env';
 import { EditComponentBase } from '../../../util';
 import { OutCashViewModel } from './model/out-cash-view-model';
+import { AgentViewModel } from '../agent/model/agent-view-model';
+import { NgForm } from '@angular/forms';
 
 /**
  * 提现新增页
@@ -35,6 +37,32 @@ export class OutCashCreateComponent extends EditComponentBase<OutCashViewModel> 
             ok: result => {
                 this.model.ableOutMoney = result;
             }
+        });
+
+        this.util.webapi.get<AgentViewModel>(`/api/agent/${id}`).handle({
+            ok: result => {
+                this.model.alipayAccount = result.alipayAccount;
+                this.model.bank = result.bank;
+                this.model.bankNumber = result.bankNumber;
+               this.model.bankUser = result.bankUser;
+           }
+        });
+    }
+
+    submit(form?: NgForm, button?) {
+
+        if(this.model.money> this.model.ableOutMoney){
+            this.util.message.error('提现金额不能大于可提现余额');
+            return;
+        }
+
+
+        this.util.form.submit({
+            url: this.getSubmitUrl(),
+            data: this.model,
+            form: form,
+            button: button,
+            back: true
         });
     }
 

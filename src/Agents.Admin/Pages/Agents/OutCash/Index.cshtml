@@ -15,16 +15,16 @@
     <util-table id="tableOutCash" query-param="queryParam" base-url="outCash" sort="CreationTime desc">
         <util-table-column type="Checkbox"></util-table-column>
         <util-table-column type="LineNumber"></util-table-column>
-        <util-table-column for="AgentId"></util-table-column>
+        <util-table-column for="OutCashAgentName"></util-table-column>
         <util-table-column for="Money"></util-table-column>
-        <util-table-column for="Note"></util-table-column>
-        <util-table-column for="PayType"></util-table-column>
+        <util-table-column for="PayTypeName"></util-table-column>
         <util-table-column for="CardId"></util-table-column>
-        <util-table-column for="State"></util-table-column>
+        <util-table-column for="StateName"></util-table-column>
+        <util-table-column for="Note"></util-table-column>
         <util-table-column title="操作">
-            <util-a class="mr-sm" color="Primary" shape="Circle" icon="Edit" tooltip="编辑" bind-link="['edit',row.id]"></util-a>
-            <util-button class="mr-sm" color="Danger" shape="Circle" icon="Delete" tooltip="删除" on-click="delete(null,row.id)"></util-button>
-            <util-a shape="Circle" icon="Eye" tooltip="详情" bind-link="['detail',row.id]"></util-a>
+            <util-button class="mr-sm" color="Primary" shape="Circle" icon="Audit" tooltip="同意" on-click="audit(null,row.id)" ng-if="row.state==1 "></util-button>
+            <util-button class="mr-sm" color="Danger" shape="Circle" icon="Diff" tooltip="拒绝" on-click="refuse(null,row.id)" ng-if="row.state==1 "></util-button>
+            <util-button class="mr-sm" color="Danger" shape="Circle" icon="Delete" tooltip="取消" on-click="delete(null,row.id)"></util-button>
         </util-table-column>
     </util-table>
 </util-card>

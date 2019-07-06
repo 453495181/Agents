@@ -1,19 +1,21 @@
-﻿using System;
+﻿using Agents.Agents.Domain.Enums;
+using Agents.Agents.Domain.Models;
+using Agents.Agents.Domain.Repositories;
+using Agents.Agents.Domain.Services.Abstractions;
+using Agents.Data;
+using Agents.Service.Abstractions.Agents;
+using Agents.Service.Dtos.Agents;
+using Agents.Service.Dtos.Agents.Extensions;
+using Agents.Service.Dtos.Agents.Requests;
+using Agents.Service.Queries.Agents;
+using Microsoft.EntityFrameworkCore;
+using System;
 using System.Threading.Tasks;
 using Util;
-using Util.Maps;
-using Util.Domains.Repositories;
-using Util.Datas.Queries;
 using Util.Applications;
-using Agents.Data;
-using Agents.Agents.Domain.Models;
-using Agents.Agents.Domain.Services.Abstractions;
-using Agents.Agents.Domain.Repositories;
-using Agents.Service.Dtos.Agents;
-using Agents.Service.Dtos.Agents.Requests;
-using Agents.Service.Dtos.Agents.Extensions;
-using Agents.Service.Queries.Agents;
-using Agents.Service.Abstractions.Agents;
+using Util.Datas.Queries;
+using Util.Domains.Repositories;
+using Util.Maps;
 
 namespace Agents.Service.Implements.Agents
 {
@@ -28,13 +30,13 @@ namespace Agents.Service.Implements.Agents
         /// <param name="unitOfWork">工作单元</param>
         /// <param name="outCashRepository">提现仓储</param>
         /// <param name="outCashManager">提现管理器</param>
-        public OutCashService(IAgentsUnitOfWork unitOfWork, IOutCashRepository outCashRepository, IOutCashManager outCashManager)
+        public OutCashService(IAgentsUnitOfWork unitOfWork, IOutCashRepository outCashRepository, IOutCashManager outCashManager, IAgentManager agentManager)
             : base(unitOfWork, outCashRepository)
         {
             UnitOfWork = unitOfWork;
             OutCashRepository = outCashRepository;
             OutCashManager = outCashManager;
-
+            AgentManager = agentManager;
         }
 
         /// <summary>
@@ -52,14 +54,23 @@ namespace Agents.Service.Implements.Agents
         /// </summary>
         public IOutCashManager OutCashManager { get; set; }
 
+        /// <summary>
+        /// 代理管理器
+        /// </summary>
+        public IAgentManager AgentManager { get; }
+
 
         /// <summary>
         /// 创建查询对象
         /// </summary>
         /// <param name="param">查询参数</param>
-        protected override IQueryBase<OutCash> CreateQuery(OutCashQuery param)
+        protected new async Task<IQueryBase<OutCash>> CreateQuery(OutCashQuery param)
         {
-            return new Query<OutCash>(param);
+            Agent currentAgent = await AgentManager.GetCurrentAgentAsync();
+            return new Query<OutCash>(param)
+                .WhereIfNotEmpty(t => t.AgentId == currentAgent.Id)
+                .WhereIfNotEmpty(t => t.CreationTime >= param.BeginCreationTime)
+                .WhereIfNotEmpty(t => t.CreationTime <= param.BeginCreationTime);
         }
 
         /// <summary>
@@ -78,6 +89,18 @@ namespace Agents.Service.Implements.Agents
         public async Task<Guid> CreateAsync(OutCashCreateRequest request)
         {
             var outCash = request.MapTo<OutCash>();
+
+            switch (request.PayType)
+            {
+                case OutCashPayType.Alipay:
+                    outCash.CardId = request.AlipayAccount;
+                    break;
+                case OutCashPayType.Bank:
+                    outCash.CardId = $"{request.Bank.Description()},{request.BankUser},{request.BankNumber}";
+                    break;
+            }
+
+
             outCash = await OutCashManager.CreateOutCashAsync(outCash);
             await UnitOfWork.CommitAsync();
             return outCash.Id;
@@ -102,5 +125,38 @@ namespace Agents.Service.Implements.Agents
             await OutCashManager.DeleteOutCash(ids);
             await UnitOfWork.CommitAsync();
         }
+
+        public async Task<PagerList<OutCashDto>> PagerQueryOutCashAsync(OutCashQuery parameter)
+        {
+            if (parameter == null)
+            {
+                return new PagerList<OutCashDto>();
+            }
+
+            var query =await CreateQuery(parameter);
+            var queryable = OutCashRepository.Find().Include(x => x.Agent).Where(query);
+            queryable = Filter(queryable, parameter);
+            return (queryable.ToPagerList(query.GetPager())).Convert(ToDto);
+        }
+
+        public async Task AuditOutCash(string id)
+        {
+            OutCashManager.AuditOutCash(id);
+        }
+
+        public async Task RefuseOutCash(string id)
+        {
+            OutCashManager.RefuseOutCash(id);
+        }
+
+        /// <summary>转换为数据传输对象</summary>
+        /// <param name="entity">实体</param>
+        protected override OutCashDto ToDto(OutCash entity)
+        {
+            var dto = entity.MapTo<OutCashDto>();
+            dto.OutCashAgentName = entity.Agent.Name;
+            return dto;
+        }
+
     }
 }

@@ -37,6 +37,18 @@ namespace Agents.Apis.Agents
         /// </summary>
         public IAccountService AccountService { get; }
 
+        /// <summary>
+        /// 分页查询
+        /// </summary>
+        [HttpGet]
+        public override async Task<IActionResult> PagerQueryAsync(OutCashQuery query)
+        {
+            PagerQueryBefore(query);
+            var result = await OutCashService.PagerQueryOutCashAsync(query);
+            return Success(ToPagerQueryResult(result));
+        }
+
+
 
         /// <summary>
         /// 根据Id获取提现
@@ -57,7 +69,7 @@ namespace Agents.Apis.Agents
         public async Task<IActionResult> GetAbleMoney(Guid id)
         {
             var account = await AccountService.GetByIdAsync(id);
-             return Success(account.Balance);
+            return Success(account.Balance);
         }
 
         /// <summary>
@@ -101,7 +113,30 @@ namespace Agents.Apis.Agents
         }
 
         /// <summary>
-        /// 删除提现
+        /// 审核提现
+        /// </summary>
+        [HttpPost("audit")]
+        public async Task<IActionResult> AuditAsync(string id)
+        {
+            await OutCashService.AuditOutCash(id);
+            return Success("ok");
+        }
+
+
+        /// <summary>
+        /// 拒绝提现
+        /// </summary>
+        [HttpPost("refuse")]
+        public async Task<IActionResult> RefuseAsync(string id)
+        {
+            await OutCashService.RefuseOutCash(id);
+            return Success("ok");
+        }
+
+        
+
+        /// <summary>
+        /// 取消提现
         /// </summary>
         [HttpDelete("{id}")]
         public async Task<IActionResult> DeleteAsync(string id)
@@ -111,7 +146,7 @@ namespace Agents.Apis.Agents
         }
 
         /// <summary>
-        /// 批量删除提现
+        /// 批量取消提现
         /// </summary>
         [HttpPost("delete")]
         public async Task<IActionResult> BatchDeleteAsync([FromBody] string ids)

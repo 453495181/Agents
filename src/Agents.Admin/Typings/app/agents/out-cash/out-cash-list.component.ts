@@ -19,4 +19,26 @@ export class OutCashListComponent extends TableQueryComponentBase<OutCashViewMod
     constructor(injector: Injector) {
         super(injector);
     }
+
+    audit(button?, id?) {
+
+        this.util.webapi.get<string>(`/api/outcash/audit`).param("id", id).handle({
+            ok: result => {
+                if (result === "ok") {
+                    this.util.message.info("审核成功");
+                }
+            }
+        });
+    }
+
+    refuse(button?, id?) {
+
+        this.util.webapi.get<string>(`/api/outcash/refuse`).param("id", id).handle({
+            ok: result => {
+                if (result === "ok") {
+                    this.util.message.info("拒绝成功");
+                }
+            }
+        });
+    }
 }

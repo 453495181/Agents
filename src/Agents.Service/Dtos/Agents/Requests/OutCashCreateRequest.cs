@@ -26,6 +26,32 @@ namespace Agents.Service.Dtos.Agents.Requests {
 
 
         /// <summary>
+        /// 支付宝帐号
+        /// </summary>
+        [StringLength(200, ErrorMessage = "支付宝帐号输入过长，不能超过200位")]
+        [Display(Name = "支付宝帐号")]
+        public string AlipayAccount { get; set; }
+      
+        /// <summary>
+        /// 开户银行
+        /// </summary>
+        [Display(Name = "开户银行")]
+        public BankEnum? Bank { get; set; }
+        /// <summary>
+        /// 开户名
+        /// </summary>
+        [StringLength(20, ErrorMessage = "开户名输入过长，不能超过20位")]
+        [Display(Name = "开户名")]
+        public string BankUser { get; set; }
+        /// <summary>
+        /// 银行卡号
+        /// </summary>
+        [StringLength(50, ErrorMessage = "银行卡号输入过长，不能超过50位")]
+        [Display(Name = "银行卡号")]
+        public string BankNumber { get; set; }
+
+
+        /// <summary>
         /// 可提现金额
         /// </summary>
         [Display(Name = "可提现金额")]

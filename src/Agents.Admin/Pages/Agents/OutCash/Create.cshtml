@@ -8,9 +8,12 @@
         <util-label text="可提现余额" />  <util-label for="AbleOutMoney" />
 
         <util-textbox for="Money"></util-textbox>
-        <util-select for="PayType" default-option-text="请选择提现方式"></util-select>
-        <util-textbox for="CardId"></util-textbox>
-        <util-textbox for="Note"></util-textbox>
+        <util-select for="PayType" default-option-text="请选择提现方式" ></util-select>
+        <util-textbox for="AlipayAccount"  readonly="true"></util-textbox>
+        <util-select for="Bank"></util-select>
+        <util-textbox for="BankUser"  readonly="true" ></util-textbox>
+        <util-textbox for="BankNumber" readonly="true"></util-textbox>
+        <util-textbox for="Note" ></util-textbox>
         <util-form-item>
             <util-form-control offset="2">
                 <util-button class="mr-sm" id="btnSubmit" validate-form="true" color="Primary" on-click="submit(form,btnSubmit)"></util-button>
