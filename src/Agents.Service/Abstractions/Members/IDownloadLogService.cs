@@ -19,7 +19,7 @@ namespace Agents.Service.Abstractions.Members {
         /// <summary>
         /// 添加下载记录
         /// </summary>
-        Task<Guid> CreateAsync(DownloadLogCreateRequest request);
+        Task<Guid> CreateAsync(string agentCode);
 
         /// <summary>
         /// 修改下载记录

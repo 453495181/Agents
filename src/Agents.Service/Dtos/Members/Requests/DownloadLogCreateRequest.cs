@@ -14,12 +14,12 @@ namespace Agents.Service.Dtos.Members.Requests {
         /// </summary>
         [Display(Name = "代理标识")]
         public Guid? AgentId { get; set; }
-        /// <summary>
-        /// IP
-        /// </summary>
-        [StringLength(20, ErrorMessage = "IP输入过长，不能超过20位")]
-        [Display(Name = "IP")]
-        public string IPAddress { get; set; }
+        ///// <summary>
+        ///// IP
+        ///// </summary>
+        //[StringLength(20, ErrorMessage = "IP输入过长，不能超过20位")]
+        //[Display(Name = "IP")]
+        //public string IPAddress { get; set; }
         ///// <summary>
         ///// 设备系统
         ///// </summary>

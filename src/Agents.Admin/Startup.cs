@@ -48,6 +48,12 @@ namespace Agents {
             //添加EF工作单元
             services.AddUnitOfWork<IAgentsUnitOfWork, AgentsUnitOfWork>( Configuration.GetConnectionString( "DefaultConnection" ) );
 
+            services.AddAuthentication("Bearer")
+                .AddIdentityServerAuthentication("Bearer", options => {
+                    options.Authority = "http://localhost:10080";
+                    options.RequireHttpsMetadata = false;
+                });
+
             //添加Swagger
             services.AddSwaggerGen( options => {
                 options.SwaggerDoc( "v1", new Info { Title = "Agents Api", Version = "v1" } );

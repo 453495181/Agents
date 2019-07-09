@@ -41,11 +41,8 @@ namespace Agents.Apis.Members {
         /// 创建下载记录
         /// </summary>
         [HttpPost]
-        public async Task<IActionResult> CreateAsync([FromBody] DownloadLogCreateRequest request) {
-            if (request == null) {
-                return Fail(WebResource.CreateRequestIsEmpty);
-            }
-            var id = await DownloadLogService.CreateAsync(request);
+        public async Task<IActionResult> CreateAsync(string agentCode) {
+            var id = await DownloadLogService.CreateAsync(agentCode);
             return Success(id);
         }
 		 

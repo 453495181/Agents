@@ -1,4 +1,4 @@
-import { NgModule, Injector, APP_INITIALIZER } from '@angular/core';
+import { NgModule, Injector } from '@angular/core';
 
 //Angular模块
 import { BrowserModule } from '@angular/platform-browser';
@@ -21,7 +21,7 @@ const icons: IconDefinition[] = Object.keys(AllIcons).map(key => AllIcons[key]);
 
 //框架模块
 import { FrameworkModule } from './framework.module';
-import { util, UploadService } from '../util';
+import { util, UploadService, createOidcProviders, OidcAuthorizeConfig } from '../util';
 
 //通用服务
 import { LocalUploadService } from "../common/services/local-upload.service";
@@ -35,19 +35,17 @@ import { HomeModule } from "./home/home.module";
 //根组件
 import { AppComponent } from './app.component';
 
+//登录回调
+import { LoginCallbackComponent } from "./login-callback.component";
+
 //启动服务
 import { StartupService } from "./home/startup/startup.service";
-
-//启动服务工厂
-export function startupServiceFactory(startupService: StartupService) {
-    return () => startupService.load();
-}
 
 /**
  * 应用根模块
  */
 @NgModule({
-    declarations: [AppComponent],
+    declarations: [AppComponent, LoginCallbackComponent],
     imports: [
         BrowserModule,
         BrowserAnimationsModule,
@@ -58,14 +56,10 @@ export function startupServiceFactory(startupService: StartupService) {
         AppRoutingModule
     ],
     providers: [
-        StartupService,
-        {
-            provide: APP_INITIALIZER,
-            useFactory: startupServiceFactory,
-            deps: [StartupService],
-            multi: true,
-        },
+        { provide: OidcAuthorizeConfig, useFactory: getAuthorizeConfig },
+        ...createOidcProviders(),
         { provide: NZ_ICONS, useValue: icons },
+        StartupService,
         { provide: UploadService, useClass: LocalUploadService }
     ],
     bootstrap: [AppComponent],
@@ -78,4 +72,15 @@ export class AppModule {
     constructor(injector: Injector) {
         util.ioc.injector = injector;
     }
+}
+
+/**
+ * 获取授权配置
+ */
+export function getAuthorizeConfig() {
+    let result = new OidcAuthorizeConfig();
+    result.authority = "http://localhost:10080",
+        result.clientId = "Agents-Admin";
+    result.scope = "openid profile agents";
+    return result;
 }

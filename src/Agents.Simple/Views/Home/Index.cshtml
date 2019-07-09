@@ -1,0 +1,135 @@
+﻿@{
+    ViewData["Title"] = "演示流程";
+}
+
+<div class="text-center">
+    <h1 class="display-4">演示流程</h1>
+    <p>
+        <h2>01 创建代理</h2>
+    </p>
+
+    <p>
+        <h2>02 推广链接</h2>
+    <p>
+        <label>代理人编号</label><input type="text" id="agentCode" value="10001" />
+    </p>
+    </p>
+
+    <p>
+        <h2>03 用户下载App</h2>
+    <p>
+        <input type="button" value="访问代理推广页面" onclick="gotoAgentIndex()" />
+    </p>
+    </p>
+
+    <p>
+        <h2>04 上报用户注册信息(跨域问题待修复)</h2>
+    <p>
+    <p>
+        <label>用户ID</label><input type="text" id="userId" value="10086" />
+    </p>
+    <p>
+        <label>用户IP</label><input type="text" id="userIp" />
+    </p>
+
+    <p>
+        <label>用户昵称</label><input type="text" id="nickName" value="测试会员" />
+    </p>
+    <p>
+        <label>用户手机</label><input type="text" id="mobile" value="15000000000" />
+    </p>
+    <input type="button" value="上报" onclick="sendRegisterInfo()" />
+    </p>
+    </p>
+
+    <p>
+        <h2>05 上报用户下单信息</h2>
+    <p>
+    <p>
+        <label>用户ID</label><input type="text" id="memberOutId" value="10086" />
+    </p>
+    <p>
+        <label>订单ID</label><input type="text" id="orderOutId" value="200001" />
+    </p>
+    <p>
+        <label>商品名称</label><input type="text" id="goodsName" value="测试商品" />
+    </p>
+    <p>
+        <label>价格</label><input type="text" id="money" value="100" />
+    </p>
+    <input type="button" value="上报" onclick="sendOrderInfo()" />
+    </p>
+    </p>
+
+    <p>
+        <h2>06 上报用户支付成功</h2>
+    <p>
+        <label>订单ID</label><input type="text" id="orderId" />
+    </p>
+        <input type="button" value="上报" onclick="sendOrderPay()" />
+
+    </p>
+    <p><h2>07 结算佣金</h2></p>
+    <p><h2>08 申请提现</h2></p>
+    <p><h2>09 支付提现</h2></p>
+</div>
+
+<script>
+
+    function gotoAgentIndex() {
+        var agentCode = $("#agentCode").val();
+        location.href = "/" + agentCode;
+    }
+
+    function sendRegisterInfo() {
+        var data = {
+            memberOutId: $("#userId").val(),
+            name: $("#nickName").val(),
+            mobile: $("#mobile").val(),
+            ipAddress: $("#userIp").val()
+        };
+        $.ajax(
+            {
+                url: "http://localhost:10090/api/Member",
+                type: "POST",
+                data: JSON.stringify(data),
+                success: function (result) {
+                    alert(result.message);
+                }
+            });
+    }
+
+    function sendOrderInfo() {
+        var data = {
+            memberOutId: $("#memberOutId").val(),
+            orderOutId: $("#orderOutId").val(),
+            goodsName: $("#goodsName").val(),
+            money: $("#money").val()
+        };
+        $.ajax(
+            {
+                url: "http://localhost:10090/api/Order",
+                type: "POST",
+                data: JSON.stringify(data),
+                success: function (result) {
+                    alert(result.message);
+                    if (result.code == 1) {
+                        $("#orderId").val(result.data);
+                    }
+                }
+            });
+    }
+    function sendOrderPay() {$.ajax(
+        {
+            url: "http://localhost:10090/api/Order/Pay?id="+$("#orderId").val(),
+            type: "POST",
+            success: function (result) {
+                if (result.code == 1) {
+                    alert("上报成功");
+                } else {
+                    alert(result.message);
+                }
+            }
+        });
+    }
+</script>

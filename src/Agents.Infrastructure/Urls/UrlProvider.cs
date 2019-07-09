@@ -10,6 +10,6 @@ namespace Agents.Urls {
         /// <summary>
         /// 登陆服务器Url
         /// </summary>
-        public static string UserServiceUrl => "http://localhost:5000";
+        public static string UserServiceUrl => "http://localhost:10082";
     }
 }

@@ -1,0 +1,31 @@
+﻿@{
+    ViewData["Title"] = "推广首页";
+}
+
+<div class="text-center">
+    <h1 class="display-4">演示下载(跨域问题待修复)</h1>
+    <p>
+        <input type="button" value="模拟下载" onclick="mockDownLoad()" />
+    </p>
+</div>
+
+<script>
+    function mockDownLoad() {
+        $.ajax(
+            {
+                url: "http://localhost:10090/api/DownloadLog?agentCode=@ViewBag.Id",
+                type: "POST",
+                success: function (result) {
+                    if (result.code == 1) {
+                        alert("已成功记录下载Ip信息,跳转到下载链接");
+                        location.href = "http://www.baidu.com";
+                    } else {
+                        alert(result.message);
+                    }
+                    
+                }
+            });
+
+    }
+
+</script>

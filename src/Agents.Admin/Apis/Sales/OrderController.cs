@@ -63,7 +63,7 @@ namespace Agents.Apis.Sales {
         /// <summary>
         /// 支付订单
         /// </summary>
-        [HttpPut("Pay{id}")]
+        [HttpPost("Pay")]
         public async Task<IActionResult> PayedAsync(string id) {
             if (id.IsEmpty() || id.ToGuid() == Guid.Empty)
                 return Fail(WebResource.IdIsEmpty);

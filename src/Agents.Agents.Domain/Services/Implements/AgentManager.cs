@@ -7,6 +7,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using Util;
 using Util.Domains.Services;
+using Util.Security;
 
 namespace Agents.Agents.Domain.Services.Implements {
     /// <summary>
@@ -95,7 +96,7 @@ namespace Agents.Agents.Domain.Services.Implements {
         /// 获取当前登陆代理 如果当前登陆的不是代理 返回Null
         /// </summary>
         public async Task<Agent> GetCurrentAgentAsync() {
-            var currentUserId = UserMocks.UserMock.CurrentUserId();
+            var currentUserId = Session.GetUserId();
             var agent = await AgentRepository.SingleAsync(t => t.UserId == currentUserId);
             return agent;
         }

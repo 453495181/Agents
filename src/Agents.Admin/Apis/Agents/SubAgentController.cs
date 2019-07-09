@@ -2,7 +2,6 @@
 using Agents.Service.Dtos.Agents;
 using Agents.Service.Dtos.Agents.Requests;
 using Agents.Service.Queries.Agents;
-using Agents.UserMocks;
 using Microsoft.AspNetCore.Mvc;
 using System.Threading.Tasks;
 using Agents.Agents.Domain.Services.Abstractions;
