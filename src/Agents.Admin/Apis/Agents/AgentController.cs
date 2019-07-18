@@ -5,6 +5,7 @@ using Agents.Service.Dtos.Agents;
 using Agents.Service.Dtos.Agents.Requests;
 using Agents.Service.Queries.Agents;
 using Agents.Service.Abstractions.Agents;
+using Microsoft.AspNetCore.Cors;
 using Util;
 using Util.Webs.Properties;
 

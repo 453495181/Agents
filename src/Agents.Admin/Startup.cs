@@ -23,7 +23,7 @@ namespace Agents {
         /// 初始化启动配置
         /// </summary>
         /// <param name="configuration">配置</param>
-        public Startup( IConfiguration configuration ) {
+        public Startup(IConfiguration configuration) {
             Configuration = configuration;
         }
 
@@ -35,18 +35,22 @@ namespace Agents {
         /// <summary>
         /// 配置服务
         /// </summary>
-        public IServiceProvider ConfigureServices( IServiceCollection services ) {
+        public IServiceProvider ConfigureServices(IServiceCollection services) {
             //注册Razor视图解析路径
             services.AddRazorViewLocationExpander();
 
+
+            //添加跨域
+            services.AddCors();
+
             //添加Mvc服务
-            services.AddMvc().SetCompatibilityVersion( CompatibilityVersion.Version_2_2 ).AddRazorPageConventions();
+            services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_2).AddRazorPageConventions();
 
             //添加NLog日志操作
             services.AddNLog();
 
             //添加EF工作单元
-            services.AddUnitOfWork<IAgentsUnitOfWork, AgentsUnitOfWork>( Configuration.GetConnectionString( "DefaultConnection" ) );
+            services.AddUnitOfWork<IAgentsUnitOfWork, AgentsUnitOfWork>(Configuration.GetConnectionString("DefaultConnection"));
 
             services.AddAuthentication("Bearer")
                 .AddIdentityServerAuthentication("Bearer", options => {
@@ -55,10 +59,11 @@ namespace Agents {
                 });
 
             //添加Swagger
-            services.AddSwaggerGen( options => {
-                options.SwaggerDoc( "v1", new Info { Title = "Agents Api", Version = "v1" } );
-                options.IncludeXmlComments( Path.Combine( AppContext.BaseDirectory, "Agents.Admin.xml" ) );
-            } );
+            services.AddSwaggerGen(options => {
+                options.SwaggerDoc("v1", new Info { Title = "Agents Api", Version = "v1" });
+                options.IncludeXmlComments(Path.Combine(AppContext.BaseDirectory, "Agents.Admin.xml"));
+            });
+
 
             //添加Util基础设施服务
             return services.AddUtil();
@@ -67,42 +72,47 @@ namespace Agents {
         /// <summary>
         /// 配置开发环境请求管道
         /// </summary>
-        public void ConfigureDevelopment( IApplicationBuilder app ) {
+        public void ConfigureDevelopment(IApplicationBuilder app) {
             app.UseDeveloperExceptionPage();
             app.UseDatabaseErrorPage();
-            app.UseWebpackDevMiddleware( new WebpackDevMiddlewareOptions {
+            app.UseWebpackDevMiddleware(new WebpackDevMiddlewareOptions {
                 HotModuleReplacement = true
-            } );
+            });
             //app.UseSwaggerX();
-            CommonConfig( app );
+            CommonConfig(app);
         }
 
         /// <summary>
         /// 配置生产环境请求管道
         /// </summary>
-        public void ConfigureProduction( IApplicationBuilder app ) {
-            app.UseExceptionHandler( "/Home/Error" );
-            CommonConfig( app );
+        public void ConfigureProduction(IApplicationBuilder app) {
+            app.UseExceptionHandler("/Home/Error");
+            CommonConfig(app);
         }
 
         /// <summary>
         /// 公共配置
         /// </summary>
-        private void CommonConfig( IApplicationBuilder app ) {
+        private void CommonConfig(IApplicationBuilder app) {
             app.UseErrorLog();
             app.UseStaticFiles();
             app.UseAuthentication();
             app.UseSwaggerX();
-            ConfigRoute( app );
+            ConfigRoute(app);
         }
 
         /// <summary>
         /// 路由配置,支持区域
         /// </summary>
-        private void ConfigRoute( IApplicationBuilder app ) {
-            app.UseMvc( routes => {
-                routes.MapSpaFallbackRoute( "spa-fallback", new { controller = "Home", action = "Index" } );
-            } );
+        private void ConfigRoute(IApplicationBuilder app) {
+            app.UseCors(t => t
+            .AllowAnyOrigin()
+            .AllowAnyHeader()
+            .AllowAnyMethod()
+            .AllowCredentials());
+            app.UseMvc(routes => {
+                routes.MapSpaFallbackRoute("spa-fallback", new { controller = "Home", action = "Index" });
+            });
         }
     }
 }

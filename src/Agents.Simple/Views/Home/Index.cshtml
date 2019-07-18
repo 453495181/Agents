@@ -23,7 +23,7 @@
     </p>
 
     <p>
-        <h2>04 上报用户注册信息(跨域问题待修复)</h2>
+        <h2>04 上报用户注册信息</h2>
     <p>
     <p>
         <label>用户ID</label><input type="text" id="userId" value="10086" />
@@ -92,6 +92,7 @@
             {
                 url: "http://localhost:10090/api/Member",
                 type: "POST",
+                contentType: "application/json",
                 data: JSON.stringify(data),
                 success: function (result) {
                     alert(result.message);
@@ -110,6 +111,7 @@
             {
                 url: "http://localhost:10090/api/Order",
                 type: "POST",
+                contentType: "application/json",
                 data: JSON.stringify(data),
                 success: function (result) {
                     alert(result.message);
